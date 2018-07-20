@@ -1,29 +1,21 @@
 require "./spec_helper"
 
-private METHODS = [
-  "to_bool", "to_i", "to_i64", "to_f", "to_f32", "to_time"
-]
-
-{% for method in METHODS %}
-  private def it_{{ method.id }}(input, expected, file = __FILE__, line = __LINE__)
+{% for method in Popcorn::Casting.methods %}
+  private def it_{{ method.name.id }}(input, expected, file = __FILE__, line = __LINE__)
     it "should casts #{input}", file, line do
-      Popcorn.{{ method.id }}(input).should eq expected
+      Popcorn.{{ method.name.id }}(input).should eq(expected)
     end
   end
 
-  private def it_{{ method.id }}?(input, expected, file = __FILE__, line = __LINE__)
-    it "should casts #{input}", file, line do
-      Popcorn.{{ method.id }}?(input).should eq expected
-    end
-  end
-
-  private def it_raise_{{ method.id }}(input, file = __FILE__, line = __LINE__)
-    it "throws an exception to casts #{input}", file, line do
-      expect_raises TypeCastError, file: file, line: line do
-        Popcorn.{{ method.id }}(input)
+  {% if method.name.id.stringify != "?" %}
+    private def it_raise_{{ method.name.id }}(input, file = __FILE__, line = __LINE__)
+      it "throws an exception to casts #{input}", file, line do
+        expect_raises TypeCastError, file: file, line: line do
+          Popcorn.{{ method.name.id }}(input)
+        end
       end
     end
-  end
+  {% end %}
 {% end %}
 
 describe Popcorn do
@@ -91,42 +83,62 @@ describe Popcorn do
     it_to_bool?({a: "b"}, nil)
   end
 
-  describe "to_i" do
-    it_to_i 1, 1
-    it_to_i -123, -123
-    it_to_i 1.234567890, 1
-    it_to_i 1.67890, 1
-    it_to_i -1, -1
-    it_to_i 123456789123456, -2045800064
-    it_to_i -123456789123456, 2045800064
-    it_to_i true, 1
-    it_to_i false, 0
-    it_to_i "123", 123
-    it_to_i "123.4", 123
-    it_to_i "123true", 123
-    it_to_i "123true456", 123
-    it_to_i "true", 0
+  describe "to_int" do
+    it_to_int 1, 1
+    it_to_int -123, -123
+    it_to_int 1.234567890, 1
+    it_to_int 1.67890, 1
+    it_to_int -1, -1
+    it_to_int 123456789123456, -2045800064
+    it_to_int -123456789123456, 2045800064
+    it_to_int true, 1
+    it_to_int false, 0
+    it_to_int "123", 123
+    it_to_int "123.4", 123
+    it_to_int "123true", 123
+    it_to_int "123true456", 123
+    it_to_int "true", 0
 
-    it_raise_to_i :foo
-    it_raise_to_i([1,2,3])
-    it_raise_to_i({"a" => "b"})
-    it_raise_to_i({a: "b"})
+    it_raise_to_int :foo
+    it_raise_to_int([1,2,3])
+    it_raise_to_int({"a" => "b"})
+    it_raise_to_int({a: "b"})
   end
 
-  # describe "to_f" do
-  #   it_to_f 1, 1
-  #   it_to_f -123, -123
-  #   it_to_f 1.234567890, 1
-  #   it_to_f 1.67890, 1
-  #   it_to_f -1, -1
-  #   it_to_f 123456789123456, -2045800064
-  #   it_to_f -123456789123456, 2045800064
-  #   it_to_f true, 1
-  #   it_to_f false, 0
-  #   it_to_f "123", 123
-  #   it_to_f "123.4", 123
-  #   it_to_f "123true", 123
-  #   it_to_f "123true456", 123
-  #   it_to_f "true", 0
+  describe "to_int?" do
+    it_to_int? 1, 1
+    it_to_int? -123, -123
+    it_to_int? 1.234567890, 1
+    it_to_int? 1.67890, 1
+    it_to_int? -1, -1
+    it_to_int? 123456789123456, -2045800064
+    it_to_int? -123456789123456, 2045800064
+    it_to_int? true, 1
+    it_to_int? false, 0
+    it_to_int? "123", 123
+    it_to_int? "123.4", 123
+    it_to_int? "123true", 123
+    it_to_int? "123true456", 123
+    it_to_int? :foo, nil
+    it_to_int?([1,2,3], nil)
+    it_to_int?({"a" => "b"}, nil)
+    it_to_int?({a: "b"}, nil)
+  end
+
+  # describe "to_float" do
+  #   it_to_float 1, 1
+  #   it_to_float -123, -123
+  #   it_to_float 1.234567890, 1
+  #   it_to_float 1.67890, 1
+  #   it_to_float -1, -1
+  #   it_to_float 123456789123456, -2045800064
+  #   it_to_float -123456789123456, 2045800064
+  #   it_to_float true, 1
+  #   it_to_float false, 0
+  #   it_to_float "123", 123
+  #   it_to_float "123.4", 123
+  #   it_to_float "123true", 123
+  #   it_to_float "123true456", 123
+  #   it_to_float "true", 0
   # end
 end

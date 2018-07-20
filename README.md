@@ -39,7 +39,7 @@ This is distinguish between built-in methods in Crystal.
 ```crystal
 require "popcorn"
 
-Popcorn.to_string("foobar")   # => "foobar"
+Popcorn.to_sting("foobar")   # => "foobar"
 Popcorn.to_string(8.31)       # => "8.31"
 Popcorn.to_int("1")           # => 1
 Popcorn.to_int("123abc")      # => 123

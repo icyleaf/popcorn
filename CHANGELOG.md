@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - [ ] to_int8
 - [ ] to_int16
 - [ ] to_int64
-- [x] to_float64
+- [ ] to_float64
 - [ ] to_float32
 - [x] to_bool
 - [ ] to_time
