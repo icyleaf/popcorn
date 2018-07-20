@@ -1,0 +1,72 @@
+# Popcorn
+
+![Status](https://img.shields.io/badge/status-WIP-blue.svg)
+[![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
+[![Tag](https://img.shields.io/github/tag/icyleaf/popcorn.svg)](https://github.com/icyleaf/popcorn/blob/master/CHANGELOG.md)
+[![Build Status](https://img.shields.io/circleci/project/github/icyleaf/popcorn/master.svg?style=flat)](https://circleci.com/gh/icyleaf/popcorn)
+
+Easy and Safe popping from one type to another.
+
+> Early stage, **DO NOT** use it in production envrioment.
+
+## Installation
+
+Add this to your application's `shard.yml`:
+
+```yaml
+dependencies:
+  popcorn:
+    github: icyleaf/popcorn
+```
+
+## Usage
+
+Popcorn is easy and safe from one type to another tool.
+
+Popcorn proviedes a handful of `to_xxx`/`to_xxx?` methods and `xxx` is full type name,
+This is distinguish between built-in methods in Crystal.
+
+- to_int
+- to_int8
+- to_int16
+- to_int64
+- to_float
+- to_float32
+- to_bool
+- to_string (alias to to_s in Crystal).
+- to_time
+
+```crystal
+require "popcorn"
+
+Popcorn.to_string("foobar")   # => "foobar"
+Popcorn.to_int("1")           # => 1
+Popcorn.to_int("123abc")      # => 123
+Popcorn.to_bool("no")         # => false
+Popcorn.to_string(8.31)       # => "8.31"
+```
+
+Also these methods had been inject to Crystal literals, you can call it directly, such like:
+
+```crystal
+require "popcorn"
+require "popcorn/injection" # => make sure require it!
+
+"foobar".to_string  # => "foobar"
+"1".to_int          # => 1
+"123abc".to_int     # => 123
+"no".to_bool        # => false
+8.31.to_string      # => "8.31"
+```
+
+## Contributing
+
+1. Fork it (<https://github.com/icyleaf/popcorn/fork>)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+## Contributors
+
+- [icyleaf](https://github.com/icyleaf) icyleaf - creator, maintainer
