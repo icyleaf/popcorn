@@ -40,10 +40,12 @@ This is distinguish between built-in methods in Crystal.
 require "popcorn"
 
 Popcorn.to_string("foobar")   # => "foobar"
+Popcorn.to_string(8.31)       # => "8.31"
 Popcorn.to_int("1")           # => 1
 Popcorn.to_int("123abc")      # => 123
 Popcorn.to_bool("no")         # => false
-Popcorn.to_string(8.31)       # => "8.31"
+Popcorn.to_bool("unkown")     # => raise a `TypeCastError` exception
+Popcorn.to_bool?("unkown")    # => nil
 ```
 
 Also these methods had been inject to Crystal literals, you can call it directly, such like:
@@ -53,10 +55,12 @@ require "popcorn"
 require "popcorn/injection" # => make sure require it!
 
 "foobar".to_string  # => "foobar"
+8.31.to_string      # => "8.31"
 "1".to_int          # => 1
 "123abc".to_int     # => 123
 "no".to_bool        # => false
-8.31.to_string      # => "8.31"
+"unkown".to_bool    # => raise a `TypeCastError` exception
+"unkown".to_bool    # => nil
 ```
 
 ## Contributing
