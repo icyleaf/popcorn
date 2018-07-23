@@ -1,13 +1,10 @@
 # Popcorn
 
-![Status](https://img.shields.io/badge/status-WIP-blue.svg)
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Tag](https://img.shields.io/github/tag/icyleaf/popcorn.svg)](https://github.com/icyleaf/popcorn/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/popcorn/master.svg?style=flat)](https://circleci.com/gh/icyleaf/popcorn)
 
 Easy and Safe popping from one type to another.
-
-> Early stage, **DO NOT** use it in production envrioment.
 
 ## Installation
 

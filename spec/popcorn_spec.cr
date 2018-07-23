@@ -206,7 +206,7 @@ describe Popcorn do
     it_raise_to_time("11:00PM")
   end
 
-  describe "to_time" do
+  describe "to_time?" do
     it_to_time? nil, nil
     it_to_time? "2018", nil
     it_to_time? "Nov 10 23:00:00", nil
