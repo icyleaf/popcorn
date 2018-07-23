@@ -1,5 +1,6 @@
 require "json/any"
 require "yaml/any"
+require "./ext/*"
 
 module Popcorn
   module Cast
@@ -76,12 +77,20 @@ module Popcorn
     end
 
     # Returns the `Time` value represented by given data type.
-    def to_time(v : T, location : Time::Location = Time::Location::UTC, formatters : Array(String)? = nil) forall T
+    #
+    # - `location` argument applies for `Int`/`String` types
+    # - `formatters` argument applies for `String` type.
+    def to_time(v : T, location : Time::Location? = nil, formatters : Array(String)? = nil) forall T
       case v
       when Time
-        v.as(Time)
+        value = v.as(Time)
       when Int
-        Time.epoch(v.as(Int))
+        value = v.as(Int).to_i64
+        if Math.log10(value) > 10
+          location ? Time.epoch_ms(value, location: location) : Time.epoch_ms(value)
+        else
+          location ? Time.epoch(value, location: location): Time.epoch(value)
+        end
       when String
         parse_time(v.as(String), location, formatters)
       else
@@ -132,7 +141,8 @@ module Popcorn
       end
     {% end %}
 
-    private def parse_time(v : String, location = Time::Location::UTC, formatters : Array(String)? = nil)
+    private def parse_time(v : String, location : Time::Location? = nil, formatters : Array(String)? = nil)
+      location ||= Time::Location::UTC
       formatters = formatters ? formatters.not_nil!.concat(time_formatters) : time_formatters
       formatters.each do |formatter|
         begin

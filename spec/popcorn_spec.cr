@@ -175,6 +175,8 @@ describe Popcorn do
     it_to_time 1516411233, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
     it_to_time 1516411233_i64, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
     it_to_time 1516382433_i64, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time 1516411233000, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time 1516382433000, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
     it_to_time "2018-01-20 01:20:33 +0000 UTC", Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
     it_to_time "Tue Jan 20 01:20:33 2018", Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
     it_to_time "Tue Jan 20 01:20:33 UTC 2018", Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
