@@ -61,8 +61,8 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/icyleaf/popcorn/Popcorn/Casting" data-name="popcorn::casting">
-      <a href="Popcorn/Casting.html">Casting</a>
+  <li class=" " data-id="github.com/icyleaf/popcorn/Popcorn/Cast" data-name="popcorn::cast">
+      <a href="Popcorn/Cast.html">Cast</a>
       
     </li>
   
@@ -73,6 +73,11 @@
   
   <li class=" " data-id="github.com/icyleaf/popcorn/String" data-name="string">
       <a href="String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Time" data-name="time">
+      <a href="Time.html">Time</a>
       
     </li>
   
@@ -104,10 +109,11 @@ This is distinguish between built-in methods in Crystal.</p>
 
 <p>Also these methods had been inject to Crystal literals, you can call it directly, such like:</p>
 
-<pre><code><span class="s">&quot;123abc&quot;</span>.to_int     <span class="c"># =&gt; 123</span>
-<span class="s">&quot;No&quot;</span>.to_bool        <span class="c"># =&gt; false</span></code></pre>
+<pre><code><span class="t">Popcorn</span>.to_int(<span class="s">&quot;123abc&quot;</span>)                <span class="c"># =&gt; 123</span>
+<span class="t">Popcorn</span>.to_bool(<span class="s">&quot;No&quot;</span>)                   <span class="c"># =&gt; false</span>
+<span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-01-20T01:20:33Z&quot;</span>) <span class="c"># =&gt; Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)</span></code></pre>
 
-<p>More methods to review <code><a href="Popcorn/Casting.html">Popcorn::Casting</a></code>.</p>
+<p>More methods to review <code><a href="Popcorn/Cast.html">Popcorn::Cast</a></code>.</p>
 
 
 
@@ -118,7 +124,7 @@ This is distinguish between built-in methods in Crystal.</p>
   <h2>Extended Modules</h2>
   <ul class="other-types-list">
   
-    <li class="other-type"><a href="Popcorn/Casting.html">Popcorn::Casting</a></li>
+    <li class="other-type"><a href="Popcorn/Cast.html">Popcorn::Cast</a></li>
   
   </ul>
 
@@ -132,22 +138,22 @@ This is distinguish between built-in methods in Crystal.</p>
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/16cf310bdbb997f5a8293eeb95075831719bf719/src/popcorn/version.cr#L1" target="_blank">popcorn/version.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/1c05437b83246ca77232277efbee4b057b8c3d6d/src/popcorn/version.cr#L1" target="_blank">popcorn/version.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/16cf310bdbb997f5a8293eeb95075831719bf719/src/popcorn/casting.cr#L4" target="_blank">popcorn/casting.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/1c05437b83246ca77232277efbee4b057b8c3d6d/src/popcorn/cast.cr#L4" target="_blank">popcorn/cast.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/16cf310bdbb997f5a8293eeb95075831719bf719/src/popcorn.cr#L27" target="_blank">popcorn.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/1c05437b83246ca77232277efbee4b057b8c3d6d/src/popcorn.cr#L28" target="_blank">popcorn.cr</a>
     
     <br/>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/16cf310bdbb997f5a8293eeb95075831719bf719/src/popcorn/injection.cr#L1" target="_blank">popcorn/injection.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/1c05437b83246ca77232277efbee4b057b8c3d6d/src/popcorn/injection.cr#L1" target="_blank">popcorn/injection.cr</a>
     
     <br/>
   
