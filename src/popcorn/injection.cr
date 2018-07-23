@@ -1,8 +1,8 @@
 module Popcorn
   # :nodoc:
   module Injection
-    CLASS_METHODS = [String]
-    STRUCT_METHODS = [Int32, Int64, Float64, Bool]
+    CLASS_METHODS  = [String]
+    STRUCT_METHODS = [Int32, Int64, Float64, Bool, Time]
 
     macro start
       {% for name in CLASS_METHODS %}
@@ -18,11 +18,17 @@ module Popcorn
       {% begin %}
       # `{{ name.id }}` cast methods
       {{ type.id }} {{ name.id }}
-        {% for method in Popcorn::Casting.methods %}
-          # Alias to `Popcorn::Casting.{{ method.name.id }}`
-          def {{ method.name.id }}
-            Popcorn.{{ method.name.id }}(self)
-          end
+        {% for method in Popcorn::Cast.methods %}
+          # Alias to `Popcorn::Cast.{{ method.name.id }}`
+          {% if method.name.id == "to_time".id %}
+            def {{ method.name.id }}(location : Time::Location = Time::Location::UTC, formatters : Array(String)? = nil)
+              Popcorn.{{ method.name.id }}(self, location, formatters)
+            end
+          {% else %}
+            def {{ method.name.id }}
+              Popcorn.{{ method.name.id }}(self)
+            end
+          {% end %}
         {% end %}
 
         # Alias to `Object.to_s`

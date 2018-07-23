@@ -1,5 +1,5 @@
 require "./popcorn/version"
-require "./popcorn/casting"
+require "./popcorn/cast"
 
 # Popcorn is easy and safe from one type to another tool.
 #
@@ -19,11 +19,12 @@ require "./popcorn/casting"
 # Also these methods had been inject to Crystal literals, you can call it directly, such like:
 #
 # ```
-# "123abc".to_int     # => 123
-# "No".to_bool        # => false
+# Popcorn.to_int("123abc")                # => 123
+# Popcorn.to_bool("No")                   # => false
+# Popcorn.to_time("2018-01-20T01:20:33Z") # => Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
 # ```
 #
-# More methods to review `Popcorn::Casting`.
+# More methods to review `Popcorn::Cast`.
 module Popcorn
-  extend Casting
+  extend Cast
 end
