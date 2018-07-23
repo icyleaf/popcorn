@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.25.0">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/doc.js"></script>
+<script type="text/javascript">
+  CrystalDoc.base_path = "";
+</script>
+
+  <meta id="repository-name" content="github.com/icyleaf/popcorn">
+  <title>README - github.com/icyleaf/popcorn</title>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Bool" data-name="bool">
+      <a href="Bool.html">Bool</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Float64" data-name="float64">
+      <a href="Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Int32" data-name="int32">
+      <a href="Int32.html">Int32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Int64" data-name="int64">
+      <a href="Int64.html">Int64</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/icyleaf/popcorn/Popcorn" data-name="popcorn">
+      <a href="Popcorn.html">Popcorn</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/Popcorn/Casting" data-name="popcorn::casting">
+      <a href="Popcorn/Casting.html">Casting</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/icyleaf/popcorn/String" data-name="string">
+      <a href="String.html">String</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1>Popcorn</h1>
+
+<p><img src="https://img.shields.io/badge/status-WIP-blue.svg" alt="Status"/>
+<a href="https://github.com/crystal-lang/crystal" target="_blank"><img src="https://img.shields.io/badge/language-crystal-776791.svg" alt="Language"/></a>
+<a href="https://github.com/icyleaf/popcorn/blob/master/CHANGELOG.md" target="_blank"><img src="https://img.shields.io/github/tag/icyleaf/popcorn.svg" alt="Tag"/></a>
+<a href="https://circleci.com/gh/icyleaf/popcorn" target="_blank"><img src="https://img.shields.io/circleci/project/github/icyleaf/popcorn/master.svg?style=flat" alt="Build Status"/></a></p>
+
+<p>Easy and Safe popping from one type to another.</p>
+
+<blockquote>Early stage, <strong>DO NOT</strong> use it in production envrioment.</blockquote>
+
+<h2>Installation</h2>
+
+<p>Add this to your application's <code>shard.yml</code>:</p>
+
+<pre><code class="language-yaml">dependencies:
+  popcorn:
+    github: icyleaf/popcorn</code></pre>
+
+<h2>Usage</h2>
+
+<p>Popcorn is easy and safe from one type to another tool.</p>
+
+<p>Popcorn proviedes a handful of <code>to_xxx</code>/<code>to_xxx?</code> methods and <code>xxx</code> is full type name,
+This is distinguish between built-in methods in Crystal.</p>
+
+<ul><li>to_int</li><li>to_int8</li><li>to_int16</li><li>to_int64</li><li>to_float</li><li>to_float32</li><li>to_bool</li><li>to_string (alias to to_s in Crystal).</li><li>to_time</li></ul>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
+
+<span class="t">Popcorn</span>.to_sting(<span class="s">&quot;foobar&quot;</span>)   <span class="c"># =&gt; &quot;foobar&quot;</span>
+<span class="t">Popcorn</span>.to_string(<span class="n">8.31</span>)       <span class="c"># =&gt; &quot;8.31&quot;</span>
+<span class="t">Popcorn</span>.to_int(<span class="s">&quot;1&quot;</span>)           <span class="c"># =&gt; 1</span>
+<span class="t">Popcorn</span>.to_int(<span class="s">&quot;123abc&quot;</span>)      <span class="c"># =&gt; 123</span>
+<span class="t">Popcorn</span>.to_bool(<span class="s">&quot;no&quot;</span>)         <span class="c"># =&gt; false</span>
+<span class="t">Popcorn</span>.to_bool(<span class="s">&quot;unkown&quot;</span>)     <span class="c"># =&gt; raise a `TypeCastError` exception</span>
+<span class="t">Popcorn</span>.to_bool?(<span class="s">&quot;unkown&quot;</span>)    <span class="c"># =&gt; nil</span></code></pre>
+
+<p>Also these methods had been inject to Crystal literals, you can call it directly, such like:</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
+<span class="k">require</span> <span class="s">&quot;popcorn/injection&quot;</span> <span class="c"># =&gt; make sure require it!</span>
+
+<span class="s">&quot;foobar&quot;</span>.to_string  <span class="c"># =&gt; &quot;foobar&quot;</span>
+<span class="n">8.31</span>.to_string      <span class="c"># =&gt; &quot;8.31&quot;</span>
+<span class="s">&quot;1&quot;</span>.to_int          <span class="c"># =&gt; 1</span>
+<span class="s">&quot;123abc&quot;</span>.to_int     <span class="c"># =&gt; 123</span>
+<span class="s">&quot;no&quot;</span>.to_bool        <span class="c"># =&gt; false</span>
+<span class="s">&quot;unkown&quot;</span>.to_bool    <span class="c"># =&gt; raise a `TypeCastError` exception</span>
+<span class="s">&quot;unkown&quot;</span>.to_bool    <span class="c"># =&gt; nil</span></code></pre>
+
+<h2>Contributing</h2>
+
+<ol><li>Fork it (&lt;https://github.com/icyleaf/popcorn/fork>)</li><li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li><li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li><li>Push to the branch (<code>git push origin my-new-feature</code>)</li><li>Create a new Pull Request</li></ol>
+
+<h2>Contributors</h2>
+
+<ul><li><a href="https://github.com/icyleaf" target="_blank">icyleaf</a> icyleaf - creator, maintainer</li></ul>
+</div>
+</body>
+</html>
