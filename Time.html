@@ -126,10 +126,34 @@
 
   <h2>Defined in:</h2>
   
+    
+      <a href="https://github.com/icyleaf/popcorn/blob/6f278074bba611e0933fa5f4f300be6502686b1a/src/popcorn/ext/time_epoch.cr#L1" target="_blank">popcorn/ext/time_epoch.cr</a>
+    
+    <br/>
+  
 
 
 
 
+
+  <h2>Constructors</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#epoch%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.epoch</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
+        
+          <div class="summary"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of <em>seconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#epoch_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.epoch_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
+        
+          <div class="summary"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of <em>milliseconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -232,7 +256,7 @@
       <li class="entry-summary">
         <a href="#to_time%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method" class="signature"><strong>#to_time</strong>(location : Time::Location = <span class="t">Time</span><span class="t">::</span><span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>, formatters : Array(String)? = <span class="n">nil</span>)</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28v%3AT%2Clocation%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">Popcorn::Cast.to_time</a></code></p></div>
+          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28v%3AT%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">Popcorn::Cast.to_time</a></code></p></div>
         
       </li>
     
@@ -293,6 +317,56 @@
   
 </div>
 
+
+  <h2>Constructor Detail</h2>
+  
+    <div class="entry-detail" id="epoch(seconds:Int,location=Location::UTC):Time-class-method">
+      <div class="signature">
+        
+        def self.<strong>epoch</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
+
+        <a class="method-permalink" href="#epoch%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of
+<em>seconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p>
+
+<p>The time zone is always UTC.</p>
+
+<pre><code><span class="t">Time</span>.epoch(<span class="n">981173106</span>) <span class="c"># =&gt; 2001-02-03 04:05:06 UTC</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/popcorn/blob/6f278074bba611e0933fa5f4f300be6502686b1a/src/popcorn/ext/time_epoch.cr#L2" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="epoch_ms(milliseconds:Int,location=Location::UTC):Time-class-method">
+      <div class="signature">
+        
+        def self.<strong>epoch_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
+
+        <a class="method-permalink" href="#epoch_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of
+<em>milliseconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p>
+
+<p>The time zone is always UTC.</p>
+
+<pre><code>time <span class="o">=</span> <span class="t">Time</span>.epoch_ms(<span class="n">981173106789</span>) <span class="c"># =&gt; 2001-02-03 04:05:06.789 UTC</span>
+time.millisecond                   <span class="c"># =&gt; 789</span></code></pre></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/popcorn/blob/6f278074bba611e0933fa5f4f300be6502686b1a/src/popcorn/ext/time_epoch.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -516,7 +590,7 @@
         <a class="method-permalink" href="#to_time%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28v%3AT%2Clocation%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">Popcorn::Cast.to_time</a></code></p></div>
+        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28v%3AT%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">Popcorn::Cast.to_time</a></code></p></div>
       
       <br/>
       <div>
