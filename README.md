@@ -27,25 +27,26 @@ Popcorn proviedes a handful of `to_xxx`/`to_xxx?` methods and `xxx` is full type
 This is distinguish between built-in methods in Crystal.
 
 - to_int
-- to_int8
-- to_int16
 - to_int64
-- to_float
 - to_float32
+- to_float
 - to_bool
-- to_string (alias to to_s in Crystal).
 - to_time
+- to_string (alias to to_s in Crystal).
 
 ```crystal
 require "popcorn"
 
-Popcorn.to_sting("foobar")   # => "foobar"
-Popcorn.to_string(8.31)       # => "8.31"
-Popcorn.to_int("1")           # => 1
-Popcorn.to_int("123abc")      # => 123
-Popcorn.to_bool("no")         # => false
-Popcorn.to_bool("unkown")     # => raise a `TypeCastError` exception
-Popcorn.to_bool?("unkown")    # => nil
+Popcorn.to_sting("foobar")                                                    # => "foobar"
+Popcorn.to_string(8.31)                                                       # => "8.31"
+Popcorn.to_int("1")                                                           # => 1
+Popcorn.to_int("123abc")                                                      # => 123
+Popcorn.to_bool("no")                                                         # => false
+Popcorn.to_bool("unkown")                                                     # => raise a `TypeCastError` exception
+Popcorn.to_bool?("unkown")                                                    # => nil
+Popcorn.to_time("2018-07-23T10:11:22")                                        # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
+Popcorn.to_time("2018-07-23T10:11:22Z", Time::Location.load("Asia/Shanghai")) # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load("Asia/Shanghai"))
+Popcorn.to_time("Tue, 20 Jan 2018", formatter: ["%a, %d %b %Y"])              # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
 ```
 
 Also these methods had been inject to Crystal literals, you can call it directly, such like:
@@ -54,13 +55,16 @@ Also these methods had been inject to Crystal literals, you can call it directly
 require "popcorn"
 require "popcorn/injection" # => make sure require it!
 
-"foobar".to_string  # => "foobar"
-8.31.to_string      # => "8.31"
-"1".to_int          # => 1
-"123abc".to_int     # => 123
-"no".to_bool        # => false
-"unkown".to_bool    # => raise a `TypeCastError` exception
-"unkown".to_bool    # => nil
+"foobar".to_string                                                   # => "foobar"
+8.31.to_string                                                       # => "8.31"
+"1".to_int                                                           # => 1
+"123abc".to_int                                                      # => 123
+"no".to_bool                                                         # => false
+"unkown".to_bool                                                     # => raise a `TypeCastError` exception
+"unkown".to_bool                                                     # => nil
+"2018-07-23T10:11:22".to_time                                        # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
+"2018-07-23T10:11:22Z".to_time(Time::Location.load("Asia/Shanghai")) # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load("Asia/Shanghai"))
+"Tue, 20 Jan 2018".to_time(formatter: ["%a, %d %b %Y"])              # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
 ```
 
 ## Contributing
