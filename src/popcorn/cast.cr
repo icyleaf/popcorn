@@ -28,6 +28,59 @@ module Popcorn
       end
     end
 
+    # Alias to `to_int?`
+    def to_int32?(v : T) forall T
+      to_int?(v)
+    end
+
+    # Returns the `Int8` or `Nil` value represented by given data type.
+    def to_int8?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_i8
+      when Float
+        v.as(Float).to_i8
+      when Bool
+        v.as(Bool) ? 1 : 0
+      when Nil
+        0
+      when JSON::Any
+        case object = v.as(JSON::Any)
+        when .as_i?    then to_int(object.as_i)
+        when .as_f?    then to_int(object.as_f)
+        when .as_bool? then to_int(object.as_bool)
+        when .as_s?    then to_int(object.as_s)
+        end
+      when String
+        value = v.as(String).to_i8?(strict: false)
+        value ? value : 0
+      end
+    end
+
+    # Returns the `Int16` or `Nil` value represented by given data type.
+    def to_int16?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_i16
+      when Float
+        v.as(Float).to_i16
+      when Bool
+        v.as(Bool) ? 1 : 0
+      when Nil
+        0
+      when JSON::Any
+        case object = v.as(JSON::Any)
+        when .as_i?    then to_int(object.as_i)
+        when .as_f?    then to_int(object.as_f)
+        when .as_bool? then to_int(object.as_bool)
+        when .as_s?    then to_int(object.as_s)
+        end
+      when String
+        value = v.as(String).to_i16?(strict: false)
+        value ? value : 0
+      end
+    end
+
     # Returns the `Int64` or `Nil` value represented by given data type.
     def to_int64?(v : T) forall T
       case v
@@ -58,6 +111,11 @@ module Popcorn
         value = v.as(String).to_f?(strict: false)
         value ? value : 0
       end
+    end
+
+    # Alias to `to_float64?`
+    def to_float64?(v : T) forall T
+      to_float64?(v)
     end
 
     # Returns the `Float32` or `Nil` value represented by given data type.
@@ -129,7 +187,7 @@ module Popcorn
       # Returns the `{{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.id }}` value represented by given data type.
       def {{ method.name.tr("?", "").id }}(v : T{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}) forall T
         value = {{ method.name.id }}(v{% if method.name.starts_with?("to_time") %}, location, formatters{% end %})
-        raise_error!(T.to_s, {{ method.name.id.stringify }}) if value.nil?
+        raise_error!(T.to_s, {{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.id.stringify }}) if value.nil?
         value
       end
     {% end %}

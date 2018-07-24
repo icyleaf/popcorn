@@ -21,54 +21,12 @@ require "./spec_helper"
 {% end %}
 
 describe Popcorn do
-  describe "to_bool" do
-    it_to_bool true, true
-    it_to_bool false, false
-    it_to_bool "true", true
-    it_to_bool "TRUE", true
-    it_to_bool "True", true
-    it_to_bool "false", false
-    it_to_bool "FALSE", false
-    it_to_bool "False", false
-    it_to_bool "T", true
-    it_to_bool "Yes", true
-    it_to_bool "Y", true
-    it_to_bool "on", true
-    it_to_bool "1", true
-    it_to_bool "f", false
-    it_to_bool "no", false
-    it_to_bool "off", false
-    it_to_bool "0", false
-    it_to_bool :true, true
-    it_to_bool :false, false
-    it_to_bool 1, true
-    it_to_bool 10.1, true
-    it_to_bool -1, true
-    it_to_bool 0, false
-
-    it_raise_to_bool "foo"
-    it_raise_to_bool :foo
-    it_raise_to_bool([1, 2, 3])
-    it_raise_to_bool({"a" => "b"})
-    it_raise_to_bool({a: "b"})
-  end
-
-  describe "to_bool?" do
-    it_to_bool? "foo", nil
-    it_to_bool? :foo, nil
-    it_to_bool?([1, 2, 3], nil)
-    it_to_bool?({"a" => "b"}, nil)
-    it_to_bool?({a: "b"}, nil)
-  end
-
   describe "to_int" do
-    it_to_int 1, 1
-    it_to_int -123, -123
+    it_to_int 1_i8, 1_i32
+    it_to_int -123_i16, -123
+    it_to_int 123456789123456_i64, -2045800064
     it_to_int 1.234567890, 1
-    it_to_int 1.67890, 1
-    it_to_int -1, -1
-    it_to_int 123456789123456, -2045800064
-    it_to_int -123456789123456, 2045800064
+    it_to_int 1.67890_f32, 1
     it_to_int true, 1
     it_to_int false, 0
     it_to_int "123", 123
@@ -91,14 +49,74 @@ describe Popcorn do
     it_to_int?({a: "b"}, nil)
   end
 
+  describe "to_int8" do
+    it_to_int8 1, 1_i8
+    it_to_int8 -123_i16, -123_i8
+    it_to_int8 123456789123456_i64, -128_i8
+    it_to_int8 1.234567890, 1_i8
+    it_to_int8 1.67890_f32, 1_i8
+    it_to_int8 1, 1_i8
+    it_to_int8 -123, -123_i8
+    it_to_int8 1.234567890, 1_i8
+    it_to_int8 1.67890, 1_i8
+    it_to_int8 true, 1_i8
+    it_to_int8 false, 0_i8
+    it_to_int8 "123", 123_i8
+    it_to_int8 "123.4", 123_i8
+    it_to_int8 "123true", 123_i8
+    it_to_int8 "123true456", 123_i8
+    it_to_int8 "abc123true456", 0_i8
+    it_to_int8 "true", 0_i8
+
+    it_raise_to_int8 :foo
+    it_raise_to_int8([1, 2, 3])
+    it_raise_to_int8({"a" => "b"})
+    it_raise_to_int8({a: "b"})
+  end
+
+  describe "to_int8?" do
+    it_to_int8? :foo, nil
+    it_to_int8?([1, 2, 3], nil)
+    it_to_int8?({"a" => "b"}, nil)
+    it_to_int8?({a: "b"}, nil)
+  end
+
+  describe "to_int16" do
+    it_to_int16 1_i8, 1_i16
+    it_to_int16 -123_i16, -123_i16
+    it_to_int16 123, 123_i16
+    it_to_int16 123456789123456_i64, -28288_i16
+    it_to_int16 1.234567890, 1_i16
+    it_to_int16 1.67890_f32, 1_i16
+    it_to_int16 true, 1_i16
+    it_to_int16 false, 0_i16
+    it_to_int16 "123", 123_i16
+    it_to_int16 "123.4", 123_i16
+    it_to_int16 "123true", 123_i16
+    it_to_int16 "123true456", 123_i16
+    it_to_int16 "abc123true456", 0_i16
+    it_to_int16 "true", 0_i16
+
+    it_raise_to_int16 :foo
+    it_raise_to_int16([1, 2, 3])
+    it_raise_to_int16({"a" => "b"})
+    it_raise_to_int16({a: "b"})
+  end
+
+  describe "to_int16?" do
+    it_to_int16? :foo, nil
+    it_to_int16?([1, 2, 3], nil)
+    it_to_int16?({"a" => "b"}, nil)
+    it_to_int16?({a: "b"}, nil)
+  end
+
   describe "to_int64" do
-    it_to_int64 1, 1_i64
-    it_to_int64 -123, -123_i64
+    it_to_int64 1_i8, 1_i64
+    it_to_int64 -123_i16, -123_i64
+    it_to_int64 123, 123_i64
+    it_to_int64 123456789123456_i64, 123456789123456_i64
     it_to_int64 1.234567890, 1_i64
-    it_to_int64 1.67890, 1_i64
-    it_to_int64 -1, -1_i64
-    it_to_int64 123456789123456, 123456789123456_i64
-    it_to_int64 -123456789123456, -123456789123456_i64
+    it_to_int64 1.67890_f32, 1_i64
     it_to_int64 true, 1_i64
     it_to_int64 false, 0_i64
     it_to_int64 "123", 123_i64
@@ -122,10 +140,11 @@ describe Popcorn do
   end
 
   describe "to_float" do
-    it_to_float 1.234, 1.234_f64
-    it_to_float -123.4, -123.4_f64
-    it_to_float 123456789123456, 123456789123456.0_f64
-    it_to_float -123456789123456, -123456789123456.0_f64
+    it_to_float 1_i8, 1.0_f64
+    it_to_float -123_i16, -123.0_f64
+    it_to_float 123, 123.0_f64
+    it_to_float 123456789123456_i64, 123456789123456.0_f64
+    it_to_float 1.234567890, 1.234567890_f64
     it_to_float "123", 123.0_f64
     it_to_float "123.4", 123.4_f64
     it_to_float "123true", 123.0_f64
@@ -147,10 +166,12 @@ describe Popcorn do
   end
 
   describe "to_float32" do
-    it_to_float 1.234, 1.234
-    it_to_float -123.4, -123.4
-    it_to_float 123456789123456, 123456789123456.0
-    it_to_float -123456789123456, -123456789123456.0
+    it_to_float 1_i8, 1.0_f32
+    it_to_float -123_i16, -123.0_f32
+    it_to_float 123, 123.0_f32
+    # it_to_float 123456789123456_i64, 123456790000000.0_f32
+    # it_to_float 1.23_f64, 1.23_f32
+    it_to_float 1.23_f32, 1.23_f32
     it_to_float "123", 123.0
     it_to_float "123.4", 123.4
     it_to_float "123true", 123.0
@@ -213,5 +234,45 @@ describe Popcorn do
     it_to_time? "2018", nil
     it_to_time? "Nov 10 23:00:00", nil
     it_to_time? "11:00PM", nil
+  end
+
+  describe "to_bool" do
+    it_to_bool true, true
+    it_to_bool false, false
+    it_to_bool "true", true
+    it_to_bool "TRUE", true
+    it_to_bool "True", true
+    it_to_bool "false", false
+    it_to_bool "FALSE", false
+    it_to_bool "False", false
+    it_to_bool "T", true
+    it_to_bool "Yes", true
+    it_to_bool "Y", true
+    it_to_bool "on", true
+    it_to_bool "1", true
+    it_to_bool "f", false
+    it_to_bool "no", false
+    it_to_bool "off", false
+    it_to_bool "0", false
+    it_to_bool :true, true
+    it_to_bool :false, false
+    it_to_bool 1, true
+    it_to_bool 10.1, true
+    it_to_bool -1, true
+    it_to_bool 0, false
+
+    it_raise_to_bool "foo"
+    it_raise_to_bool :foo
+    it_raise_to_bool([1, 2, 3])
+    it_raise_to_bool({"a" => "b"})
+    it_raise_to_bool({a: "b"})
+  end
+
+  describe "to_bool?" do
+    it_to_bool? "foo", nil
+    it_to_bool? :foo, nil
+    it_to_bool?([1, 2, 3], nil)
+    it_to_bool?({"a" => "b"}, nil)
+    it_to_bool?({a: "b"}, nil)
   end
 end

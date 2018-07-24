@@ -1,16 +1,15 @@
 module Popcorn
   # :nodoc:
   module Injection
-    CLASS_METHODS  = [String]
-    STRUCT_METHODS = [Int32, Int64, Float64, Bool, Time, Symbol]
-
+    TARGETS = {
+      "class" => [String],
+      "struct"  => [Int8, Int16, Int32, Int64, Float64, Float32, Bool, Time, Symbol],
+    }
     macro start
-      {% for name in CLASS_METHODS %}
-        Popcorn::Injection.inject({{ name.id }}, "class")
-      {% end %}
-
-      {% for name in STRUCT_METHODS %}
-        Popcorn::Injection.inject({{ name.id }}, "struct")
+      {% for type, ivars in TARGETS %}
+        {% for ivar in ivars %}
+          Popcorn::Injection.inject({{ ivar.id }}, {{ type.id.stringify }})
+        {% end %}
       {% end %}
     end
 
