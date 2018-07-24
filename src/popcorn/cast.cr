@@ -37,9 +37,9 @@ module Popcorn
       when Float
         v.as(Float).to_i8
       when Bool
-        v.as(Bool) ? 1 : 0
+        v.as(Bool) ? 1_i8 : 0_i8
       when Nil
-        0
+        0_i8
       when JSON::Any, YAML::Any
         value = parse_any_value(v)
         to_int8?(value) unless value.nil?
@@ -57,9 +57,9 @@ module Popcorn
       when Float
         v.as(Float).to_i16
       when Bool
-        v.as(Bool) ? 1 : 0
+        v.as(Bool) ? 1_i16 : 0_i16
       when Nil
-        0
+        0_i16
       when JSON::Any, YAML::Any
         value = parse_any_value(v)
         to_int16?(value) unless value.nil?
@@ -77,14 +77,99 @@ module Popcorn
       when Float
         v.as(Float).to_i64
       when Bool
-        v.as(Bool) ? 1 : 0
+        v.as(Bool) ? 1_i64 : 0_i64
       when Nil
-        0
+        0_i64
       when JSON::Any, YAML::Any
         value = parse_any_value(v)
         to_int64?(value) unless value.nil?
       when String
         value = v.as(String).to_i64?(strict: false)
+        value ? value : 0
+      end
+    end
+
+    # Returns the `UInt32` or `Nil` value represented by given data type.
+    def to_uint?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_u
+      when Float
+        v.as(Float).to_u
+      when Bool
+        v.as(Bool) ? 1_u32 : 0_u32
+      when Nil
+        0_u32
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_int?(value) unless value.nil?
+      when String
+        value = v.as(String).to_i?(strict: false)
+        value ? value : 0
+      end
+    end
+
+    # Alias to `to_uint?`
+    def to_uint32?(v : T) forall T
+      to_int?(v)
+    end
+
+    # Returns the `Int8` or `Nil` value represented by given data type.
+    def to_uint8?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_u8
+      when Float
+        v.as(Float).to_u8
+      when Bool
+        v.as(Bool) ? 1_u8 : 0_u8
+      when Nil
+        0_u8
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_uint8?(value) unless value.nil?
+      when String
+        value = v.as(String).to_u8?(strict: false)
+        value ? value : 0
+      end
+    end
+
+    # Returns the `UInt16` or `Nil` value represented by given data type.
+    def to_uint16?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_u16
+      when Float
+        v.as(Float).to_u16
+      when Bool
+        v.as(Bool) ? 1_u16 : 0_u16
+      when Nil
+        0_u16
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_uint16?(value) unless value.nil?
+      when String
+        value = v.as(String).to_u16?(strict: false)
+        value ? value : 0
+      end
+    end
+
+    # Returns the `UInt64` or `Nil` value represented by given data type.
+    def to_uint64?(v : T) forall T
+      case v
+      when Int
+        v.as(Int).to_u64
+      when Float
+        v.as(Float).to_u64
+      when Bool
+        v.as(Bool) ? 1_u64 : 0_u64
+      when Nil
+        0_u64
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_uint64?(value) unless value.nil?
+      when String
+        value = v.as(String).to_u64?(strict: false)
         value ? value : 0
       end
     end
@@ -180,14 +265,20 @@ module Popcorn
       end
     end
 
-    {% for method in @type.methods %}
-      # Returns the `{{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.id }}` value represented by given data type.
-      def {{ method.name.tr("?", "").id }}(v : T{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}) forall T
-        value = {{ method.name.id }}(v{% if method.name.starts_with?("to_time") %}, location, formatters{% end %})
-        raise_error!(T.to_s, {{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.id.stringify }}) if value.nil?
-        value
-      end
+    {% begin %}
+      {% for method in @type.methods %}
+        # Returns the `{{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.gsub(/^Ui/, "UI").id }}` value represented by given data type.
+        def {{ method.name.tr("?", "").id }}(v : T{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}) forall T
+          value = {{ method.name.id }}(v{% if method.name.starts_with?("to_time") %}, location, formatters{% end %})
+          raise_error!(T.to_s, {{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.gsub(/^Ui/, "UI").id.stringify }}) if value.nil?
+          value
+        end
+      {% end %}
     {% end %}
+
+    def raise_error!(source : String, target : String)
+      raise TypeCastError.new("cast from #{source} to #{target} failed.")
+    end
 
     private def parse_time(v : String, location : Time::Location? = nil, formatters : Array(String)? = nil)
       location ||= Time::Location::UTC
@@ -279,10 +370,6 @@ module Popcorn
           return value
         end
       end
-    end
-
-    private def raise_error!(source : String, target : String)
-      raise TypeCastError.new("cast from #{source} to #{target} failed.")
     end
   end
 end

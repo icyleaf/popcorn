@@ -23,9 +23,14 @@ Popcorn is easy and safe from one type to another tool.
 Popcorn proviedes a handful of `to_xxx`/`to_xxx?` methods and `xxx` is full type name,
 This is distinguish between built-in methods in Crystal.
 
+- to_int8
 - to_int16
-- to_int
+- to_int (alias to to_int32)
 - to_int64
+- to_uint8
+- to_uint16
+- to_uint (alias to to_uint32)
+- to_uint64
 - to_float32
 - to_float64
 - to_bool
@@ -50,7 +55,7 @@ Popcorn.to_time("Tue, 20 Jan 2018", formatter: ["%a, %d %b %Y"])              # 
 Also these methods had been inject to Crystal literals, you can call it directly, Monkey Patching list:
 
 - String
-- Int8/Int16/Int32/Int64
+- Int8/Int16/Int32/Int64/UInt8/UInt16/UInt32/UInt64
 - Float32/Float64
 - Bool
 - Time
@@ -67,7 +72,7 @@ require "popcorn/injection" # => make sure require it!
 "123abc".to_int                                                      # => 123
 "no".to_bool                                                         # => false
 "unkown".to_bool                                                     # => raise a `TypeCastError` exception
-"unkown".to_bool?                                                     # => nil
+"unkown".to_bool?                                                    # => nil
 "2018-07-23T10:11:22".to_time                                        # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
 "2018-07-23T10:11:22Z".to_time(Time::Location.load("Asia/Shanghai")) # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load("Asia/Shanghai"))
 "Tue, 20 Jan 2018".to_time(formatter: ["%a, %d %b %Y"])              # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)

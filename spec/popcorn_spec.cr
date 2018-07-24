@@ -2,8 +2,8 @@ require "./spec_helper"
 
 {% for method in Popcorn::Cast.methods %}
   {% if method.name.starts_with?("to_") %}
-    private def it_{{ method.name.id }}(input, expected{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}, file = __FILE__, line = __LINE__)
-      it "should casts #{input.class}: #{input}", file, line do
+    private def it_{{ method.name.id }}(input, expected{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}, except = [] of String, file = __FILE__, line = __LINE__)
+      it "should casts #{input.class}.new(#{input})", file, line do
         Popcorn.{{ method.name.id }}(input{% if method.name.starts_with?("to_time") %}, location, formatters{% end %}).should eq(expected)
       end
     end
@@ -22,7 +22,7 @@ require "./spec_helper"
 
 describe Popcorn do
   describe "to_int" do
-    it_to_int 1_i8, 1_i32
+    it_to_int 1_i8, 1_i32, except: ["json"]
     it_to_int -123_i16, -123
     it_to_int 123456789123456_i64, -2045800064
     it_to_int 1.234567890, 1
@@ -36,8 +36,7 @@ describe Popcorn do
     it_to_int "abc123true456", 0
     it_to_int "true", 0
 
-    it_to_int JSON::Any.new(raw: 1_i8), 1_i32
-    it_to_int JSON::Any.new(raw: -123_i16), -123
+    it_to_int JSON::Any.new(raw: 1_i64), 1_i32
     it_to_int JSON::Any.new(raw: 123456789123456_i64), -2045800064
     it_to_int JSON::Any.new(raw: 1.234567890), 1
     it_to_int JSON::Any.new(raw: 1.67890_f32), 1
@@ -50,8 +49,7 @@ describe Popcorn do
     it_to_int JSON::Any.new(raw: "abc123true456"), 0
     it_to_int JSON::Any.new(raw: "true"), 0
 
-    it_to_int YAML::Any.new(raw: 1_i8), 1_i32
-    it_to_int YAML::Any.new(raw: -123_i16), -123
+    it_to_int YAML::Any.new(raw: 1_i64), 1_i32
     it_to_int YAML::Any.new(raw: 123456789123456_i64), -2045800064
     it_to_int YAML::Any.new(raw: 1.234567890), 1
     it_to_int YAML::Any.new(raw: 1.67890_f32), 1
@@ -104,8 +102,7 @@ describe Popcorn do
     it_to_int8 "abc123true456", 0_i8
     it_to_int8 "true", 0_i8
 
-    it_to_int8 JSON::Any.new(raw: 1_i8), 1_i8
-    it_to_int8 JSON::Any.new(raw: -123_i16), -123_i8
+    it_to_int8 JSON::Any.new(raw: 1_i64), 1_i8
     it_to_int8 JSON::Any.new(raw: 123456789123456_i64), -128_i8
     it_to_int8 JSON::Any.new(raw: 1.234567890), 1_i8
     it_to_int8 JSON::Any.new(raw: 1.67890_f32), 1_i8
@@ -118,8 +115,7 @@ describe Popcorn do
     it_to_int8 JSON::Any.new(raw: "abc123true456"), 0_i8
     it_to_int8 JSON::Any.new(raw: "true"), 0_i8
 
-    it_to_int8 YAML::Any.new(raw: 1_i8), 1_i8
-    it_to_int8 YAML::Any.new(raw: -123_i16), -123_i8
+    it_to_int8 YAML::Any.new(raw: 1_i64), 1_i8
     it_to_int8 YAML::Any.new(raw: 123456789123456_i64), -128_i8
     it_to_int8 YAML::Any.new(raw: 1.234567890), 1_i8
     it_to_int8 YAML::Any.new(raw: 1.67890_f32), 1_i8
@@ -169,8 +165,7 @@ describe Popcorn do
     it_to_int16 "abc123true456", 0_i16
     it_to_int16 "true", 0_i16
 
-    it_to_int16 JSON::Any.new(raw: 1_i8), 1_i16
-    it_to_int16 JSON::Any.new(raw: -123_i16), -123_i16
+    it_to_int16 JSON::Any.new(raw: 1_i64), 1_i16
     it_to_int16 JSON::Any.new(raw: 123456789123456_i64), -28288_i16
     it_to_int16 JSON::Any.new(raw: 1.234567890), 1_i16
     it_to_int16 JSON::Any.new(raw: 1.67890_f32), 1_i16
@@ -183,8 +178,7 @@ describe Popcorn do
     it_to_int16 JSON::Any.new(raw: "abc123true456"), 0_i16
     it_to_int16 JSON::Any.new(raw: "true"), 0_i16
 
-    it_to_int16 YAML::Any.new(raw: 1_i8), 1_i16
-    it_to_int16 YAML::Any.new(raw: -123_i16), -123_i16
+    it_to_int16 YAML::Any.new(raw: 1_i64), 1_i16
     it_to_int16 YAML::Any.new(raw: 123456789123456_i64), -28288_i16
     it_to_int16 YAML::Any.new(raw: 1.234567890), 1_i16
     it_to_int16 YAML::Any.new(raw: 1.67890_f32), 1_i16
@@ -234,9 +228,7 @@ describe Popcorn do
     it_to_int64 "abc123true456", 0_i64
     it_to_int64 "true", 0_i64
 
-    it_to_int64 JSON::Any.new(raw: 1_i8), 1_i64
-    it_to_int64 JSON::Any.new(raw: 123_i16), 123_i64
-    it_to_int64 JSON::Any.new(raw: 123_i32), 123_i64
+    it_to_int64 JSON::Any.new(raw: 1_i64), 1_i64
     it_to_int64 JSON::Any.new(raw: 123456789123456_i64), 123456789123456_i64
     it_to_int64 JSON::Any.new(raw: 1.234567890), 1_i64
     it_to_int64 JSON::Any.new(raw: 1.67890_f32), 1_i64
@@ -249,8 +241,7 @@ describe Popcorn do
     it_to_int64 JSON::Any.new(raw: "abc123true456"), 0_i64
     it_to_int64 JSON::Any.new(raw: "true"), 0_i64
 
-    it_to_int64 YAML::Any.new(raw: 1_i8), 1_i64
-    it_to_int64 YAML::Any.new(raw: -123_i16), -123_i64
+    it_to_int64 YAML::Any.new(raw: 1_i64), 1_i64
     it_to_int64 YAML::Any.new(raw: 123456789123456_i64), 123456789123456_i64
     it_to_int64 YAML::Any.new(raw: 1.234567890), 1_i64
     it_to_int64 YAML::Any.new(raw: 1.67890_f32), 1_i64
@@ -282,6 +273,250 @@ describe Popcorn do
     it_to_int64?(JSON.parse(%Q{{"a":"b"}}), nil)
     it_to_int64?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
     it_to_int64?(YAML.parse(%Q{a:\n  b}), nil)
+  end
+
+  describe "to_uint" do
+    it_to_uint 1_i8, 1_u32
+    it_to_uint 123456789123456_i64, 2249167232_u32
+    it_to_uint 1.234567890, 1_u32
+    it_to_uint 1.67890_f32, 1_u32
+    it_to_uint true, 1_u32
+    it_to_uint false, 0_u32
+    it_to_uint "123", 123_u32
+    it_to_uint "123.4", 123_u32
+    it_to_uint "123true", 123_u32
+    it_to_uint "123true456", 123_u32
+    it_to_uint "abc123true456", 0_u32
+    it_to_uint "true", 0_u32
+
+    it_to_uint JSON::Any.new(raw: 1_i64), 1_u32
+    it_to_uint JSON::Any.new(raw: 123456789123456_i64), 2249167232_u32
+    it_to_uint JSON::Any.new(raw: 1.234567890), 1_u32
+    it_to_uint JSON::Any.new(raw: 1.67890_f32), 1_u32
+    it_to_uint JSON::Any.new(raw: true), 1_u32
+    it_to_uint JSON::Any.new(raw: false), 0_u32
+    it_to_uint JSON::Any.new(raw: "123"), 123_u32
+    it_to_uint JSON::Any.new(raw: "123.4"), 123_u32
+    it_to_uint JSON::Any.new(raw: "123true"), 123_u32
+    it_to_uint JSON::Any.new(raw: "123true456"), 123_u32
+    it_to_uint JSON::Any.new(raw: "abc123true456"), 0_u32
+    it_to_uint JSON::Any.new(raw: "true"), 0_u32
+
+    it_to_uint YAML::Any.new(raw: 1_i64), 1_u32
+    it_to_uint YAML::Any.new(raw: 123456789123456_i64), 2249167232_u32
+    it_to_uint YAML::Any.new(raw: 1.234567890), 1_u32
+    it_to_uint YAML::Any.new(raw: 1.67890_f32), 1_u32
+    it_to_uint YAML::Any.new(raw: true), 1_u32
+    it_to_uint YAML::Any.new(raw: false), 0_u32
+    it_to_uint YAML::Any.new(raw: "123"), 123_u32
+    it_to_uint YAML::Any.new(raw: "123.4"), 123_u32
+    it_to_uint YAML::Any.new(raw: "123true"), 123_u32
+    it_to_uint YAML::Any.new(raw: "123true456"), 123_u32
+    it_to_uint YAML::Any.new(raw: "abc123true456"), 0_u32
+    it_to_uint YAML::Any.new(raw: "true"), 0_u32
+
+    it_raise_to_uint :foo
+    it_raise_to_uint([1, 2, 3])
+    it_raise_to_uint({"a" => "b"})
+    it_raise_to_uint({a: "b"})
+    it_raise_to_uint(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_uint(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_uint(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_uint(YAML.parse(%Q{a:\n  b}))
+  end
+
+  describe "to_uint?" do
+    it_to_uint? :foo, nil
+    it_to_uint?([1, 2, 3], nil)
+    it_to_uint?({"a" => "b"}, nil)
+    it_to_uint?({a: "b"}, nil)
+    it_to_uint?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_uint?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_uint?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_uint?(YAML.parse(%Q{a:\n  b}), nil)
+  end
+
+  describe "to_uint8" do
+    it_to_uint8 1_i8, 1_u8
+    it_to_uint8 123456789123456_i64, 128_u8
+    it_to_uint8 1.234567890, 1_u8
+    it_to_uint8 1.67890_f32, 1_u8
+    it_to_uint8 true, 1_u8
+    it_to_uint8 false, 0_u8
+    it_to_uint8 "123", 123_u8
+    it_to_uint8 "123.4", 123_u8
+    it_to_uint8 "123true", 123_u8
+    it_to_uint8 "123true456", 123_u8
+    it_to_uint8 "abc123true456", 0_u8
+    it_to_uint8 "true", 0_u8
+
+    it_to_uint8 JSON::Any.new(raw: 1_i64), 1_u8
+    it_to_uint8 JSON::Any.new(raw: 123456789123456_i64), 128_u8
+    it_to_uint8 JSON::Any.new(raw: 1.234567890), 1_u8
+    it_to_uint8 JSON::Any.new(raw: 1.67890_f32), 1_u8
+    it_to_uint8 JSON::Any.new(raw: true), 1_u8
+    it_to_uint8 JSON::Any.new(raw: false), 0_u8
+    it_to_uint8 JSON::Any.new(raw: "123"), 123_u8
+    it_to_uint8 JSON::Any.new(raw: "123.4"), 123_u8
+    it_to_uint8 JSON::Any.new(raw: "123true"), 123_u8
+    it_to_uint8 JSON::Any.new(raw: "123true456"), 123_u8
+    it_to_uint8 JSON::Any.new(raw: "abc123true456"), 0_u8
+    it_to_uint8 JSON::Any.new(raw: "true"), 0_u8
+
+    it_to_uint8 YAML::Any.new(raw: 1_i64), 1_u8
+    it_to_uint8 YAML::Any.new(raw: 123456789123456_i64), 128_u8
+    it_to_uint8 YAML::Any.new(raw: 1.234567890), 1_u8
+    it_to_uint8 YAML::Any.new(raw: 1.67890_f32), 1_u8
+    it_to_uint8 YAML::Any.new(raw: true), 1_u8
+    it_to_uint8 YAML::Any.new(raw: false), 0_u8
+    it_to_uint8 YAML::Any.new(raw: "123"), 123_u8
+    it_to_uint8 YAML::Any.new(raw: "123.4"), 123_u8
+    it_to_uint8 YAML::Any.new(raw: "123true"), 123_u8
+    it_to_uint8 YAML::Any.new(raw: "123true456"), 123_u8
+    it_to_uint8 YAML::Any.new(raw: "abc123true456"), 0_u8
+    it_to_uint8 YAML::Any.new(raw: "true"), 0_u8
+
+    it_raise_to_uint8 :foo
+    it_raise_to_uint8([1, 2, 3])
+    it_raise_to_uint8({"a" => "b"})
+    it_raise_to_uint8({a: "b"})
+    it_raise_to_uint8(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_uint8(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_uint8(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_uint8(YAML.parse(%Q{a:\n  b}))
+  end
+
+  describe "to_uint8?" do
+    it_to_uint8? :foo, nil
+    it_to_uint8?([1, 2, 3], nil)
+    it_to_uint8?({"a" => "b"}, nil)
+    it_to_uint8?({a: "b"}, nil)
+    it_to_uint8?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_uint8?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_uint8?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_uint8?(YAML.parse(%Q{a:\n  b}), nil)
+  end
+
+  describe "to_uint16" do
+    it_to_uint16 1_i8, 1_u16
+    it_to_uint16 123456789123456_i64, 37248_u16
+    it_to_uint16 1.234567890, 1_u16
+    it_to_uint16 1.67890_f32, 1_u16
+    it_to_uint16 true, 1_u16
+    it_to_uint16 false, 0_u16
+    it_to_uint16 "123", 123_u16
+    it_to_uint16 "123.4", 123_u16
+    it_to_uint16 "123true", 123_u16
+    it_to_uint16 "123true456", 123_u16
+    it_to_uint16 "abc123true456", 0_u16
+    it_to_uint16 "true", 0_u16
+
+    it_to_uint16 JSON::Any.new(raw: 1_i64), 1_u16
+    it_to_uint16 JSON::Any.new(raw: 123456789123456_i64), 37248_u16
+    it_to_uint16 JSON::Any.new(raw: 1.234567890), 1_u16
+    it_to_uint16 JSON::Any.new(raw: 1.67890_f32), 1_u16
+    it_to_uint16 JSON::Any.new(raw: true), 1_u16
+    it_to_uint16 JSON::Any.new(raw: false), 0_u16
+    it_to_uint16 JSON::Any.new(raw: "123"), 123_u16
+    it_to_uint16 JSON::Any.new(raw: "123.4"), 123_u16
+    it_to_uint16 JSON::Any.new(raw: "123true"), 123_u16
+    it_to_uint16 JSON::Any.new(raw: "123true456"), 123_u16
+    it_to_uint16 JSON::Any.new(raw: "abc123true456"), 0_u16
+    it_to_uint16 JSON::Any.new(raw: "true"), 0_u16
+
+    it_to_uint16 YAML::Any.new(raw: 1_i64), 1_u16
+    it_to_uint16 YAML::Any.new(raw: 123456789123456_i64), 37248_u16
+    it_to_uint16 YAML::Any.new(raw: 1.234567890), 1_u16
+    it_to_uint16 YAML::Any.new(raw: 1.67890_f32), 1_u16
+    it_to_uint16 YAML::Any.new(raw: true), 1_u16
+    it_to_uint16 YAML::Any.new(raw: false), 0_u16
+    it_to_uint16 YAML::Any.new(raw: "123"), 123_u16
+    it_to_uint16 YAML::Any.new(raw: "123.4"), 123_u16
+    it_to_uint16 YAML::Any.new(raw: "123true"), 123_u16
+    it_to_uint16 YAML::Any.new(raw: "123true456"), 123_u16
+    it_to_uint16 YAML::Any.new(raw: "abc123true456"), 0_u16
+    it_to_uint16 YAML::Any.new(raw: "true"), 0_u16
+
+    it_raise_to_uint16 :foo
+    it_raise_to_uint16([1, 2, 3])
+    it_raise_to_uint16({"a" => "b"})
+    it_raise_to_uint16({a: "b"})
+    it_raise_to_uint16(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_uint16(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_uint16(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_uint16(YAML.parse(%Q{a:\n  b}))
+  end
+
+  describe "to_uint16?" do
+    it_to_uint16? :foo, nil
+    it_to_uint16?([1, 2, 3], nil)
+    it_to_uint16?({"a" => "b"}, nil)
+    it_to_uint16?({a: "b"}, nil)
+    it_to_uint16?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_uint16?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_uint16?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_uint16?(YAML.parse(%Q{a:\n  b}), nil)
+  end
+
+  describe "to_uint64" do
+    it_to_uint64 1_i8, 1_u64
+    it_to_uint64 123456789123456_i64, 123456789123456_i64
+    it_to_uint64 1.234567890, 1_u64
+    it_to_uint64 1.67890_f32, 1_u64
+    it_to_uint64 true, 1_u64
+    it_to_uint64 false, 0_u64
+    it_to_uint64 "123", 123_u64
+    it_to_uint64 "123.4", 123_u64
+    it_to_uint64 "123true", 123_u64
+    it_to_uint64 "123true456", 123_u64
+    it_to_uint64 "abc123true456", 0_u64
+    it_to_uint64 "true", 0_u64
+
+    it_to_uint64 JSON::Any.new(raw: 1_i64), 1_u64
+    it_to_uint64 JSON::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_uint64 JSON::Any.new(raw: 1.234567890), 1_u64
+    it_to_uint64 JSON::Any.new(raw: 1.67890_f32), 1_u64
+    it_to_uint64 JSON::Any.new(raw: true), 1_u64
+    it_to_uint64 JSON::Any.new(raw: false), 0_u64
+    it_to_uint64 JSON::Any.new(raw: "123"), 123_u64
+    it_to_uint64 JSON::Any.new(raw: "123.4"), 123_u64
+    it_to_uint64 JSON::Any.new(raw: "123true"), 123_u64
+    it_to_uint64 JSON::Any.new(raw: "123true456"), 123_u64
+    it_to_uint64 JSON::Any.new(raw: "abc123true456"), 0_u64
+    it_to_uint64 JSON::Any.new(raw: "true"), 0_u64
+
+    it_to_uint64 YAML::Any.new(raw: 1_i64), 1_u64
+    it_to_uint64 YAML::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_uint64 YAML::Any.new(raw: 1.234567890), 1_u64
+    it_to_uint64 YAML::Any.new(raw: 1.67890_f32), 1_u64
+    it_to_uint64 YAML::Any.new(raw: true), 1_u64
+    it_to_uint64 YAML::Any.new(raw: false), 0_u64
+    it_to_uint64 YAML::Any.new(raw: "123"), 123_u64
+    it_to_uint64 YAML::Any.new(raw: "123.4"), 123_u64
+    it_to_uint64 YAML::Any.new(raw: "123true"), 123_u64
+    it_to_uint64 YAML::Any.new(raw: "123true456"), 123_u64
+    it_to_uint64 YAML::Any.new(raw: "abc123true456"), 0_u64
+    it_to_uint64 YAML::Any.new(raw: "true"), 0_u64
+
+    it_raise_to_uint64 :foo
+    it_raise_to_uint64([1, 2, 3])
+    it_raise_to_uint64({"a" => "b"})
+    it_raise_to_uint64({a: "b"})
+    it_raise_to_uint64(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_uint64(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_uint64(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_uint64(YAML.parse(%Q{a:\n  b}))
+  end
+
+  describe "to_uint64?" do
+    it_to_uint64? :foo, nil
+    it_to_uint64?([1, 2, 3], nil)
+    it_to_uint64?({"a" => "b"}, nil)
+    it_to_uint64?({a: "b"}, nil)
+    it_to_uint64?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_uint64?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_uint64?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_uint64?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_float" do

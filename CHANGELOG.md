@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## 0.1.1 (2018-07-24)
+
+## Add
+
+- to_uint8
+- to_uint16
+- to_uint (alias to to_uint32)
+- to_uint64
+
+Monkey Patching list:
+
+- UInt8/UInt16/UInt32/UInt64
+
 ## 0.1.0 (2018-07-24)
 
 First beta version.
@@ -17,14 +30,15 @@ First beta version.
 
 Provides methods:
 
-- [x] to_int8
-- [x] to_int16
-- [x] to_int
-- [x] to_int64
-- [x] to_float32
-- [x] to_float64
-- [x] to_bool
-- [x] to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)
+- to_int8
+- to_int16
+- to_int (alias to to_int32)
+- to_int64
+- to_float32
+- to_float64
+- to_bool
+- to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)
+- to_string (alias to to_s in Crystal).
 
 Monkey Patching list:
 
