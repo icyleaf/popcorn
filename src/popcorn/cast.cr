@@ -4,8 +4,8 @@ require "./ext/*"
 
 module Popcorn
   module Cast
-    # Returns the `Int32` value represented by given data type.
-    def to_int(v : T) forall T
+    # Returns the `Int32` or `Nil` value represented by given data type.
+    def to_int?(v : T) forall T
       case v
       when Int
         v.as(Int).to_i
@@ -15,16 +15,21 @@ module Popcorn
         v.as(Bool) ? 1 : 0
       when Nil
         0
+      when JSON::Any
+        case object = v.as(JSON::Any)
+        when .as_i?    then to_int(object.as_i)
+        when .as_f?    then to_int(object.as_f)
+        when .as_bool? then to_int(object.as_bool)
+        when .as_s?    then to_int(object.as_s)
+        end
       when String
         value = v.as(String).to_i?(strict: false)
         value ? value : 0
-      else
-        raise TypeCastError.new("cast from #{T} to Int32 failed. at #{__FILE__}:#{__LINE__}")
       end
     end
 
-    # Returns the `Int64` value represented by given data type.
-    def to_int64(v : T) forall T
+    # Returns the `Int64` or `Nil` value represented by given data type.
+    def to_int64?(v : T) forall T
       case v
       when Int
         v.as(Int).to_i64
@@ -37,13 +42,11 @@ module Popcorn
       when String
         value = v.as(String).to_i64?(strict: false)
         value ? value : 0
-      else
-        raise TypeCastError.new("cast from #{T} to Int64 failed. at #{__FILE__}:#{__LINE__}")
       end
     end
 
-    # Returns the `Float64` value represented by given data type.
-    def to_float(v : T) forall T
+    # Returns the `Float64` or `Nil` value represented by given data type.
+    def to_float?(v : T) forall T
       case v
       when Int
         v.as(Int).to_f
@@ -54,13 +57,11 @@ module Popcorn
       when String
         value = v.as(String).to_f?(strict: false)
         value ? value : 0
-      else
-        raise TypeCastError.new("cast from #{T} to Float64 failed. at #{__FILE__}:#{__LINE__}")
       end
     end
 
-    # Returns the `Float32` value represented by given data type.
-    def to_float32(v : T) forall T
+    # Returns the `Float32` or `Nil` value represented by given data type.
+    def to_float32?(v : T) forall T
       case v
       when Int
         v.as(Int).to_f32
@@ -71,16 +72,14 @@ module Popcorn
       when String
         value = v.as(String).to_f32?(strict: false)
         value ? value : 0
-      else
-        raise TypeCastError.new("cast from #{T} to Float32 failed. at #{__FILE__}:#{__LINE__}")
       end
     end
 
-    # Returns the `Time` value represented by given data type.
+    # Returns the `Time` or `Nil` value represented by given data type.
     #
     # - `location` argument applies for `Int`/`String` types
     # - `formatters` argument applies for `String` type.
-    def to_time(v : T, location : Time::Location? = nil, formatters : Array(String)? = nil) forall T
+    def to_time?(v : T, location : Time::Location? = nil, formatters : Array(String)? = nil) forall T
       case v
       when Time
         value = v.as(Time)
@@ -89,55 +88,49 @@ module Popcorn
         if Math.log10(value) > 10
           location ? Time.epoch_ms(value, location: location) : Time.epoch_ms(value)
         else
-          location ? Time.epoch(value, location: location): Time.epoch(value)
+          location ? Time.epoch(value, location: location) : Time.epoch(value)
         end
       when String
         parse_time(v.as(String), location, formatters)
-      else
-        raise TypeCastError.new("cast from #{T} to Time failed. at #{__FILE__}:#{__LINE__}")
       end
     end
 
-    # Returns the `Bool` value represented by given data type.
+    # Returns the `Bool` or `Nil` value represented by given data type.
     # It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value return an error.
-    def to_bool(v : T) forall T
-      value = case v
-              when Bool
-                v.as(Bool)
-              when Int
-                !v.as(Int).zero?
-              when Float
-                !v.as(Float).zero?
-              when Nil
-                false
-              when Symbol
-                to_bool(v.as(Symbol).to_s)
-              when JSON::Any
-                v.as(JSON::Any).as_bool
-              when YAML::Any
-                if object = v.as(YAML::Any).as_s?
-                  to_bool(object)
-                end
-              when String
-                object = v.as(String).downcase
-                if %w(true t yes y on 1).includes?(object)
-                  true
-                elsif %w(false f no n off 0).includes?(object)
-                  false
-                end
-              end
-
-      raise TypeCastError.new("cast from #{T} to Bool failed. at #{__FILE__}:#{__LINE__}") if value.nil?
-
-      value
+    def to_bool?(v : T) forall T
+      case v
+      when Bool
+        v.as(Bool)
+      when Int
+        !v.as(Int).zero?
+      when Float
+        !v.as(Float).zero?
+      when Nil
+        false
+      when Symbol
+        to_bool?(v.as(Symbol).to_s)
+      when JSON::Any
+        v.as(JSON::Any).as_bool
+      when YAML::Any
+        if object = v.as(YAML::Any).as_s?
+          to_bool?(object)
+        end
+      when String
+        object = v.as(String).downcase
+        if %w(true t yes y on 1).includes?(object)
+          true
+        elsif %w(false f no n off 0).includes?(object)
+          false
+        end
+      end
     end
 
     {% for method in @type.methods %}
-      def {{ method.name.id }}?(v : T) forall T
-        # Returns the `{{ method.name }}` value represented by given data type. If can not convert return nil.
-        {{ method.name.id }}(v)
-      rescue TypeCastError
-        nil
+      # Returns the `{{ method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.id }}` value represented by given data type.
+      def {{ method.name.tr("?", "").id }}(v : T{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}) forall T
+        value = {{ method.name.id }}(v{% if method.name.starts_with?("to_time") %}, location, formatters{% end %})
+        raise_error!(T.to_s, {{ method.name.id.stringify }}) if value.nil?
+        value
       end
     {% end %}
 
@@ -151,8 +144,6 @@ module Popcorn
           next
         end
       end
-
-      raise TypeCastError.new("cast from String to Time failed.")
     end
 
     private def time_formatters
@@ -174,6 +165,10 @@ module Popcorn
         "%F",                 # Date, eg 2018-01-20
         "%d %b %Y",           # Date, eg 20 Jan 2018
       ]
+    end
+
+    private def raise_error!(source : String, target : String)
+      raise TypeCastError.new("cast from #{source} to #{target} failed.")
     end
   end
 end

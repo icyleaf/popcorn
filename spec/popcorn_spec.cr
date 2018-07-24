@@ -1,20 +1,22 @@
 require "./spec_helper"
 
 {% for method in Popcorn::Cast.methods %}
-  private def it_{{ method.name.id }}(input, expected{% if method.name.id == "to_time".id %}, location = Time::Location::UTC, formatters : Array(String)? = nil{% end %}, file = __FILE__, line = __LINE__)
-    it "should casts #{input}", file, line do
-      Popcorn.{{ method.name.id }}(input{% if method.name.id == "to_time".id %}, location, formatters{% end %}).should eq(expected)
-    end
-  end
-
-  {% if !method.name.ends_with?("?") %}
-    private def it_raise_{{ method.name.id }}(input, file = __FILE__, line = __LINE__)
-      it "throws an exception to casts #{input}", file, line do
-        expect_raises TypeCastError, file: file, line: line do
-          Popcorn.{{ method.name.id }}(input)
-        end
+  {% if method.name.starts_with?("to_") %}
+    private def it_{{ method.name.id }}(input, expected{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}, file = __FILE__, line = __LINE__)
+      it "should casts #{input}", file, line do
+        Popcorn.{{ method.name.id }}(input{% if method.name.starts_with?("to_time") %}, location, formatters{% end %}).should eq(expected)
       end
     end
+
+    {% if !method.name.ends_with?("?") %}
+      private def it_raise_{{ method.name.id }}(input, file = __FILE__, line = __LINE__)
+        it "throws an exception to casts #{input}", file, line do
+          expect_raises TypeCastError, file: file, line: line do
+            Popcorn.{{ method.name.id }}(input)
+          end
+        end
+      end
+    {% end %}
   {% end %}
 {% end %}
 
