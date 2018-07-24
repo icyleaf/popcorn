@@ -131,7 +131,7 @@
 <p>Popcorn proviedes a handful of <code>to_xxx</code>/<code>to_xxx?</code> methods and <code>xxx</code> is full type name,
 This is distinguish between built-in methods in Crystal.</p>
 
-<ul><li>to_int</li><li>to_int64</li><li>to_float32</li><li>to_float</li><li>to_bool</li><li>to_time</li><li>to_string (alias to to_s in Crystal).</li></ul>
+<ul><li>to_int16</li><li>to_int</li><li>to_int64</li><li>to_float32</li><li>to_float64</li><li>to_bool</li><li>to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)</li><li>to_string (alias to to_s in Crystal).</li></ul>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
 
@@ -146,7 +146,9 @@ This is distinguish between built-in methods in Crystal.</p>
 <span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>, <span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
 <span class="t">Popcorn</span>.to_time(<span class="s">&quot;Tue, 20 Jan 2018&quot;</span>, formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
 
-<p>Also these methods had been inject to Crystal literals, you can call it directly, such like:</p>
+<p>Also these methods had been inject to Crystal literals, you can call it directly, Monkey Patching list:</p>
+
+<ul><li>String</li><li>Int8/Int16/Int32/Int64</li><li>Float32/Float64</li><li>Bool</li><li>Time</li><li>JSON::Any</li><li>YAML::Any</li></ul>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
 <span class="k">require</span> <span class="s">&quot;popcorn/injection&quot;</span> <span class="c"># =&gt; make sure require it!</span>
