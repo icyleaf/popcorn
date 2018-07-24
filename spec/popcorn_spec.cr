@@ -3,14 +3,14 @@ require "./spec_helper"
 {% for method in Popcorn::Cast.methods %}
   {% if method.name.starts_with?("to_") %}
     private def it_{{ method.name.id }}(input, expected{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}, file = __FILE__, line = __LINE__)
-      it "should casts #{input}", file, line do
+      it "should casts #{input.class}: #{input}", file, line do
         Popcorn.{{ method.name.id }}(input{% if method.name.starts_with?("to_time") %}, location, formatters{% end %}).should eq(expected)
       end
     end
 
     {% if !method.name.ends_with?("?") %}
       private def it_raise_{{ method.name.id }}(input, file = __FILE__, line = __LINE__)
-        it "throws an exception to casts #{input}", file, line do
+        it "throws an exception to casts #{input.class}: #{input}", file, line do
           expect_raises TypeCastError, file: file, line: line do
             Popcorn.{{ method.name.id }}(input)
           end
@@ -36,10 +36,42 @@ describe Popcorn do
     it_to_int "abc123true456", 0
     it_to_int "true", 0
 
+    it_to_int JSON::Any.new(raw: 1_i8), 1_i32
+    it_to_int JSON::Any.new(raw: -123_i16), -123
+    it_to_int JSON::Any.new(raw: 123456789123456_i64), -2045800064
+    it_to_int JSON::Any.new(raw: 1.234567890), 1
+    it_to_int JSON::Any.new(raw: 1.67890_f32), 1
+    it_to_int JSON::Any.new(raw: true), 1
+    it_to_int JSON::Any.new(raw: false), 0
+    it_to_int JSON::Any.new(raw: "123"), 123
+    it_to_int JSON::Any.new(raw: "123.4"), 123
+    it_to_int JSON::Any.new(raw: "123true"), 123
+    it_to_int JSON::Any.new(raw: "123true456"), 123
+    it_to_int JSON::Any.new(raw: "abc123true456"), 0
+    it_to_int JSON::Any.new(raw: "true"), 0
+
+    it_to_int YAML::Any.new(raw: 1_i8), 1_i32
+    it_to_int YAML::Any.new(raw: -123_i16), -123
+    it_to_int YAML::Any.new(raw: 123456789123456_i64), -2045800064
+    it_to_int YAML::Any.new(raw: 1.234567890), 1
+    it_to_int YAML::Any.new(raw: 1.67890_f32), 1
+    it_to_int YAML::Any.new(raw: true), 1
+    it_to_int YAML::Any.new(raw: false), 0
+    it_to_int YAML::Any.new(raw: "123"), 123
+    it_to_int YAML::Any.new(raw: "123.4"), 123
+    it_to_int YAML::Any.new(raw: "123true"), 123
+    it_to_int YAML::Any.new(raw: "123true456"), 123
+    it_to_int YAML::Any.new(raw: "abc123true456"), 0
+    it_to_int YAML::Any.new(raw: "true"), 0
+
     it_raise_to_int :foo
     it_raise_to_int([1, 2, 3])
     it_raise_to_int({"a" => "b"})
     it_raise_to_int({a: "b"})
+    it_raise_to_int(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_int(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_int(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_int(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_int?" do
@@ -47,6 +79,10 @@ describe Popcorn do
     it_to_int?([1, 2, 3], nil)
     it_to_int?({"a" => "b"}, nil)
     it_to_int?({a: "b"}, nil)
+    it_to_int?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_int?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_int?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_int?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_int8" do
@@ -68,10 +104,42 @@ describe Popcorn do
     it_to_int8 "abc123true456", 0_i8
     it_to_int8 "true", 0_i8
 
+    it_to_int8 JSON::Any.new(raw: 1_i8), 1_i8
+    it_to_int8 JSON::Any.new(raw: -123_i16), -123_i8
+    it_to_int8 JSON::Any.new(raw: 123456789123456_i64), -128_i8
+    it_to_int8 JSON::Any.new(raw: 1.234567890), 1_i8
+    it_to_int8 JSON::Any.new(raw: 1.67890_f32), 1_i8
+    it_to_int8 JSON::Any.new(raw: true), 1_i8
+    it_to_int8 JSON::Any.new(raw: false), 0_i8
+    it_to_int8 JSON::Any.new(raw: "123"), 123_i8
+    it_to_int8 JSON::Any.new(raw: "123.4"), 123_i8
+    it_to_int8 JSON::Any.new(raw: "123true"), 123_i8
+    it_to_int8 JSON::Any.new(raw: "123true456"), 123_i8
+    it_to_int8 JSON::Any.new(raw: "abc123true456"), 0_i8
+    it_to_int8 JSON::Any.new(raw: "true"), 0_i8
+
+    it_to_int8 YAML::Any.new(raw: 1_i8), 1_i8
+    it_to_int8 YAML::Any.new(raw: -123_i16), -123_i8
+    it_to_int8 YAML::Any.new(raw: 123456789123456_i64), -128_i8
+    it_to_int8 YAML::Any.new(raw: 1.234567890), 1_i8
+    it_to_int8 YAML::Any.new(raw: 1.67890_f32), 1_i8
+    it_to_int8 YAML::Any.new(raw: true), 1_i8
+    it_to_int8 YAML::Any.new(raw: false), 0_i8
+    it_to_int8 YAML::Any.new(raw: "123"), 123_i8
+    it_to_int8 YAML::Any.new(raw: "123.4"), 123_i8
+    it_to_int8 YAML::Any.new(raw: "123true"), 123_i8
+    it_to_int8 YAML::Any.new(raw: "123true456"), 123_i8
+    it_to_int8 YAML::Any.new(raw: "abc123true456"), 0_i8
+    it_to_int8 YAML::Any.new(raw: "true"), 0_i8
+
     it_raise_to_int8 :foo
     it_raise_to_int8([1, 2, 3])
     it_raise_to_int8({"a" => "b"})
     it_raise_to_int8({a: "b"})
+    it_raise_to_int8(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_int8(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_int8(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_int8(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_int8?" do
@@ -79,6 +147,10 @@ describe Popcorn do
     it_to_int8?([1, 2, 3], nil)
     it_to_int8?({"a" => "b"}, nil)
     it_to_int8?({a: "b"}, nil)
+    it_to_int8?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_int8?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_int8?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_int8?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_int16" do
@@ -97,10 +169,42 @@ describe Popcorn do
     it_to_int16 "abc123true456", 0_i16
     it_to_int16 "true", 0_i16
 
+    it_to_int16 JSON::Any.new(raw: 1_i8), 1_i16
+    it_to_int16 JSON::Any.new(raw: -123_i16), -123_i16
+    it_to_int16 JSON::Any.new(raw: 123456789123456_i64), -28288_i16
+    it_to_int16 JSON::Any.new(raw: 1.234567890), 1_i16
+    it_to_int16 JSON::Any.new(raw: 1.67890_f32), 1_i16
+    it_to_int16 JSON::Any.new(raw: true), 1_i16
+    it_to_int16 JSON::Any.new(raw: false), 0_i16
+    it_to_int16 JSON::Any.new(raw: "123"), 123_i16
+    it_to_int16 JSON::Any.new(raw: "123.4"), 123_i16
+    it_to_int16 JSON::Any.new(raw: "123true"), 123_i16
+    it_to_int16 JSON::Any.new(raw: "123true456"), 123_i16
+    it_to_int16 JSON::Any.new(raw: "abc123true456"), 0_i16
+    it_to_int16 JSON::Any.new(raw: "true"), 0_i16
+
+    it_to_int16 YAML::Any.new(raw: 1_i8), 1_i16
+    it_to_int16 YAML::Any.new(raw: -123_i16), -123_i16
+    it_to_int16 YAML::Any.new(raw: 123456789123456_i64), -28288_i16
+    it_to_int16 YAML::Any.new(raw: 1.234567890), 1_i16
+    it_to_int16 YAML::Any.new(raw: 1.67890_f32), 1_i16
+    it_to_int16 YAML::Any.new(raw: true), 1_i16
+    it_to_int16 YAML::Any.new(raw: false), 0_i16
+    it_to_int16 YAML::Any.new(raw: "123"), 123_i16
+    it_to_int16 YAML::Any.new(raw: "123.4"), 123_i16
+    it_to_int16 YAML::Any.new(raw: "123true"), 123_i16
+    it_to_int16 YAML::Any.new(raw: "123true456"), 123_i16
+    it_to_int16 YAML::Any.new(raw: "abc123true456"), 0_i16
+    it_to_int16 YAML::Any.new(raw: "true"), 0_i16
+
     it_raise_to_int16 :foo
     it_raise_to_int16([1, 2, 3])
     it_raise_to_int16({"a" => "b"})
     it_raise_to_int16({a: "b"})
+    it_raise_to_int16(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_int16(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_int16(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_int16(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_int16?" do
@@ -108,6 +212,10 @@ describe Popcorn do
     it_to_int16?([1, 2, 3], nil)
     it_to_int16?({"a" => "b"}, nil)
     it_to_int16?({a: "b"}, nil)
+    it_to_int16?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_int16?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_int16?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_int16?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_int64" do
@@ -126,10 +234,43 @@ describe Popcorn do
     it_to_int64 "abc123true456", 0_i64
     it_to_int64 "true", 0_i64
 
+    it_to_int64 JSON::Any.new(raw: 1_i8), 1_i64
+    it_to_int64 JSON::Any.new(raw: 123_i16), 123_i64
+    it_to_int64 JSON::Any.new(raw: 123_i32), 123_i64
+    it_to_int64 JSON::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_int64 JSON::Any.new(raw: 1.234567890), 1_i64
+    it_to_int64 JSON::Any.new(raw: 1.67890_f32), 1_i64
+    it_to_int64 JSON::Any.new(raw: true), 1_i64
+    it_to_int64 JSON::Any.new(raw: false), 0_i64
+    it_to_int64 JSON::Any.new(raw: "123"), 123_i64
+    it_to_int64 JSON::Any.new(raw: "123.4"), 123_i64
+    it_to_int64 JSON::Any.new(raw: "123true"), 123_i64
+    it_to_int64 JSON::Any.new(raw: "123true456"), 123_i64
+    it_to_int64 JSON::Any.new(raw: "abc123true456"), 0_i64
+    it_to_int64 JSON::Any.new(raw: "true"), 0_i64
+
+    it_to_int64 YAML::Any.new(raw: 1_i8), 1_i64
+    it_to_int64 YAML::Any.new(raw: -123_i16), -123_i64
+    it_to_int64 YAML::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_int64 YAML::Any.new(raw: 1.234567890), 1_i64
+    it_to_int64 YAML::Any.new(raw: 1.67890_f32), 1_i64
+    it_to_int64 YAML::Any.new(raw: true), 1_i64
+    it_to_int64 YAML::Any.new(raw: false), 0_i64
+    it_to_int64 YAML::Any.new(raw: "123"), 123_i64
+    it_to_int64 YAML::Any.new(raw: "123.4"), 123_i64
+    it_to_int64 YAML::Any.new(raw: "123true"), 123_i64
+    it_to_int64 YAML::Any.new(raw: "123true456"), 123_i64
+    it_to_int64 YAML::Any.new(raw: "abc123true456"), 0_i64
+    it_to_int64 YAML::Any.new(raw: "true"), 0_i64
+
     it_raise_to_int64 :foo
     it_raise_to_int64([1, 2, 3])
     it_raise_to_int64({"a" => "b"})
     it_raise_to_int64({a: "b"})
+    it_raise_to_int64(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_int64(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_int64(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_int64(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_int64?" do
@@ -137,6 +278,10 @@ describe Popcorn do
     it_to_int64?([1, 2, 3], nil)
     it_to_int64?({"a" => "b"}, nil)
     it_to_int64?({a: "b"}, nil)
+    it_to_int64?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_int64?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_int64?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_int64?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_float" do
@@ -152,10 +297,42 @@ describe Popcorn do
     it_to_float "abc123true456", 0.0_f64
     it_to_float "true", 0.0_f64
 
+    it_to_float JSON::Any.new(raw: 1_i8), 1.0_f64
+    it_to_float JSON::Any.new(raw: -123_i16), -123.0_f64
+    it_to_float JSON::Any.new(raw: 123), 123.0_f64
+    it_to_float JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
+    it_to_float JSON::Any.new(raw: 1.234567890), 1.234567890_f64
+    it_to_float JSON::Any.new(raw: "123"), 123_f64
+    it_to_float JSON::Any.new(raw: "123.4"), 123.4_f64
+    it_to_float JSON::Any.new(raw: "123true"), 123_f64
+    it_to_float JSON::Any.new(raw: "123true456"), 123_f64
+    it_to_float JSON::Any.new(raw: "abc123true456"), 0_f64
+    it_to_float JSON::Any.new(raw: "true"), 0_f64
+
+    it_to_float YAML::Any.new(raw: 1_i8), 1_f64
+    it_to_float YAML::Any.new(raw: -123_i16), -123_f64
+    it_to_float YAML::Any.new(raw: 123), 123.0_f64
+    it_to_float YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
+    it_to_float YAML::Any.new(raw: 1.234567890), 1.234567890_f64
+    it_to_float YAML::Any.new(raw: "123"), 123.0_f64
+    it_to_float YAML::Any.new(raw: "123.4"), 123.4_f64
+    it_to_float YAML::Any.new(raw: "123true"), 123_f64
+    it_to_float YAML::Any.new(raw: "123true456"), 123_f64
+    it_to_float YAML::Any.new(raw: "abc123true456"), 0_f64
+    it_to_float YAML::Any.new(raw: "true"), 0_f64
+
     it_raise_to_float :foo
     it_raise_to_float([1, 2, 3])
     it_raise_to_float({"a" => "b"})
     it_raise_to_float({a: "b"})
+    it_raise_to_float(JSON::Any.new(raw: true))
+    it_raise_to_float(JSON::Any.new(raw: false))
+    it_raise_to_float(YAML::Any.new(raw: true))
+    it_raise_to_float(YAML::Any.new(raw: false))
+    it_raise_to_float(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_float(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_float(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_float(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_float?" do
@@ -163,26 +340,66 @@ describe Popcorn do
     it_to_float?([1, 2, 3], nil)
     it_to_float?({"a" => "b"}, nil)
     it_to_float?({a: "b"}, nil)
+    it_to_float?(JSON::Any.new(raw: true), nil)
+    it_to_float?(JSON::Any.new(raw: false), nil)
+    it_to_float?(YAML::Any.new(raw: true), nil)
+    it_to_float?(YAML::Any.new(raw: false), nil)
+    it_to_float?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_float?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_float?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_float?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_float32" do
-    it_to_float 1_i8, 1.0_f32
-    it_to_float -123_i16, -123.0_f32
-    it_to_float 123, 123.0_f32
-    # it_to_float 123456789123456_i64, 123456790000000.0_f32
-    # it_to_float 1.23_f64, 1.23_f32
-    it_to_float 1.23_f32, 1.23_f32
-    it_to_float "123", 123.0
-    it_to_float "123.4", 123.4
-    it_to_float "123true", 123.0
-    it_to_float "123true456", 123.0
-    it_to_float "abc123true456", 0.0
-    it_to_float "true", 0.0
+    it_to_float32 1_i8, 1.0_f32
+    it_to_float32 -123_i16, -123.0_f32
+    it_to_float32 123, 123.0_f32
+    it_to_float32 123456789123456_i64, 123456790000000.0_f32
+    it_to_float32 1.23_f64, 1.23_f32
+    it_to_float32 1.23_f32, 1.23_f32
+    it_to_float32 "123", 123.0_f32
+    it_to_float32 "123.4", 123.4_f32
+    it_to_float32 "123true", 123.0_f32
+    it_to_float32 "123true456", 123.0_f32
+    it_to_float32 "abc123true456", 0.0_f32
+    it_to_float32 "true", 0.0_f32
 
-    it_raise_to_float :foo
-    it_raise_to_float([1, 2, 3])
-    it_raise_to_float({"a" => "b"})
-    it_raise_to_float({a: "b"})
+    it_to_float32 JSON::Any.new(raw: 1_i8), 1.0_f32
+    it_to_float32 JSON::Any.new(raw: -123_i16), -123.0_f32
+    it_to_float32 JSON::Any.new(raw: 123), 123.0_f32
+    it_to_float32 JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
+    it_to_float32 JSON::Any.new(raw: 1.234567890), 1.234567890_f32
+    it_to_float32 JSON::Any.new(raw: "123"), 123_f32
+    it_to_float32 JSON::Any.new(raw: "123.4"), 123.4_f32
+    it_to_float32 JSON::Any.new(raw: "123true"), 123_f32
+    it_to_float32 JSON::Any.new(raw: "123true456"), 123_f32
+    it_to_float32 JSON::Any.new(raw: "abc123true456"), 0_f32
+    it_to_float32 JSON::Any.new(raw: "true"), 0_f32
+
+    it_to_float32 YAML::Any.new(raw: 1_i8), 1_f32
+    it_to_float32 YAML::Any.new(raw: -123_i16), -123_f32
+    it_to_float32 YAML::Any.new(raw: 123), 123.0_f32
+    it_to_float32 YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
+    it_to_float32 YAML::Any.new(raw: 1.234567890), 1.234567890_f32
+    it_to_float32 YAML::Any.new(raw: "123"), 123.0_f32
+    it_to_float32 YAML::Any.new(raw: "123.4"), 123.4_f32
+    it_to_float32 YAML::Any.new(raw: "123true"), 123_f32
+    it_to_float32 YAML::Any.new(raw: "123true456"), 123_f32
+    it_to_float32 YAML::Any.new(raw: "abc123true456"), 0_f32
+    it_to_float32 YAML::Any.new(raw: "true"), 0_f32
+
+    it_raise_to_float32 :foo
+    it_raise_to_float32([1, 2, 3])
+    it_raise_to_float32({"a" => "b"})
+    it_raise_to_float32({a: "b"})
+    it_raise_to_float32(JSON::Any.new(raw: true))
+    it_raise_to_float32(JSON::Any.new(raw: false))
+    it_raise_to_float32(YAML::Any.new(raw: true))
+    it_raise_to_float32(YAML::Any.new(raw: false))
+    it_raise_to_float32(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_float32(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_float32(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_float32(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_float32?" do
@@ -190,6 +407,14 @@ describe Popcorn do
     it_to_float32?([1, 2, 3], nil)
     it_to_float32?({"a" => "b"}, nil)
     it_to_float32?({a: "b"}, nil)
+    it_to_float32?(JSON::Any.new(raw: true), nil)
+    it_to_float32?(JSON::Any.new(raw: false), nil)
+    it_to_float32?(YAML::Any.new(raw: true), nil)
+    it_to_float32?(YAML::Any.new(raw: false), nil)
+    it_to_float32?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_float32?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_float32?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_float32?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
   describe "to_time" do
@@ -222,6 +447,63 @@ describe Popcorn do
     it_to_time "2018-01-20", Time.new(2018, 1, 20, 0, 0, 0, location: Time::Location::UTC)
     it_to_time "2018-01-20 01:20:33", Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
     it_to_time "2018-01-20 01:20", Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai"), ["%F %H:%M"]
+
+    it_to_time JSON::Any.new(raw: 0_i64), Time.new(1970, 1, 1, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: 1516411233_i64), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: 1516382433_i64), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time JSON::Any.new(raw: 1516411233000), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: 1516382433000), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33 +0000 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "Tue Jan 20 01:20:33 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "Tue Jan 20 01:20:33 UTC 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "Tue Jan 20 01:20:33 +0800 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time JSON::Any.new(raw: "20 Jan 18 01:20 UTC"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "20 Jan 18 01:20 +0800"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time JSON::Any.new(raw: "Tuesday, 20-Jan-18 01:20:33 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "Tue, 20 Jan 2018 01:20:33 GMT"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "Tue, 20 Jan 2018 01:20:33 +0800"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time JSON::Any.new(raw: "2018-01-20T01:20:33+08:00"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time JSON::Any.new(raw: "2018-01-20T01:20:33Z"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33+08:00"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33 +0800"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33 +0000 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33.000"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33.000000"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33.123456789"), Time.new(2018, 1, 20, 1, 20, 33, nanosecond: 123456789, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20"), Time.new(2018, 1, 20, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20"), Time.new(2018, 1, 20, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20:33"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time JSON::Any.new(raw: "2018-01-20 01:20"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai"), ["%F %H:%M"]
+
+    it_to_time YAML::Any.new(raw: Time.new(2018, 1, 20, 1, 20, 33)), Time.new(2018, 1, 20, 1, 20, 33)
+    it_to_time YAML::Any.new(raw: 0_i64), Time.new(1970, 1, 1, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: 1516411233_i64), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: 1516382433_i64), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time YAML::Any.new(raw: 1516411233000), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: 1516382433000), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33 +0000 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "Tue Jan 20 01:20:33 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "Tue Jan 20 01:20:33 UTC 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "Tue Jan 20 01:20:33 +0800 2018"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time YAML::Any.new(raw: "20 Jan 18 01:20 UTC"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "20 Jan 18 01:20 +0800"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time YAML::Any.new(raw: "Tuesday, 20-Jan-18 01:20:33 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "Tue, 20 Jan 2018 01:20:33 GMT"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "Tue, 20 Jan 2018 01:20:33 +0800"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time YAML::Any.new(raw: "2018-01-20T01:20:33+08:00"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time YAML::Any.new(raw: "2018-01-20T01:20:33Z"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33+08:00"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33 +0800"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai"))
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33 +0000 UTC"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33.000"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33.000000"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33.123456789"), Time.new(2018, 1, 20, 1, 20, 33, nanosecond: 123456789, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20"), Time.new(2018, 1, 20, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20"), Time.new(2018, 1, 20, 0, 0, 0, location: Time::Location::UTC)
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20:33"), Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai")
+    it_to_time YAML::Any.new(raw: "2018-01-20 01:20"), Time.new(2018, 1, 20, 1, 20, 0, location: Time::Location.load("Asia/Shanghai")), Time::Location.load("Asia/Shanghai"), ["%F %H:%M"]
 
     it_raise_to_time(nil)
     it_raise_to_time("2018")
@@ -261,11 +543,59 @@ describe Popcorn do
     it_to_bool -1, true
     it_to_bool 0, false
 
+    it_to_bool JSON::Any.new(raw: true), true
+    it_to_bool JSON::Any.new(raw: false), false
+    it_to_bool JSON::Any.new(raw: "true"), true
+    it_to_bool JSON::Any.new(raw: "TRUE"), true
+    it_to_bool JSON::Any.new(raw: "True"), true
+    it_to_bool JSON::Any.new(raw: "false"), false
+    it_to_bool JSON::Any.new(raw: "FALSE"), false
+    it_to_bool JSON::Any.new(raw: "False"), false
+    it_to_bool JSON::Any.new(raw: "T"), true
+    it_to_bool JSON::Any.new(raw: "Yes"), true
+    it_to_bool JSON::Any.new(raw: "Y"), true
+    it_to_bool JSON::Any.new(raw: "on"), true
+    it_to_bool JSON::Any.new(raw: "1"), true
+    it_to_bool JSON::Any.new(raw: "f"), false
+    it_to_bool JSON::Any.new(raw: "no"), false
+    it_to_bool JSON::Any.new(raw: "off"), false
+    it_to_bool JSON::Any.new(raw: "0"), false
+    it_to_bool JSON::Any.new(raw: 1_i64), true
+    it_to_bool JSON::Any.new(raw: 10.1), true
+    it_to_bool JSON::Any.new(raw: -1_i64), true
+    it_to_bool JSON::Any.new(raw: 0_i64), false
+
+    it_to_bool YAML::Any.new(raw: true), true
+    it_to_bool YAML::Any.new(raw: false), false
+    it_to_bool YAML::Any.new(raw: "true"), true
+    it_to_bool YAML::Any.new(raw: "TRUE"), true
+    it_to_bool YAML::Any.new(raw: "True"), true
+    it_to_bool YAML::Any.new(raw: "false"), false
+    it_to_bool YAML::Any.new(raw: "FALSE"), false
+    it_to_bool YAML::Any.new(raw: "False"), false
+    it_to_bool YAML::Any.new(raw: "T"), true
+    it_to_bool YAML::Any.new(raw: "Yes"), true
+    it_to_bool YAML::Any.new(raw: "Y"), true
+    it_to_bool YAML::Any.new(raw: "on"), true
+    it_to_bool YAML::Any.new(raw: "1"), true
+    it_to_bool YAML::Any.new(raw: "f"), false
+    it_to_bool YAML::Any.new(raw: "no"), false
+    it_to_bool YAML::Any.new(raw: "off"), false
+    it_to_bool YAML::Any.new(raw: "0"), false
+    it_to_bool YAML::Any.new(raw: 1_i64), true
+    it_to_bool YAML::Any.new(raw: 10.1), true
+    it_to_bool YAML::Any.new(raw: -1_i64), true
+    it_to_bool YAML::Any.new(raw: 0_i64), false
+
     it_raise_to_bool "foo"
     it_raise_to_bool :foo
     it_raise_to_bool([1, 2, 3])
     it_raise_to_bool({"a" => "b"})
     it_raise_to_bool({a: "b"})
+    it_raise_to_bool(JSON.parse(%Q{[1, 2, 3]}))
+    it_raise_to_bool(JSON.parse(%Q{{"a":"b"}}))
+    it_raise_to_bool(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_bool(YAML.parse(%Q{a:\n  b}))
   end
 
   describe "to_bool?" do
@@ -274,5 +604,9 @@ describe Popcorn do
     it_to_bool?([1, 2, 3], nil)
     it_to_bool?({"a" => "b"}, nil)
     it_to_bool?({a: "b"}, nil)
+    it_to_bool?(JSON.parse(%Q{[1, 2, 3]}), nil)
+    it_to_bool?(JSON.parse(%Q{{"a":"b"}}), nil)
+    it_to_bool?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
+    it_to_bool?(YAML.parse(%Q{a:\n  b}), nil)
   end
 end

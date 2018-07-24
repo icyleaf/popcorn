@@ -2,9 +2,10 @@ module Popcorn
   # :nodoc:
   module Injection
     TARGETS = {
-      "class" => [String],
-      "struct"  => [Int8, Int16, Int32, Int64, Float64, Float32, Bool, Time, Symbol],
+      "class"  => [String],
+      "struct" => [Int8, Int16, Int32, Int64, Float64, Float32, Bool, Time, Symbol, JSON::Any, YAML::Any],
     }
+
     macro start
       {% for type, ivars in TARGETS %}
         {% for ivar in ivars %}

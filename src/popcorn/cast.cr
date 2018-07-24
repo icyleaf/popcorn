@@ -15,13 +15,9 @@ module Popcorn
         v.as(Bool) ? 1 : 0
       when Nil
         0
-      when JSON::Any
-        case object = v.as(JSON::Any)
-        when .as_i?    then to_int(object.as_i)
-        when .as_f?    then to_int(object.as_f)
-        when .as_bool? then to_int(object.as_bool)
-        when .as_s?    then to_int(object.as_s)
-        end
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_int?(value) unless value.nil?
       when String
         value = v.as(String).to_i?(strict: false)
         value ? value : 0
@@ -44,13 +40,9 @@ module Popcorn
         v.as(Bool) ? 1 : 0
       when Nil
         0
-      when JSON::Any
-        case object = v.as(JSON::Any)
-        when .as_i?    then to_int(object.as_i)
-        when .as_f?    then to_int(object.as_f)
-        when .as_bool? then to_int(object.as_bool)
-        when .as_s?    then to_int(object.as_s)
-        end
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_int8?(value) unless value.nil?
       when String
         value = v.as(String).to_i8?(strict: false)
         value ? value : 0
@@ -68,13 +60,9 @@ module Popcorn
         v.as(Bool) ? 1 : 0
       when Nil
         0
-      when JSON::Any
-        case object = v.as(JSON::Any)
-        when .as_i?    then to_int(object.as_i)
-        when .as_f?    then to_int(object.as_f)
-        when .as_bool? then to_int(object.as_bool)
-        when .as_s?    then to_int(object.as_s)
-        end
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_int16?(value) unless value.nil?
       when String
         value = v.as(String).to_i16?(strict: false)
         value ? value : 0
@@ -92,6 +80,9 @@ module Popcorn
         v.as(Bool) ? 1 : 0
       when Nil
         0
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_int64?(value) unless value.nil?
       when String
         value = v.as(String).to_i64?(strict: false)
         value ? value : 0
@@ -107,6 +98,9 @@ module Popcorn
         v.as(Float).to_f
       when Nil
         0
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_float?(value) unless value.nil?
       when String
         value = v.as(String).to_f?(strict: false)
         value ? value : 0
@@ -127,6 +121,9 @@ module Popcorn
         v.as(Float).to_f32
       when Nil
         0
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_float32?(value) unless value.nil?
       when String
         value = v.as(String).to_f32?(strict: false)
         value ? value : 0
@@ -148,6 +145,9 @@ module Popcorn
         else
           location ? Time.epoch(value, location: location) : Time.epoch(value)
         end
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_time?(value, location, formatters) unless value.nil?
       when String
         parse_time(v.as(String), location, formatters)
       end
@@ -167,12 +167,9 @@ module Popcorn
         false
       when Symbol
         to_bool?(v.as(Symbol).to_s)
-      when JSON::Any
-        v.as(JSON::Any).as_bool
-      when YAML::Any
-        if object = v.as(YAML::Any).as_s?
-          to_bool?(object)
-        end
+      when JSON::Any, YAML::Any
+        value = parse_any_value(v)
+        to_bool?(value) unless value.nil?
       when String
         object = v.as(String).downcase
         if %w(true t yes y on 1).includes?(object)
@@ -223,6 +220,65 @@ module Popcorn
         "%F",                 # Date, eg 2018-01-20
         "%d %b %Y",           # Date, eg 20 Jan 2018
       ]
+    end
+
+    private def parse_any_value(v : JSON::Any | YAML::Any)
+      case v
+      when JSON::Any
+        object = v.as(JSON::Any)
+
+        if value = object.as_i64?
+          return value
+        end
+
+        if value = object.as_i?
+          return value
+        end
+
+        if value = object.as_f?
+          return value
+        end
+
+        if value = object.as_f32?
+          return value
+        end
+
+        value = object.as_bool?
+        if !value.nil?
+          return value
+        end
+
+        if value = object.as_s?
+          return value
+        end
+      else
+        object = v.as(YAML::Any)
+
+        if value = object.as_i64?
+          return value
+        end
+
+        if value = object.as_i?
+          return value
+        end
+
+        if value = object.as_f?
+          return value
+        end
+
+        if value = object.as_time?
+          return value
+        end
+
+        # Fix YAML::Any.new(raw: _)
+        if object.raw.is_a?(Bool)
+          return object.raw.as(Bool)
+        end
+
+        if value = object.as_s?
+          return value
+        end
+      end
     end
 
     private def raise_error!(source : String, target : String)
