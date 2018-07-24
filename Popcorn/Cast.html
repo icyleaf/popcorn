@@ -76,6 +76,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/icyleaf/popcorn/Symbol" data-name="symbol">
+      <a href="../Symbol.html">Symbol</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/icyleaf/popcorn/Time" data-name="time">
       <a href="../Time.html">Time</a>
       
@@ -114,7 +119,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L6" target="_blank">popcorn/cast.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L6" target="_blank">popcorn/cast.cr</a>
     
     <br/>
   
@@ -140,12 +145,14 @@
       <li class="entry-summary">
         <a href="#to_bool%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_bool?</strong>(v : T) forall T</a>
         
+          <div class="summary"><p>Returns the <code><a href="../Bool.html">Bool</a></code> or <code>Nil</code> value represented by given data type.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#to_float%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_float</strong>(v : T) forall T</a>
         
-          <div class="summary"><p>Returns the <code><a href="../Float64.html">Float64</a></code> value represented by given data type.</p></div>
+          <div class="summary"><p>Returns the <code>Float</code> value represented by given data type.</p></div>
         
       </li>
     
@@ -159,17 +166,21 @@
       <li class="entry-summary">
         <a href="#to_float32%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_float32?</strong>(v : T) forall T</a>
         
+          <div class="summary"><p>Returns the <code>Float32</code> or <code>Nil</code> value represented by given data type.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#to_float%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_float?</strong>(v : T) forall T</a>
+        
+          <div class="summary"><p>Returns the <code><a href="../Float64.html">Float64</a></code> or <code>Nil</code> value represented by given data type.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_int</strong>(v : T) forall T</a>
         
-          <div class="summary"><p>Returns the <code><a href="../Int32.html">Int32</a></code> value represented by given data type.</p></div>
+          <div class="summary"><p>Returns the <code>Int</code> value represented by given data type.</p></div>
         
       </li>
     
@@ -183,10 +194,14 @@
       <li class="entry-summary">
         <a href="#to_int64%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_int64?</strong>(v : T) forall T</a>
         
+          <div class="summary"><p>Returns the <code><a href="../Int64.html">Int64</a></code> or <code>Nil</code> value represented by given data type.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#to_int%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_int?</strong>(v : T) forall T</a>
+        
+          <div class="summary"><p>Returns the <code><a href="../Int32.html">Int32</a></code> or <code>Nil</code> value represented by given data type.</p></div>
         
       </li>
     
@@ -198,7 +213,9 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#to_time%3F%28v%3AT%29forallT-instance-method" class="signature"><strong>#to_time?</strong>(v : T) forall T</a>
+        <a href="#to_time%3F%28v%3AT%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method" class="signature"><strong>#to_time?</strong>(v : T, location : Time::Location? = <span class="n">nil</span>, formatters : Array(String)? = <span class="n">nil</span>) forall T</a>
+        
+          <div class="summary"><p>Returns the <code><a href="../Time.html">Time</a></code> or <code>Nil</code> value represented by given data type.</p></div>
         
       </li>
     
@@ -227,13 +244,12 @@
         <a class="method-permalink" href="#to_bool%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the <code><a href="../Bool.html">Bool</a></code> value represented by given data type.
-It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value return an error.</p></div>
+        <div class="doc"><p>Returns the <code><a href="../Bool.html">Bool</a></code> value represented by given data type.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L103" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -246,10 +262,13 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_bool%3F%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Returns the <code><a href="../Bool.html">Bool</a></code> or <code>Nil</code> value represented by given data type.
+It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value return an error.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -262,12 +281,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_float%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the <code><a href="../Float64.html">Float64</a></code> value represented by given data type.</p></div>
+        <div class="doc"><p>Returns the <code>Float</code> value represented by given data type.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -285,7 +304,7 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L63" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -298,10 +317,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_float32%3F%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Returns the <code>Float32</code> or <code>Nil</code> value represented by given data type.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -314,10 +335,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_float%3F%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Returns the <code><a href="../Float64.html">Float64</a></code> or <code>Nil</code> value represented by given data type.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -330,12 +353,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_int%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the <code><a href="../Int32.html">Int32</a></code> value represented by given data type.</p></div>
+        <div class="doc"><p>Returns the <code>Int</code> value represented by given data type.</p></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -353,7 +376,7 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L27" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -366,10 +389,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_int64%3F%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Returns the <code><a href="../Int64.html">Int64</a></code> or <code>Nil</code> value represented by given data type.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -382,10 +407,12 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_int%3F%28v%3AT%29forallT-instance-method">#</a>
       </div>
       
+        <div class="doc"><p>Returns the <code><a href="../Int32.html">Int32</a></code> or <code>Nil</code> value represented by given data type.</p></div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -398,30 +425,32 @@ It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value retu
         <a class="method-permalink" href="#to_time%28v%3AT%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Returns the <code><a href="../Time.html">Time</a></code> value represented by given data type.</p>
+        <div class="doc"><p>Returns the <code><a href="../Time.html">Time</a></code> value represented by given data type.</p></div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L128" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_time?(v:T,location:Time::Location?=nil,formatters:Array(String)?=nil)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>to_time?</strong>(v : T, location : Time::Location? = <span class="n">nil</span>, formatters : Array(<a href="../String.html">String</a>)? = <span class="n">nil</span>) forall T
+
+        <a class="method-permalink" href="#to_time%3F%28v%3AT%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the <code><a href="../Time.html">Time</a></code> or <code>Nil</code> value represented by given data type.</p>
 
 <ul><li><code>location</code> argument applies for <code>Int</code>/<code><a href="../String.html">String</a></code> types</li><li><code>formatters</code> argument applies for <code><a href="../String.html">String</a></code> type.</li></ul></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L83" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_time?(v:T)forallT-instance-method">
-      <div class="signature">
-        
-        def <strong>to_time?</strong>(v : T) forall T
-
-        <a class="method-permalink" href="#to_time%3F%28v%3AT%29forallT-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/icyleaf/popcorn/blob/02807be576f5472064aa4d6b572d64d22d068ae0/src/popcorn/cast.cr#L135" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/79adffddcfa26f82db5f42275ae84b29445b6986/src/popcorn/cast.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
