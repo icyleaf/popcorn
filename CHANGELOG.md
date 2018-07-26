@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 0.1.1 (2018-07-24)
 
-## Add
+## Added
 
 - to_uint8
 - to_uint16
@@ -26,7 +26,7 @@ Monkey Patching list:
 
 First beta version.
 
-## Add
+## Added
 
 Provides methods:
 
