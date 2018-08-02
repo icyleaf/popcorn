@@ -17,8 +17,11 @@ module Popcorn
       when Float64.class then to_float64?(raw)
       when Bool.class    then to_bool?(raw)
       when Time.class    then to_time?(raw)
-      else                    to_string?(raw)
+      when String.class  then raw.to_s
+      else                    raw.as(T)
       end
+    rescue TypeCastError
+      nil
     end
 
     # Returns the target value represented by given data type.
