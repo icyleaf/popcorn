@@ -1,3 +1,5 @@
+![halite-logo](https://github.com/icyleaf/popcorn/raw/master/logo-small.png)
+
 # Popcorn
 
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
