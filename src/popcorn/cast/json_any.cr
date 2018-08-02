@@ -92,14 +92,14 @@ module Popcorn::Cast
     to_bool?(value) unless value.nil?
   end
 
-  def to_array?(raw : JSON::Any, target : T.class = String) forall T
+  def to_array?(raw : JSON::Any, value_type : T.class = String) forall T
     return unless data = raw.as_a?
     data.each_with_object(Array(T).new) do |v, obj|
       obj << cast(v, T).as(T)
     end
   end
 
-  def to_hash?(raw : JSON::Any, value : T.class = String) forall T
+  def to_hash?(raw : JSON::Any, value_type : T.class = String) forall T
     return unless data = raw.as_h?
     data.each_with_object(Hash(String, T).new) do |(k, v), obj|
       obj[k.to_s] = cast(v, T).as(T)

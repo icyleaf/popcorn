@@ -93,6 +93,14 @@ module Popcorn::Cast
     end
   end
 
+  def to_array?(raw : String, value_type : T.class = String) forall T
+    [cast(raw, T).as(T)]
+  end
+
+  def to_hash?(raw : String, value_type : T.class = String) forall T
+    nil
+  end
+
   private def parse_time(raw : String, location : Time::Location? = nil, formatters : Array(String)? = nil)
     location ||= Time::Location::UTC
     formatters = formatters ? formatters.not_nil!.concat(time_formatters) : time_formatters

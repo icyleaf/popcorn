@@ -24,29 +24,28 @@ module Popcorn
         {% for method in Popcorn::Cast.methods %}
           # Alias to `Popcorn::Cast.{{ method.name.id }}`
           {% if method.name.starts_with?("to_") %}
-            {% if method.name.starts_with?("to_time") %}
-              def {{ method.name.id }}(location : Time::Location = Time::Location::UTC, formatters : Array(String)? = nil)
-                Popcorn.{{ method.name.id }}(self, location, formatters)
-              end
-            {% elsif method.name.starts_with?("to_array") %}
-              def {{ method.name.id }}(target : T.class = String) forall T
-                Popcorn.{{ method.name.id }}(self, target)
-              end
-            {% elsif method.name.starts_with?("to_hash") %}
-              def {{ method.name.id }}(target : T.class = String) forall T
-                Popcorn.{{ method.name.id }}(self, target)
-              end
-            {% else %}
-              def {{ method.name.id }}
-                Popcorn.{{ method.name.id }}(self)
-              end
-            {% end %}
+            {% margs = method.args[1..-1].map { |a| s = "#{a.name.id} : #{a.restriction.id}"; s = "#{s.id} = #{a.default_value}" if a.default_value == nil || a.default_value; s }.join(", ") %}
+            {% rtype = method.args[0].restriction %}
+            {% mtype = method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.gsub(/^Ui/, "UI") %}
+
+            # Returns the `{{ mtype.id }}` value represented by given `{{ rtype.id }}` type, else raise a `TypeCastError` exception.
+            def {{ method.name.id }}({{ margs.id }}){% if method.name.includes?("to_array") || method.name.includes?("to_hash") %} forall T{% end %}
+              Popcorn.{{ method.name.id }}(self{% if method.args.size > 1 %}, {{ method.args[1..-1].map { |a| a.name }.join(", ").id }}{% end %})
+            end
           {% end %}
         {% end %}
 
         # Alias to `Object.to_s`
         def to_string
           to_s
+        end
+
+        def cast?(other)
+          Popcorn.cast?(self, other)
+        end
+
+        def cast(other)
+          Popcorn.cast(self, other)
         end
       end
       {% end %}
