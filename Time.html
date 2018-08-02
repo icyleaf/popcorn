@@ -167,7 +167,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/325f840f80ae578531fec76d05ce2ebbfeb2e8a8/src/popcorn/cast/int.cr#L87" target="_blank">popcorn/cast/int.cr</a>
+      <a href="https://github.com/icyleaf/popcorn/blob/24880d943a7509c97abdb7d525050680d1eeeb96/src/popcorn/cast/int.cr#L87" target="_blank">popcorn/cast/int.cr</a>
     
     <br/>
   
@@ -203,156 +203,166 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#to_array%28target%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_array</strong>(target : T.class = <span class="t">String</span>) forall T</a>
-        
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_array%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_array</a></code></p></div>
+        <a href="#cast%28other%29-instance-method" class="signature"><strong>#cast</strong>(other)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_array%3F%28target%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_array?</strong>(target : T.class = <span class="t">String</span>) forall T</a>
+        <a href="#cast%3F%28other%29-instance-method" class="signature"><strong>#cast?</strong>(other)</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_array%3F%28raw%3AJSON%3A%3AAny%2Ctarget%3AT.class%3DString%29forallT-instance-method">Popcorn::Cast.to_array?</a></code></p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_array%28value_type%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_array</strong>(value_type : T.class = <span class="t">String</span>) forall T</a>
+        
+          <div class="summary"><p>Returns the <code>Array</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_array%3F%28value_type%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_array?</strong>(value_type : T.class = <span class="t">String</span>) forall T</a>
+        
+          <div class="summary"><p>Returns the <code>Array</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_bool-instance-method" class="signature"><strong>#to_bool</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_bool%28raw%3AArray%29-instance-method">Popcorn::Cast.to_bool</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Bool.html">Bool</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_bool%3F-instance-method" class="signature"><strong>#to_bool?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_bool%3F%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_bool?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Bool.html">Bool</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float-instance-method" class="signature"><strong>#to_float</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float%28raw%3AString%29-instance-method">Popcorn::Cast.to_float</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Float</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float32-instance-method" class="signature"><strong>#to_float32</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float32%28raw%3ASymbol%29-instance-method">Popcorn::Cast.to_float32</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Float32.html">Float32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float32%3F-instance-method" class="signature"><strong>#to_float32?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float32%3F%28raw%3ATime%29-instance-method">Popcorn::Cast.to_float32?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Float32.html">Float32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float64-instance-method" class="signature"><strong>#to_float64</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float64%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_float64</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Float64.html">Float64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float64%3F-instance-method" class="signature"><strong>#to_float64?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float64%3F%28raw%3AArray%29-instance-method">Popcorn::Cast.to_float64?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Float64.html">Float64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_float%3F-instance-method" class="signature"><strong>#to_float?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_float%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_float?</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Float</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_hash%28target%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_hash</strong>(target : T.class = <span class="t">String</span>) forall T</a>
+        <a href="#to_hash%28value_type%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_hash</strong>(value_type : T.class = <span class="t">String</span>) forall T</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_hash%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_hash</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Hash</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_hash%3F%28target%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_hash?</strong>(target : T.class = <span class="t">String</span>) forall T</a>
+        <a href="#to_hash%3F%28value_type%3AT.class%3DString%29forallT-instance-method" class="signature"><strong>#to_hash?</strong>(value_type : T.class = <span class="t">String</span>) forall T</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_hash%3F%28raw%3AJSON%3A%3AAny%2Cvalue%3AT.class%3DString%29forallT-instance-method">Popcorn::Cast.to_hash?</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Hash</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int-instance-method" class="signature"><strong>#to_int</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int%28raw%3ASymbol%29-instance-method">Popcorn::Cast.to_int</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Int</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int16-instance-method" class="signature"><strong>#to_int16</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int16%28raw%3AInt%29-instance-method">Popcorn::Cast.to_int16</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int16.html">Int16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int16%3F-instance-method" class="signature"><strong>#to_int16?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int16%3F%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_int16?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int16.html">Int16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int32-instance-method" class="signature"><strong>#to_int32</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int32%28raw%3AHash%29-instance-method">Popcorn::Cast.to_int32</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int32.html">Int32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int32%3F-instance-method" class="signature"><strong>#to_int32?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int32%3F%28raw%3ATime%29-instance-method">Popcorn::Cast.to_int32?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int32.html">Int32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int64-instance-method" class="signature"><strong>#to_int64</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int64%28raw%3AArray%29-instance-method">Popcorn::Cast.to_int64</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int64.html">Int64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int64%3F-instance-method" class="signature"><strong>#to_int64?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int64%3F%28raw%3AArray%29-instance-method">Popcorn::Cast.to_int64?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int64.html">Int64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int8-instance-method" class="signature"><strong>#to_int8</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int8%28raw%3ABool%29-instance-method">Popcorn::Cast.to_int8</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int8.html">Int8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int8%3F-instance-method" class="signature"><strong>#to_int8?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int8%3F%28raw%3AInt%29-instance-method">Popcorn::Cast.to_int8?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Int8.html">Int8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_int%3F-instance-method" class="signature"><strong>#to_int?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_int%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_int?</a></code></p></div>
+          <div class="summary"><p>Returns the <code>Int</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
@@ -364,86 +374,86 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#to_time%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method" class="signature"><strong>#to_time</strong>(location : Time::Location = <span class="t">Time</span><span class="t">::</span><span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>, formatters : Array(String)? = <span class="n">nil</span>)</a>
+        <a href="#to_time%28location%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method" class="signature"><strong>#to_time</strong>(location : Time::Location? = <span class="n">nil</span>, formatters : Array(String)? = <span class="n">nil</span>)</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28raw%3ABool%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">Popcorn::Cast.to_time</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Time.html">Time</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_time%3F%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method" class="signature"><strong>#to_time?</strong>(location : Time::Location = <span class="t">Time</span><span class="t">::</span><span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>, formatters : Array(String)? = <span class="n">nil</span>)</a>
+        <a href="#to_time%3F%28location%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method" class="signature"><strong>#to_time?</strong>(location : Time::Location? = <span class="n">nil</span>, formatters : Array(String)? = <span class="n">nil</span>)</a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%3F%28raw%3AArray%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">Popcorn::Cast.to_time?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="Time.html">Time</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint-instance-method" class="signature"><strong>#to_uint</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint%28raw%3ATime%29-instance-method">Popcorn::Cast.to_uint</a></code></p></div>
+          <div class="summary"><p>Returns the <code>UInt</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint16-instance-method" class="signature"><strong>#to_uint16</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint16%28raw%3AArray%29-instance-method">Popcorn::Cast.to_uint16</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt16.html">UInt16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint16%3F-instance-method" class="signature"><strong>#to_uint16?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint16%3F%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_uint16?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt16.html">UInt16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint32-instance-method" class="signature"><strong>#to_uint32</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint32%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_uint32</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt32.html">UInt32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint32%3F-instance-method" class="signature"><strong>#to_uint32?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint32%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_uint32?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt32.html">UInt32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint64-instance-method" class="signature"><strong>#to_uint64</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint64%28raw%3AInt%29-instance-method">Popcorn::Cast.to_uint64</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt64.html">UInt64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint64%3F-instance-method" class="signature"><strong>#to_uint64?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint64%3F%28raw%3AString%29-instance-method">Popcorn::Cast.to_uint64?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt64.html">UInt64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint8-instance-method" class="signature"><strong>#to_uint8</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint8%28raw%3AArray%29-instance-method">Popcorn::Cast.to_uint8</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt8.html">UInt8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint8%3F-instance-method" class="signature"><strong>#to_uint8?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint8%3F%28raw%3AHash%29-instance-method">Popcorn::Cast.to_uint8?</a></code></p></div>
+          <div class="summary"><p>Returns the <code><a href="UInt8.html">UInt8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#to_uint%3F-instance-method" class="signature"><strong>#to_uint?</strong></a>
         
-          <div class="summary"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_uint?</a></code></p></div>
+          <div class="summary"><p>Returns the <code>UInt</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
         
       </li>
     
@@ -518,7 +528,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/325f840f80ae578531fec76d05ce2ebbfeb2e8a8/src/popcorn/cast/int.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/24880d943a7509c97abdb7d525050680d1eeeb96/src/popcorn/cast/int.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -542,7 +552,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/325f840f80ae578531fec76d05ce2ebbfeb2e8a8/src/popcorn/cast/int.cr#L92" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/24880d943a7509c97abdb7d525050680d1eeeb96/src/popcorn/cast/int.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -554,15 +564,13 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
 
   <h2>Instance Method Detail</h2>
   
-    <div class="entry-detail" id="to_array(target:T.class=String)forallT-instance-method">
+    <div class="entry-detail" id="cast(other)-instance-method">
       <div class="signature">
         
-        def <strong>to_array</strong>(target : T.class = <span class="t">String</span>) forall T
+        def <strong>cast</strong>(other)
 
-        <a class="method-permalink" href="#to_array%28target%3AT.class%3DString%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#cast%28other%29-instance-method">#</a>
       </div>
-      
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_array%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_array</a></code></p></div>
       
       <br/>
       <div>
@@ -570,15 +578,45 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       </div>
     </div>
   
-    <div class="entry-detail" id="to_array?(target:T.class=String)forallT-instance-method">
+    <div class="entry-detail" id="cast?(other)-instance-method">
       <div class="signature">
         
-        def <strong>to_array?</strong>(target : T.class = <span class="t">String</span>) forall T
+        def <strong>cast?</strong>(other)
 
-        <a class="method-permalink" href="#to_array%3F%28target%3AT.class%3DString%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#cast%3F%28other%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_array%3F%28raw%3AJSON%3A%3AAny%2Ctarget%3AT.class%3DString%29forallT-instance-method">Popcorn::Cast.to_array?</a></code></p></div>
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_array(value_type:T.class=String)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>to_array</strong>(value_type : T.class = <span class="t">String</span>) forall T
+
+        <a class="method-permalink" href="#to_array%28value_type%3AT.class%3DString%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the <code>Array</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_array?(value_type:T.class=String)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>to_array?</strong>(value_type : T.class = <span class="t">String</span>) forall T
+
+        <a class="method-permalink" href="#to_array%3F%28value_type%3AT.class%3DString%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc"><p>Returns the <code>Array</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -594,7 +632,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_bool-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_bool%28raw%3AArray%29-instance-method">Popcorn::Cast.to_bool</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Bool.html">Bool</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -610,7 +648,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_bool%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_bool%3F%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_bool?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Bool.html">Bool</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -626,7 +664,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float%28raw%3AString%29-instance-method">Popcorn::Cast.to_float</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Float</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -642,7 +680,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float32-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float32%28raw%3ASymbol%29-instance-method">Popcorn::Cast.to_float32</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Float32.html">Float32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -658,7 +696,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float32%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float32%3F%28raw%3ATime%29-instance-method">Popcorn::Cast.to_float32?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Float32.html">Float32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -674,7 +712,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float64-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float64%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_float64</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Float64.html">Float64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -690,7 +728,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float64%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float64%3F%28raw%3AArray%29-instance-method">Popcorn::Cast.to_float64?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Float64.html">Float64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -706,7 +744,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_float%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_float%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_float?</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Float</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -714,15 +752,15 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       </div>
     </div>
   
-    <div class="entry-detail" id="to_hash(target:T.class=String)forallT-instance-method">
+    <div class="entry-detail" id="to_hash(value_type:T.class=String)forallT-instance-method">
       <div class="signature">
         
-        def <strong>to_hash</strong>(target : T.class = <span class="t">String</span>) forall T
+        def <strong>to_hash</strong>(value_type : T.class = <span class="t">String</span>) forall T
 
-        <a class="method-permalink" href="#to_hash%28target%3AT.class%3DString%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#to_hash%28value_type%3AT.class%3DString%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_hash%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_hash</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Hash</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -730,15 +768,15 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       </div>
     </div>
   
-    <div class="entry-detail" id="to_hash?(target:T.class=String)forallT-instance-method">
+    <div class="entry-detail" id="to_hash?(value_type:T.class=String)forallT-instance-method">
       <div class="signature">
         
-        def <strong>to_hash?</strong>(target : T.class = <span class="t">String</span>) forall T
+        def <strong>to_hash?</strong>(value_type : T.class = <span class="t">String</span>) forall T
 
-        <a class="method-permalink" href="#to_hash%3F%28target%3AT.class%3DString%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#to_hash%3F%28value_type%3AT.class%3DString%29forallT-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_hash%3F%28raw%3AJSON%3A%3AAny%2Cvalue%3AT.class%3DString%29forallT-instance-method">Popcorn::Cast.to_hash?</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Hash</code> value represented by given <code><a href="String.html">String</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -754,7 +792,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int%28raw%3ASymbol%29-instance-method">Popcorn::Cast.to_int</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Int</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -770,7 +808,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int16-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int16%28raw%3AInt%29-instance-method">Popcorn::Cast.to_int16</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int16.html">Int16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -786,7 +824,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int16%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int16%3F%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_int16?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int16.html">Int16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -802,7 +840,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int32-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int32%28raw%3AHash%29-instance-method">Popcorn::Cast.to_int32</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int32.html">Int32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -818,7 +856,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int32%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int32%3F%28raw%3ATime%29-instance-method">Popcorn::Cast.to_int32?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int32.html">Int32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -834,7 +872,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int64-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int64%28raw%3AArray%29-instance-method">Popcorn::Cast.to_int64</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int64.html">Int64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -850,7 +888,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int64%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int64%3F%28raw%3AArray%29-instance-method">Popcorn::Cast.to_int64?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int64.html">Int64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -866,7 +904,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int8-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int8%28raw%3ABool%29-instance-method">Popcorn::Cast.to_int8</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int8.html">Int8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -882,7 +920,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int8%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int8%3F%28raw%3AInt%29-instance-method">Popcorn::Cast.to_int8?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Int8.html">Int8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -898,7 +936,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_int%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_int%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_int?</a></code></p></div>
+        <div class="doc"><p>Returns the <code>Int</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -922,15 +960,15 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       </div>
     </div>
   
-    <div class="entry-detail" id="to_time(location:Time::Location=Time::Location::UTC,formatters:Array(String)?=nil)-instance-method">
+    <div class="entry-detail" id="to_time(location:Time::Location?=nil,formatters:Array(String)?=nil)-instance-method">
       <div class="signature">
         
-        def <strong>to_time</strong>(location : Time::Location = <span class="t">Time</span><span class="t">::</span><span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>, formatters : Array(<a href="String.html">String</a>)? = <span class="n">nil</span>)
+        def <strong>to_time</strong>(location : Time::Location? = <span class="n">nil</span>, formatters : Array(<a href="String.html">String</a>)? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#to_time%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">#</a>
+        <a class="method-permalink" href="#to_time%28location%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%28raw%3ABool%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">Popcorn::Cast.to_time</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Time.html">Time</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -938,15 +976,15 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
       </div>
     </div>
   
-    <div class="entry-detail" id="to_time?(location:Time::Location=Time::Location::UTC,formatters:Array(String)?=nil)-instance-method">
+    <div class="entry-detail" id="to_time?(location:Time::Location?=nil,formatters:Array(String)?=nil)-instance-method">
       <div class="signature">
         
-        def <strong>to_time?</strong>(location : Time::Location = <span class="t">Time</span><span class="t">::</span><span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>, formatters : Array(<a href="String.html">String</a>)? = <span class="n">nil</span>)
+        def <strong>to_time?</strong>(location : Time::Location? = <span class="n">nil</span>, formatters : Array(<a href="String.html">String</a>)? = <span class="n">nil</span>)
 
-        <a class="method-permalink" href="#to_time%3F%28location%3ATime%3A%3ALocation%3DTime%3A%3ALocation%3A%3AUTC%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">#</a>
+        <a class="method-permalink" href="#to_time%3F%28location%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_time%3F%28raw%3AArray%2Clocation%3ATime%3A%3ALocation%3F%3Dnil%2Cformatters%3AArray%28String%29%3F%3Dnil%29-instance-method">Popcorn::Cast.to_time?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="Time.html">Time</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -962,7 +1000,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint%28raw%3ATime%29-instance-method">Popcorn::Cast.to_uint</a></code></p></div>
+        <div class="doc"><p>Returns the <code>UInt</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -978,7 +1016,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint16-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint16%28raw%3AArray%29-instance-method">Popcorn::Cast.to_uint16</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt16.html">UInt16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -994,7 +1032,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint16%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint16%3F%28raw%3AJSON%3A%3AAny%29-instance-method">Popcorn::Cast.to_uint16?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt16.html">UInt16</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1010,7 +1048,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint32-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint32%28raw%3AYAML%3A%3AAny%29-instance-method">Popcorn::Cast.to_uint32</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt32.html">UInt32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1026,7 +1064,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint32%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint32%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_uint32?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt32.html">UInt32</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1042,7 +1080,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint64-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint64%28raw%3AInt%29-instance-method">Popcorn::Cast.to_uint64</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt64.html">UInt64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1058,7 +1096,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint64%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint64%3F%28raw%3AString%29-instance-method">Popcorn::Cast.to_uint64?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt64.html">UInt64</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1074,7 +1112,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint8-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint8%28raw%3AArray%29-instance-method">Popcorn::Cast.to_uint8</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt8.html">UInt8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1090,7 +1128,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint8%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint8%3F%28raw%3AHash%29-instance-method">Popcorn::Cast.to_uint8?</a></code></p></div>
+        <div class="doc"><p>Returns the <code><a href="UInt8.html">UInt8</a></code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
@@ -1106,7 +1144,7 @@ time.millisecond                   <span class="c"># =&gt; 789</span></code></pr
         <a class="method-permalink" href="#to_uint%3F-instance-method">#</a>
       </div>
       
-        <div class="doc"><p>Alias to <code><a href="Popcorn/Cast.html#to_uint%3F%28raw%3ABool%29-instance-method">Popcorn::Cast.to_uint?</a></code></p></div>
+        <div class="doc"><p>Returns the <code>UInt</code> value represented by given <code><a href="YAML/Any.html">YAML::Any</a></code> type, else raise a <code>TypeCastError</code> exception.</p></div>
       
       <br/>
       <div>
