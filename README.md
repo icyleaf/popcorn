@@ -6,7 +6,7 @@
 [![Tag](https://img.shields.io/github/tag/icyleaf/popcorn.svg)](https://github.com/icyleaf/popcorn/blob/master/CHANGELOG.md)
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/popcorn/master.svg?style=flat)](https://circleci.com/gh/icyleaf/popcorn)
 
-Easy and Safe popping from one type to another.
+Easy and Safe popping from one type to another. Popcorn icon by HLD from the [Noun Project](https://thenounproject.com).
 
 ## Installation
 
