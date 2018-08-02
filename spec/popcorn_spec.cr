@@ -1,28 +1,8 @@
 require "./spec_helper"
 
-{% for method in Popcorn::Cast.methods %}
-  {% if method.name.starts_with?("to_") %}
-    private def it_{{ method.name.id }}(input, expected{% if method.name.starts_with?("to_time") %}, location : Time::Location? = nil, formatters : Array(String)? = nil{% end %}, except = [] of String, file = __FILE__, line = __LINE__)
-      it "should casts #{input.class}.new(#{input})", file, line do
-        Popcorn.{{ method.name.id }}(input{% if method.name.starts_with?("to_time") %}, location, formatters{% end %}).should eq(expected)
-      end
-    end
-
-    {% if !method.name.ends_with?("?") %}
-      private def it_raise_{{ method.name.id }}(input, file = __FILE__, line = __LINE__)
-        it "throws an exception to casts #{input.class}: #{input}", file, line do
-          expect_raises TypeCastError, file: file, line: line do
-            Popcorn.{{ method.name.id }}(input)
-          end
-        end
-      end
-    {% end %}
-  {% end %}
-{% end %}
-
 describe Popcorn do
   describe "to_int" do
-    it_to_int 1_i8, 1_i32, except: ["json"]
+    it_to_int 1_i8, 1_i32
     it_to_int -123_i16, -123
     it_to_int 123456789123456_i64, -2045800064
     it_to_int 1.234567890, 1
@@ -777,6 +757,11 @@ describe Popcorn do
     it_to_bool 10.1, true
     it_to_bool -1, true
     it_to_bool 0, false
+    it_to_bool({a: "b"}, true)
+    it_to_bool([1, 2, 3], true)
+    it_to_bool(Array(String).new, false)
+    it_to_bool({"a" => "b"}, true)
+    it_to_bool(Hash(String, String).new, false)
 
     it_to_bool JSON::Any.new(raw: true), true
     it_to_bool JSON::Any.new(raw: false), false
@@ -824,9 +809,6 @@ describe Popcorn do
 
     it_raise_to_bool "foo"
     it_raise_to_bool :foo
-    it_raise_to_bool([1, 2, 3])
-    it_raise_to_bool({"a" => "b"})
-    it_raise_to_bool({a: "b"})
     it_raise_to_bool(JSON.parse(%Q{[1, 2, 3]}))
     it_raise_to_bool(JSON.parse(%Q{{"a":"b"}}))
     it_raise_to_bool(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
@@ -836,12 +818,5 @@ describe Popcorn do
   describe "to_bool?" do
     it_to_bool? "foo", nil
     it_to_bool? :foo, nil
-    it_to_bool?([1, 2, 3], nil)
-    it_to_bool?({"a" => "b"}, nil)
-    it_to_bool?({a: "b"}, nil)
-    it_to_bool?(JSON.parse(%Q{[1, 2, 3]}), nil)
-    it_to_bool?(JSON.parse(%Q{{"a":"b"}}), nil)
-    it_to_bool?(YAML.parse(%Q{---\n- 1\n- 2\n -3}), nil)
-    it_to_bool?(YAML.parse(%Q{a:\n  b}), nil)
   end
 end

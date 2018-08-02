@@ -28,6 +28,14 @@ module Popcorn
               def {{ method.name.id }}(location : Time::Location = Time::Location::UTC, formatters : Array(String)? = nil)
                 Popcorn.{{ method.name.id }}(self, location, formatters)
               end
+            {% elsif method.name.starts_with?("to_array") %}
+              def {{ method.name.id }}(target : T.class = String) forall T
+                Popcorn.{{ method.name.id }}(self, target)
+              end
+            {% elsif method.name.starts_with?("to_hash") %}
+              def {{ method.name.id }}(target : T.class = String) forall T
+                Popcorn.{{ method.name.id }}(self, target)
+              end
             {% else %}
               def {{ method.name.id }}
                 Popcorn.{{ method.name.id }}(self)
