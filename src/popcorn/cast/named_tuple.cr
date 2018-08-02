@@ -4,47 +4,47 @@ module Popcorn::Cast
     to_int32?(raw)
   end
 
-  # Returns the `Int32` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_int32?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_int8?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Int16` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_int16?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Int64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_int64?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `UInt32` or `Nil` value represented by given data type.
+  # Aliase to `to_uint32`
   def to_uint?(raw : NamedTuple)
     to_uint32?(raw)
   end
 
-  # Alias to `to_uint?`
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_uint32?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_uint8?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `UInt16` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_uint16?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `UInt64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_uint64?(raw : NamedTuple)
     nil
   end
@@ -54,17 +54,17 @@ module Popcorn::Cast
     to_float64?(raw)
   end
 
-  # Returns the `Float64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_float64?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Float32` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   def to_float32?(raw : NamedTuple)
     nil
   end
 
-  # Returns the `Time` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given NamedTuple type.
   #
   # - `location` argument applies for `Int`/`String` types
   # - `formatters` argument applies for `String` type.

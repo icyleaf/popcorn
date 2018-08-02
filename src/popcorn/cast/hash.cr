@@ -4,27 +4,27 @@ module Popcorn::Cast
     to_int32?(raw)
   end
 
-  # Returns the `Int32` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_int32?(raw : Hash)
     nil
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_int8?(raw : Hash)
     nil
   end
 
-  # Returns the `Int16` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_int16?(raw : Hash)
     nil
   end
 
-  # Returns the `Int64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_int64?(raw : Hash)
     nil
   end
 
-  # Returns the `UInt32` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_uint?(raw : Hash)
     to_uint32?(raw)
   end
@@ -34,17 +34,17 @@ module Popcorn::Cast
     nil
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_uint8?(raw : Hash)
     nil
   end
 
-  # Returns the `UInt16` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_uint16?(raw : Hash)
     nil
   end
 
-  # Returns the `UInt64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_uint64?(raw : Hash)
     nil
   end
@@ -54,17 +54,17 @@ module Popcorn::Cast
     to_float64?(raw)
   end
 
-  # Returns the `Float64` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_float64?(raw : Hash)
     nil
   end
 
-  # Returns the `Float32` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   def to_float32?(raw : Hash)
     nil
   end
 
-  # Returns the `Time` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Hash type.
   #
   # - `location` argument applies for `Int`/`String` types
   # - `formatters` argument applies for `String` type.

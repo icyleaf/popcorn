@@ -819,4 +819,8 @@ describe Popcorn do
     it_to_bool? "foo", nil
     it_to_bool? :foo, nil
   end
+
+  describe "to_array" do
+
+  end
 end

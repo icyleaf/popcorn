@@ -4,27 +4,27 @@ module Popcorn::Cast
     to_int32?(raw)
   end
 
-  # Returns the `Int32` or `Nil` value represented by given data type.
+  # Returns the `Int32` or `Nil` value represented by given Float type.
   def to_int32?(raw : Float)
     raw.to_i32
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Int8` or `Nil` value represented by given Float type.
   def to_int8?(raw : Float)
     raw.to_i8
   end
 
-  # Returns the `Int16` or `Nil` value represented by given data type.
+  # Returns the `Int16` or `Nil` value represented by given Float type.
   def to_int16?(raw : Float)
     raw.to_i16
   end
 
-  # Returns the `Int64` or `Nil` value represented by given data type.
+  # Returns the `Int64` or `Nil` value represented by given Float type.
   def to_int64?(raw : Float)
     raw.to_i64
   end
 
-  # Returns the `UInt32` or `Nil` value represented by given data type.
+  # Returns the `UInt32` or `Nil` value represented by given Float type.
   def to_uint?(raw : Float)
     to_uint32?(raw)
   end
@@ -34,22 +34,22 @@ module Popcorn::Cast
     raw.to_u32
   end
 
-  # Returns the `Int8` or `Nil` value represented by given data type.
+  # Returns the `Int8` or `Nil` value represented by given Float type.
   def to_uint8?(raw : Float)
     raw.to_u8
   end
 
-  # Returns the `UInt16` or `Nil` value represented by given data type.
+  # Returns the `UInt16` or `Nil` value represented by given Float type.
   def to_uint16?(raw : Float)
     raw.to_u16
   end
 
-  # Returns the `UInt64` or `Nil` value represented by given data type.
+  # Returns the `UInt64` or `Nil` value represented by given Float type.
   def to_uint64?(raw : Float)
     raw.to_u64
   end
 
-  # Returns the `Float64` or `Nil` value represented by given data type.
+  # Returns the `Float64` or `Nil` value represented by given Float type.
   def to_float?(raw : Float)
     to_float64?(raw)
   end
@@ -59,12 +59,12 @@ module Popcorn::Cast
     raw
   end
 
-  # Returns the `Float32` or `Nil` value represented by given data type.
+  # Returns the `Float32` or `Nil` value represented by given Float type.
   def to_float32?(raw : Float)
     raw.to_f32
   end
 
-  # Returns the `Time` or `Nil` value represented by given data type.
+  # Returns the `Nil` value represented by given Float type.
   #
   # - `location` argument applies for `Int`/`String` types
   # - `formatters` argument applies for `String` type.
@@ -72,7 +72,7 @@ module Popcorn::Cast
     nil
   end
 
-  # Returns the `Bool` or `Nil` value represented by given data type.
+  # Returns the `Bool` or `Nil` value represented by given Float type.
   # It accepts true, t, yes, y, on, 1, false, f, no, n, off, 0. Any other value return an error.
   def to_bool?(raw : Float)
     !raw.zero?
