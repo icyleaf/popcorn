@@ -72,8 +72,24 @@ module Popcorn::Cast
     nil
   end
 
-  # Returns the `Bool` or `Nil` value represented by given data type.
+  # Returns the `Bool` or `Nil` value represented by given NamedTuple type.
   def to_bool?(raw : NamedTuple)
     !raw.size.zero?
+  end
+
+  # Returns the `Array` or `Nil` value represented by given NamedTuple type.
+  def to_array?(raw : NamedTuple, value_type : T.class = String) forall T
+    return unless data = raw.as_a?
+    data.each_with_object(Array(T).new) do |v, obj|
+      obj << cast(v, T).as(T)
+    end
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given NamedTuple type.
+  def to_hash?(raw : NamedTuple, value_type : T.class = String) forall T
+    return unless data = raw.as_h?
+    data.each_with_object(Hash(String, T).new) do |(k, v), obj|
+      obj[k.to_s] = cast(v, T).as(T)
+    end
   end
 end

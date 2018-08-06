@@ -77,4 +77,14 @@ module Popcorn::Cast
   def to_bool?(raw : Nil)
     false
   end
+
+  # Returns the `Array` or `Nil` value represented by given Nil type.
+  def to_array?(raw : Time, value_type : T.class = String) forall T
+    [cast(raw, T).as(T)]
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given Nil type.
+  def to_hash?(raw : Time, value_type : T.class = String) forall T
+    nil
+  end
 end

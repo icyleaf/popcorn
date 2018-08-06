@@ -76,4 +76,14 @@ module Popcorn::Cast
   def to_bool?(raw : Array)
     !raw.size.zero?
   end
+
+  # Returns the `Array` or `Nil` value represented by given Array type.
+  def to_array?(raw : Array, value_type : T.class = String) forall T
+    raw
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given Array type.
+  def to_hash?(raw : Array, value_type : T.class = String) forall T
+    nil
+  end
 end

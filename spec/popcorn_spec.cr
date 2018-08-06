@@ -1,7 +1,15 @@
 require "./spec_helper"
 
 describe Popcorn do
-  describe "to_int" do
+  describe ".cast" do
+    it_cast 1_i8, String, "1"
+    it_cast "123abc456", Int32, 123
+    it_cast "123.456abc789", Float64, 123.456
+    it_cast 1, Bool, true
+    it_cast "foo", Array, ["foo"]
+  end
+
+  describe ".to_int" do
     it_to_int 1_i8, 1_i32
     it_to_int -123_i16, -123
     it_to_int 123456789123456_i64, -2045800064
@@ -52,7 +60,7 @@ describe Popcorn do
     it_raise_to_int(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_int?" do
+  describe ".to_int?" do
     it_to_int? :foo, nil
     it_to_int?([1, 2, 3], nil)
     it_to_int?({"a" => "b"}, nil)
@@ -63,7 +71,7 @@ describe Popcorn do
     it_to_int?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_int8" do
+  describe ".to_int8" do
     it_to_int8 1, 1_i8
     it_to_int8 -123_i16, -123_i8
     it_to_int8 123456789123456_i64, -128_i8
@@ -118,7 +126,7 @@ describe Popcorn do
     it_raise_to_int8(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_int8?" do
+  describe ".to_int8?" do
     it_to_int8? :foo, nil
     it_to_int8?([1, 2, 3], nil)
     it_to_int8?({"a" => "b"}, nil)
@@ -129,7 +137,7 @@ describe Popcorn do
     it_to_int8?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_int16" do
+  describe ".to_int16" do
     it_to_int16 1_i8, 1_i16
     it_to_int16 -123_i16, -123_i16
     it_to_int16 123, 123_i16
@@ -181,7 +189,7 @@ describe Popcorn do
     it_raise_to_int16(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_int16?" do
+  describe ".to_int16?" do
     it_to_int16? :foo, nil
     it_to_int16?([1, 2, 3], nil)
     it_to_int16?({"a" => "b"}, nil)
@@ -192,7 +200,7 @@ describe Popcorn do
     it_to_int16?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_int64" do
+  describe ".to_int64" do
     it_to_int64 1_i8, 1_i64
     it_to_int64 -123_i16, -123_i64
     it_to_int64 123, 123_i64
@@ -244,7 +252,7 @@ describe Popcorn do
     it_raise_to_int64(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_int64?" do
+  describe ".to_int64?" do
     it_to_int64? :foo, nil
     it_to_int64?([1, 2, 3], nil)
     it_to_int64?({"a" => "b"}, nil)
@@ -255,7 +263,7 @@ describe Popcorn do
     it_to_int64?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_uint" do
+  describe ".to_uint" do
     it_to_uint 1_i8, 1_u32
     it_to_uint 123456789123456_i64, 2249167232_u32
     it_to_uint 1.234567890, 1_u32
@@ -305,7 +313,7 @@ describe Popcorn do
     it_raise_to_uint(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_uint?" do
+  describe ".to_uint?" do
     it_to_uint? :foo, nil
     it_to_uint?([1, 2, 3], nil)
     it_to_uint?({"a" => "b"}, nil)
@@ -316,7 +324,7 @@ describe Popcorn do
     it_to_uint?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_uint8" do
+  describe ".to_uint8" do
     it_to_uint8 1_i8, 1_u8
     it_to_uint8 123456789123456_i64, 128_u8
     it_to_uint8 1.234567890, 1_u8
@@ -366,7 +374,7 @@ describe Popcorn do
     it_raise_to_uint8(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_uint8?" do
+  describe ".to_uint8?" do
     it_to_uint8? :foo, nil
     it_to_uint8?([1, 2, 3], nil)
     it_to_uint8?({"a" => "b"}, nil)
@@ -377,7 +385,7 @@ describe Popcorn do
     it_to_uint8?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_uint16" do
+  describe ".to_uint16" do
     it_to_uint16 1_i8, 1_u16
     it_to_uint16 123456789123456_i64, 37248_u16
     it_to_uint16 1.234567890, 1_u16
@@ -427,7 +435,7 @@ describe Popcorn do
     it_raise_to_uint16(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_uint16?" do
+  describe ".to_uint16?" do
     it_to_uint16? :foo, nil
     it_to_uint16?([1, 2, 3], nil)
     it_to_uint16?({"a" => "b"}, nil)
@@ -438,7 +446,7 @@ describe Popcorn do
     it_to_uint16?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_uint64" do
+  describe ".to_uint64" do
     it_to_uint64 1_i8, 1_u64
     it_to_uint64 123456789123456_i64, 123456789123456_i64
     it_to_uint64 1.234567890, 1_u64
@@ -488,7 +496,7 @@ describe Popcorn do
     it_raise_to_uint64(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_uint64?" do
+  describe ".to_uint64?" do
     it_to_uint64? :foo, nil
     it_to_uint64?([1, 2, 3], nil)
     it_to_uint64?({"a" => "b"}, nil)
@@ -499,7 +507,7 @@ describe Popcorn do
     it_to_uint64?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_float" do
+  describe ".to_float" do
     it_to_float 1_i8, 1.0_f64
     it_to_float -123_i16, -123.0_f64
     it_to_float 123, 123.0_f64
@@ -550,7 +558,7 @@ describe Popcorn do
     it_raise_to_float(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_float?" do
+  describe ".to_float?" do
     it_to_float? :foo, nil
     it_to_float?([1, 2, 3], nil)
     it_to_float?({"a" => "b"}, nil)
@@ -565,7 +573,7 @@ describe Popcorn do
     it_to_float?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_float32" do
+  describe ".to_float32" do
     it_to_float32 1_i8, 1.0_f32
     it_to_float32 -123_i16, -123.0_f32
     it_to_float32 123, 123.0_f32
@@ -617,7 +625,7 @@ describe Popcorn do
     it_raise_to_float32(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_float32?" do
+  describe ".to_float32?" do
     it_to_float32? :foo, nil
     it_to_float32?([1, 2, 3], nil)
     it_to_float32?({"a" => "b"}, nil)
@@ -632,7 +640,7 @@ describe Popcorn do
     it_to_float32?(YAML.parse(%Q{a:\n  b}), nil)
   end
 
-  describe "to_time" do
+  describe ".to_time" do
     it_to_time Time.new(2018, 1, 20, 1, 20, 33), Time.new(2018, 1, 20, 1, 20, 33)
     it_to_time 0, Time.new(1970, 1, 1, 0, 0, 0, location: Time::Location::UTC)
     it_to_time 1516411233, Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
@@ -726,14 +734,14 @@ describe Popcorn do
     it_raise_to_time("11:00PM")
   end
 
-  describe "to_time?" do
+  describe ".to_time?" do
     it_to_time? nil, nil
     it_to_time? "2018", nil
     it_to_time? "Nov 10 23:00:00", nil
     it_to_time? "11:00PM", nil
   end
 
-  describe "to_bool" do
+  describe ".to_bool" do
     it_to_bool true, true
     it_to_bool false, false
     it_to_bool "true", true
@@ -815,12 +823,29 @@ describe Popcorn do
     it_raise_to_bool(YAML.parse(%Q{a:\n  b}))
   end
 
-  describe "to_bool?" do
+  describe ".to_bool?" do
     it_to_bool? "foo", nil
     it_to_bool? :foo, nil
   end
 
-  describe "to_array" do
+  describe ".to_array" do
+    it_to_array "foo", ["foo"]
+    it_to_array :foo, ["foo"]
+    it_to_array 1_i8, ["1"]
+    it_to_array 1.23, ["1.23"]
+    it_to_array 1.23, [1.23], Float64
+    it_to_array 1, [true], Bool
+    it_to_array [1, 2, 3], [1, 2, 3]
+    it_to_array({"a" => "b"}, ["a", "b"])
+  end
 
+  describe ".to_hash" do
+    it_raise_to_hash "foo"
+    it_raise_to_hash :foo
+    it_raise_to_hash 1_i8
+    it_raise_to_hash 1.23
+    it_raise_to_hash 1.23
+    it_raise_to_hash 1
+    it_raise_to_hash [1, 2, 3]
   end
 end

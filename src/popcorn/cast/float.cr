@@ -77,4 +77,14 @@ module Popcorn::Cast
   def to_bool?(raw : Float)
     !raw.zero?
   end
+
+  # Returns the `Array` or `Nil` value represented by given Float type.
+  def to_array?(raw : Float, value_type : T.class = String) forall T
+    [cast(raw, T).as(T)]
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given Float type.
+  def to_hash?(raw : Float, value_type : T.class = String) forall T
+    nil
+  end
 end

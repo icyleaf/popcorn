@@ -68,12 +68,30 @@ module Popcorn::Cast
   #
   # - `location` argument applies for `Int`/`String` types
   # - `formatters` argument applies for `String` type.
-  def to_time?(raw : Array, location : Time::Location? = nil, formatters : Array(String)? = nil)
+  def to_time?(raw : Hash, location : Time::Location? = nil, formatters : Array(String)? = nil)
     nil
   end
 
   # Returns the `Bool` or `Nil` value represented by given data type.
   def to_bool?(raw : Hash)
     !raw.size.zero?
+  end
+
+  # Returns the `Array` or `Nil` value represented by given Hash type.
+  #
+  # ```
+  # Popcorn.to_array?({"a" => "b", "c" => "d"})   # => ["a", "b", "c", "d"]
+  # ```
+  def to_array?(raw : Hash, value_type : T.class = String) forall T
+    Array(T).new.tap do |obj|
+      raw.each do |k, v|
+        obj << k << v
+      end
+    end
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given Hash type.
+  def to_hash?(raw : Hash, value_type : T.class = String) forall T
+    raw
   end
 end

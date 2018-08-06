@@ -2,6 +2,66 @@ require "./cast/*"
 
 module Popcorn
   module Cast
+    # def cast?(raw, other : Int8.class) : Int8?
+    #   to_int8?(raw)
+    # end
+
+    # def cast?(raw, other : Int16.class) : Int16?
+    #   to_int16?(raw)
+    # end
+
+    # def cast?(raw, other : Int32.class) : Int32?
+    #   to_int32?(raw)
+    # end
+
+    # def cast?(raw, other : Int64.class) : Int64?
+    #   to_int64?(raw)
+    # end
+
+    # def cast?(raw, other : UInt8.class) : UInt8?
+    #   to_uint8?(raw)
+    # end
+
+    # def cast?(raw, other : UInt16.class) : UInt16?
+    #   to_uint16?(raw)
+    # end
+
+    # def cast?(raw, other : UInt32.class) : UInt32?
+    #   to_uint32?(raw)
+    # end
+
+    # def cast?(raw, other : UInt64.class) : UInt64?
+    #   to_uint64?(raw)
+    # end
+
+    # def cast?(raw, other : Float32.class) : Float32?
+    #   to_float32?(raw)
+    # end
+
+    # def cast?(raw, other : Float64.class) : Float64?
+    #   to_float64?(raw)
+    # end
+
+    # def cast?(raw, other : Bool.class) : Bool?
+    #   to_bool?(raw)
+    # end
+
+    # def cast?(raw, other : Time.class) : Time?
+    #   to_time?(raw)
+    # end
+
+    # def cast?(raw, other : String.class) : String
+    #   raw.to_s
+    # end
+
+    # def cast?(raw, other : Array.class) : Array(String)
+    #   raw.to_array?(raw)
+    # end
+
+    # def cast?(raw, other : Hash.class) : Hash(String, String)
+    #   raw.to_hash?(raw)
+    # end
+
     # Returns the target value or `Nil` represented by given data type.
     def cast?(raw, other)
       case other

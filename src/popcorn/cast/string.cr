@@ -93,10 +93,12 @@ module Popcorn::Cast
     end
   end
 
+  # Returns the `Array` or `Nil` value represented by given String type.
   def to_array?(raw : String, value_type : T.class = String) forall T
     [cast(raw, T).as(T)]
   end
 
+  # Returns the `Hash` or `Nil` value represented by given String type.
   def to_hash?(raw : String, value_type : T.class = String) forall T
     nil
   end

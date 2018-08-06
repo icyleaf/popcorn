@@ -92,6 +92,22 @@ module Popcorn::Cast
     to_bool?(value) unless value.nil?
   end
 
+  # Returns the `Array` or `Nil` value represented by given YAML::Any type.
+  def to_array?(raw : YAML::Any, value_type : T.class = String) forall T
+    return unless data = raw.as_a?
+    data.each_with_object(Array(T).new) do |v, obj|
+      obj << cast(v, T).as(T)
+    end
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given YAML::Any type.
+  def to_hash?(raw : YAML::Any, value_type : T.class = String) forall T
+    return unless data = raw.as_h?
+    data.each_with_object(Hash(String, T).new) do |(k, v), obj|
+      obj[k.to_s] = cast(v, T).as(T)
+    end
+  end
+
   private def as_value(raw : YAML::Any)
     if value = raw.as_i64?
       return value

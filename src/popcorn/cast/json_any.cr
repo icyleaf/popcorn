@@ -92,6 +92,7 @@ module Popcorn::Cast
     to_bool?(value) unless value.nil?
   end
 
+  # Returns the `Array` or `Nil` value represented by given JSON::Any type.
   def to_array?(raw : JSON::Any, value_type : T.class = String) forall T
     return unless data = raw.as_a?
     data.each_with_object(Array(T).new) do |v, obj|
@@ -99,6 +100,7 @@ module Popcorn::Cast
     end
   end
 
+  # Returns the `Hash` or `Nil` value represented by given JSON::Any type.
   def to_hash?(raw : JSON::Any, value_type : T.class = String) forall T
     return unless data = raw.as_h?
     data.each_with_object(Hash(String, T).new) do |(k, v), obj|

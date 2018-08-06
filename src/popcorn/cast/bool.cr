@@ -77,4 +77,14 @@ module Popcorn::Cast
   def to_bool?(raw : Bool)
     raw
   end
+
+  # Returns the `Array` or `Nil` value represented by given Bool type.
+  def to_array?(raw : Bool, value_type : T.class = String) forall T
+    [cast(raw, T).as(T)]
+  end
+
+  # Returns the `Hash` or `Nil` value represented by given Bool type.
+  def to_hash?(raw : Bool, value_type : T.class = String) forall T
+    nil
+  end
 end
