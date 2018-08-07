@@ -106,12 +106,14 @@ module Popcorn
             {% rtype = method.args[0].restriction %}
             {% mtype = method.name.gsub(/^to_/, "").gsub(/\?$/, "").capitalize.gsub(/^Ui/, "UI") %}
 
-            # Returns the `{{ mtype.id }}` value represented by given `{{ rtype.id }}` type, else raise a `TypeCastError` exception.
-            def {{ mname.id }}({{ margs.id }}){% if mname.includes?("to_array") || mname.includes?("to_hash") %} forall T{% end %}
-              value = {{ method.name }}({{ method.args.map { |a| a.name }.join(", ").id }})
-              cast_error!({{ rtype.id.stringify }}, {{ mtype.id.stringify }}) if value.nil?
-              value
-            end
+            {% if @type.methods.select {|m| m.name.id == mname.id && m.args[0].restriction.id == rtype.id }.size == 0 %}
+              # Returns the `{{ mtype.id }}` value represented by given `{{ rtype.id }}` type, else raise a `TypeCastError` exception.
+              def {{ mname.id }}({{ margs.id }}){% if mname.includes?("to_array") || mname.includes?("to_hash") %} forall T{% end %}
+                value = {{ method.name }}({{ method.args.map { |a| a.name }.join(", ").id }})
+                cast_error!({{ rtype.id.stringify }}, {{ mtype.id.stringify }}) if value.nil?
+                value
+              end
+            {% end %}
           {% end %}
         {% end %}
       {% end %}
