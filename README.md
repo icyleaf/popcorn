@@ -37,6 +37,8 @@ This is distinguish between built-in methods in Crystal.
 - to_float64
 - to_bool
 - to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)
+- to_array(target : T.class = String)
+- to_hash(target : T.class = String)
 - to_string (alias to to_s in Crystal).
 
 ```crystal
@@ -57,10 +59,15 @@ Popcorn.to_time("Tue, 20 Jan 2018", formatter: ["%a, %d %b %Y"])              # 
 Also these methods had been inject to Crystal literals, you can call it directly, Monkey Patching list:
 
 - String
-- Int8/Int16/Int32/Int64/UInt8/UInt16/UInt32/UInt64
-- Float32/Float64
+- Int
+- Float
 - Bool
 - Time
+- Symbol
+- NamedTupe
+- Array
+- Hash
+- Nil
 - JSON::Any
 - YAML::Any
 
@@ -79,6 +86,10 @@ require "popcorn/injection" # => make sure require it!
 "2018-07-23T10:11:22Z".to_time(Time::Location.load("Asia/Shanghai")) # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load("Asia/Shanghai"))
 "Tue, 20 Jan 2018".to_time(formatter: ["%a, %d %b %Y"])              # => Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)
 ```
+
+## Casting unmatch class
+
+By desgin in Crystal, we can not match type with `T`(no override by alone type) and no time to match each shard type. so you can write your own.
 
 ## Contributing
 
