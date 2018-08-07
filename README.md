@@ -91,6 +91,8 @@ require "popcorn/injection" # => make sure require it!
 
 By desgin in Crystal, we can not match type with `T`(no override by alone type) and no time to match each shard type. so you can write your own.
 
+Reference at [totem](https://github.com/icyleaf/totem/blob/b8bfca5f7a6ded111fc5074205dad7a205040b1d/src/totem/any.cr#L256).
+
 ## Contributing
 
 1. Fork it (<https://github.com/icyleaf/popcorn/fork>)
