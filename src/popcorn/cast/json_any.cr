@@ -94,9 +94,16 @@ module Popcorn::Cast
 
   # Returns the `Array` or `Nil` value represented by given JSON::Any type.
   def to_array?(raw : JSON::Any, value_type : T.class = String) forall T
-    return unless data = raw.as_a?
-    data.each_with_object(Array(T).new) do |v, obj|
-      obj << cast(v, T).as(T)
+    if data = raw.as_a?
+      data.each_with_object(Array(T).new) do |v, obj|
+        obj << cast(v.to_s, T).as(T)
+      end
+    elsif data = raw.as_h?
+      data.each_with_object(Array(T).new) do |(k, v), obj|
+        obj << cast(k.to_s, T).as(T) << cast(v.to_s, T).as(T)
+      end
+    else
+      [cast(raw.to_s, T).as(T)]
     end
   end
 

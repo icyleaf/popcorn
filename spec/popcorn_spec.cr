@@ -819,7 +819,7 @@ describe Popcorn do
     it_raise_to_bool :foo
     it_raise_to_bool(JSON.parse(%Q{[1, 2, 3]}))
     it_raise_to_bool(JSON.parse(%Q{{"a":"b"}}))
-    it_raise_to_bool(YAML.parse(%Q{---\n- 1\n- 2\n -3}))
+    it_raise_to_bool(YAML.parse(%Q{---\n- 1\n- 2\n- 3}))
     it_raise_to_bool(YAML.parse(%Q{a:\n  b}))
   end
 
@@ -837,9 +837,23 @@ describe Popcorn do
     it_to_array 1, [true], Bool
     it_to_array [1, 2, 3], [1, 2, 3]
     it_to_array({"a" => "b"}, ["a", "b"])
+
+    it_to_array JSON::Any.new(raw: true), ["true"]
+    it_to_array JSON::Any.new(raw: true), [true], Bool
+    it_to_array JSON::Any.new(raw: false), [0], Int32
+    it_to_array JSON.parse(%Q{[1, 2, 3]}), [1, 2, 3], Int32
+    it_to_array JSON.parse(%Q{{"a":"b"}}), ["a", "b"]
+
+    it_to_array YAML::Any.new(raw: true), ["true"]
+    it_to_array YAML::Any.new(raw: true), [true], Bool
+    it_to_array YAML::Any.new(raw: false), [0], Int32
+    it_to_array YAML.parse(%Q{---\n- 1\n- 2\n- 3\n}), [1, 2, 3], Int32
+    it_to_array YAML.parse(%Q{---\na: b}), ["a", "b"]
   end
 
   describe ".to_hash" do
+    it_to_hash({"a" => "1", "b" => 2}, {"a" => "1", "b" => 2})
+
     it_raise_to_hash "foo"
     it_raise_to_hash :foo
     it_raise_to_hash 1_i8
@@ -847,5 +861,15 @@ describe Popcorn do
     it_raise_to_hash 1.23
     it_raise_to_hash 1
     it_raise_to_hash [1, 2, 3]
+  end
+
+  describe ".to_hash?" do
+    it_to_hash? "foo", nil
+    it_to_hash? :foo, nil
+    it_to_hash? 1_i8, nil
+    it_to_hash? 1.23, nil
+    it_to_hash? 1.23, nil
+    it_to_hash? 1, nil
+    it_to_hash? [1, 2, 3], nil
   end
 end
