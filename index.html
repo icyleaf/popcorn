@@ -153,7 +153,7 @@
 <p>Popcorn proviedes a handful of <code>to_xxx</code>/<code>to_xxx?</code> methods and <code>xxx</code> is full type name,
 This is distinguish between built-in methods in Crystal.</p>
 
-<ul><li>to_int8</li><li>to_int16</li><li>to_int (alias to to_int32)</li><li>to_int64</li><li>to_uint8</li><li>to_uint16</li><li>to_uint (alias to to_uint32)</li><li>to_uint64</li><li>to_float32</li><li>to_float64</li><li>to_bool</li><li>to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)</li><li>to_string (alias to to_s in Crystal).</li></ul>
+<ul><li>to_int8</li><li>to_int16</li><li>to_int (alias to to_int32)</li><li>to_int64</li><li>to_uint8</li><li>to_uint16</li><li>to_uint (alias to to_uint32)</li><li>to_uint64</li><li>to_float32</li><li>to_float64</li><li>to_bool</li><li>to_time(location : Time::Location? = nil, formatters : Array(String)? = nil)</li><li>to_array(target : T.class = String)</li><li>to_hash(target : T.class = String)</li><li>to_string (alias to to_s in Crystal).</li></ul>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
 
@@ -170,7 +170,7 @@ This is distinguish between built-in methods in Crystal.</p>
 
 <p>Also these methods had been inject to Crystal literals, you can call it directly, Monkey Patching list:</p>
 
-<ul><li>String</li><li>Int8/Int16/Int32/Int64/UInt8/UInt16/UInt32/UInt64</li><li>Float32/Float64</li><li>Bool</li><li>Time</li><li>JSON::Any</li><li>YAML::Any</li></ul>
+<ul><li>String</li><li>Int</li><li>Float</li><li>Bool</li><li>Time</li><li>Symbol</li><li>NamedTupe</li><li>Array</li><li>Hash</li><li>Nil</li><li>JSON::Any</li><li>YAML::Any</li></ul>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;popcorn&quot;</span>
 <span class="k">require</span> <span class="s">&quot;popcorn/injection&quot;</span> <span class="c"># =&gt; make sure require it!</span>
@@ -185,6 +185,10 @@ This is distinguish between built-in methods in Crystal.</p>
 <span class="s">&quot;2018-07-23T10:11:22&quot;</span>.to_time                                        <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span>
 <span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>.to_time(<span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
 <span class="s">&quot;Tue, 20 Jan 2018&quot;</span>.to_time(formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
+
+<h2>Casting unmatch class</h2>
+
+<p>By desgin in Crystal, we can not match type with <code>T</code>(no override by alone type) and no time to match each shard type. so you can write your own.</p>
 
 <h2>Contributing</h2>
 
