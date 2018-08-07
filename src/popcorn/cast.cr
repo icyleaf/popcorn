@@ -114,6 +114,12 @@ module Popcorn
                 value
               end
             {% end %}
+
+            {% if @type.methods.select {|m| m.name.id == "to_string".id && m.args[0].restriction.id == rtype.id }.size == 0 %}
+              def to_string({{ method.args[0].name.id }} : {{ method.args[0].restriction.id }})
+                {{ method.args[0].name.id }}.to_s
+              end
+            {% end %}
           {% end %}
         {% end %}
       {% end %}

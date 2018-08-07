@@ -872,4 +872,15 @@ describe Popcorn do
     it_to_hash? 1, nil
     it_to_hash? [1, 2, 3], nil
   end
+
+  describe ".to_string" do
+    it_to_string 123_i8, "123"
+    it_to_string 123_i64, "123"
+    it_to_string 123.45, "123.45"
+    it_to_string false, "false"
+    it_to_string :foo, "foo"
+    it_to_string nil, ""
+    it_to_string [1,2,3], "[1, 2, 3]"
+    it_to_string({"a" => "b", "c" => "d"}, %Q{{"a" => "b", "c" => "d"}})
+  end
 end
