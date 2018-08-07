@@ -9,16 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.2.0] (2018-08-07)
+
 ## Added
 
-- Added `cast(raw : S, target_type : T.class = String)`/`cast?` methods to casts Type easily.
+- Add `cast(raw : S, target_type : T.class = String)`/`cast?` methods to casts Type easily.
+- Add `to_array`/`to_hash`/`to_string` methods.
 
 ## Changed
 
 - Split all methods to each file by type, it is not to accpets all Type.
-- Renamed `raise_error!` to `cast_error!`
+- Rename `raise_error!` to `cast_error!`
 
-## 0.1.1 (2018-07-24)
+## Fixed
+
+- Fix duplicate to_xxx methods during multi-call `generate!` method
+
+## [0.1.1] (2018-07-24)
 
 ## Added
 
@@ -31,7 +38,7 @@ Monkey Patching list:
 
 - UInt8/UInt16/UInt32/UInt64
 
-## 0.1.0 (2018-07-24)
+## [0.1.0] (2018-07-24)
 
 First beta version.
 
