@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## Added
+
+- Added `cast(raw : S, target_type : T.class = String)`/`cast?` methods to casts Type easily.
+
+## Changed
+
+- Split all methods to each file by type, it is not to accpets all Type.
+- Renamed `raise_error!` to `cast_error!`
+
 ## 0.1.1 (2018-07-24)
 
 ## Added
