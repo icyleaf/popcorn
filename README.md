@@ -107,7 +107,7 @@ Reference at [totem](https://github.com/icyleaf/totem/blob/b8bfca5f7a6ded111fc50
 
 ## You may also like
 
-- [halite](https://github.com/icyleaf/halite) - Crystal HTTP Requests Client with a chainable REST API, built-in sessions and loggers.
+- [halite](https://github.com/icyleaf/halite) - Crystal HTTP Requests Client with a chainable REST API, built-in sessions and middlewares.
 - [totem](https://github.com/icyleaf/totem) - Load and parse a configuration file or string in JSON, YAML, dotenv formats.
 - [poncho](https://github.com/icyleaf/poncho) - A .env parser/loader improved for performance.
 - [fast-crystal](https://github.com/icyleaf/fast-crystal) - 💨 Writing Fast Crystal 😍 -- Collect Common Crystal idioms.
