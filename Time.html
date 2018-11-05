@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.26.1">
+<meta name="generator" content="Crystal Docs 0.27.0">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
-      <input type="search" class="search-input" placeholder="Search..." spellcheck="false">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
     <div class="repository-links">
@@ -167,7 +167,7 @@
   <h2>Defined in:</h2>
   
     
-      <a href="https://github.com/icyleaf/popcorn/blob/160f9dec26f31c4290c045f1d26b1372bbf5503d/src/popcorn/cast/int.cr#L97" target="_blank">
+      <a href="https://github.com/icyleaf/popcorn/blob/a8a8dc42c2ee1cc5f02e0e17cacf278a92873eaa/src/popcorn/cast/int.cr#L97" target="_blank">
         popcorn/cast/int.cr
       </a>
     
@@ -182,14 +182,14 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#epoch%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.epoch</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
+        <a href="#unix%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.unix</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
         
           <div class="summary"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of <em>seconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#epoch_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.epoch_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
+        <a href="#unix_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method" class="signature"><strong>.unix_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : Time</a>
         
           <div class="summary"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of <em>milliseconds</em> elapsed since the Unix epoch (<code>1970-01-01 00:00:00 UTC</code>).</p></div>
         
@@ -512,12 +512,12 @@
 
   <h2>Constructor Detail</h2>
   
-    <div class="entry-detail" id="epoch(seconds:Int,location=Location::UTC):Time-class-method">
+    <div class="entry-detail" id="unix(seconds:Int,location=Location::UTC):Time-class-method">
       <div class="signature">
         
-        def self.<strong>epoch</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
+        def self.<strong>unix</strong>(seconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
 
-        <a class="method-permalink" href="#epoch%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
+        <a class="method-permalink" href="#unix%28seconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
       </div>
       
         <div class="doc"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of
@@ -525,22 +525,22 @@
 
 <p>The time zone is always UTC.</p>
 
-<pre><code><span class="t">Time</span>.epoch(<span class="n">981173106</span>) <span class="c"># =&gt; 2001-02-03 04:05:06 UTC</span></code></pre></div>
+<pre><code><span class="t">Time</span>.unix(<span class="n">981173106</span>) <span class="c"># =&gt; 2001-02-03 04:05:06 UTC</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/160f9dec26f31c4290c045f1d26b1372bbf5503d/src/popcorn/cast/int.cr#L98" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/a8a8dc42c2ee1cc5f02e0e17cacf278a92873eaa/src/popcorn/cast/int.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="epoch_ms(milliseconds:Int,location=Location::UTC):Time-class-method">
+    <div class="entry-detail" id="unix_ms(milliseconds:Int,location=Location::UTC):Time-class-method">
       <div class="signature">
         
-        def self.<strong>epoch_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
+        def self.<strong>unix_ms</strong>(milliseconds : Int, location = <span class="t">Location</span><span class="t">::</span><span class="t">UTC</span>) : <a href="Time.html">Time</a>
 
-        <a class="method-permalink" href="#epoch_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
+        <a class="method-permalink" href="#unix_ms%28milliseconds%3AInt%2Clocation%3DLocation%3A%3AUTC%29%3ATime-class-method">#</a>
       </div>
       
         <div class="doc"><p>Creates a new <code><a href="Time.html">Time</a></code> instance that corresponds to the number of
@@ -548,13 +548,13 @@
 
 <p>The time zone is always UTC.</p>
 
-<pre><code>time <span class="o">=</span> <span class="t">Time</span>.epoch_ms(<span class="n">981173106789</span>) <span class="c"># =&gt; 2001-02-03 04:05:06.789 UTC</span>
-time.millisecond                   <span class="c"># =&gt; 789</span></code></pre></div>
+<pre><code>time <span class="o">=</span> <span class="t">Time</span>.unix_ms(<span class="n">981173106789</span>) <span class="c"># =&gt; 2001-02-03 04:05:06.789 UTC</span>
+time.millisecond                  <span class="c"># =&gt; 789</span></code></pre></div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/icyleaf/popcorn/blob/160f9dec26f31c4290c045f1d26b1372bbf5503d/src/popcorn/cast/int.cr#L102" target="_blank">View source</a>]
+          [<a href="https://github.com/icyleaf/popcorn/blob/a8a8dc42c2ee1cc5f02e0e17cacf278a92873eaa/src/popcorn/cast/int.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
