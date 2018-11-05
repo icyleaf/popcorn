@@ -9,25 +9,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 > TODO
 
+## [0.2.1] (2018-11-05)
+
+### Fixed
+
+- Compatibility with Crystal 0.27
+
 ## [0.2.0] (2018-08-07)
 
-## Added
+### Added
 
 - Add `cast(raw : S, target_type : T.class = String)`/`cast?` methods to casts Type easily.
 - Add `to_array`/`to_hash`/`to_string` methods.
 
-## Changed
+### Changed
 
 - Split all methods to each file by type, it is not to accpets all Type.
 - Rename `raise_error!` to `cast_error!`
 
-## Fixed
+### Fixed
 
 - Fix duplicate to_xxx methods during multi-call `generate!` method
 
 ## [0.1.1] (2018-07-24)
 
-## Added
+### Added
 
 - to_uint8
 - to_uint16
@@ -42,7 +48,7 @@ Monkey Patching list:
 
 First beta version.
 
-## Added
+### Added
 
 Provides methods:
 
@@ -66,5 +72,7 @@ Monkey Patching list:
 - JSON::Any
 - YAML::Any
 
-[Unreleased]: https://github.com/icyleaf/popcorn/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/icyleaf/popcorn/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/icyleaf/popcorn/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/icyleaf/popcorn/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/icyleaf/popcorn/compare/25a00baffd41f4ac8a071330038916375904b46d...v0.1.0
