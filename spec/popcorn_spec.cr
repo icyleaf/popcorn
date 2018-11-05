@@ -520,9 +520,7 @@ describe Popcorn do
     it_to_float "abc123true456", 0.0_f64
     it_to_float "true", 0.0_f64
 
-    it_to_float JSON::Any.new(raw: 1_i8), 1.0_f64
-    it_to_float JSON::Any.new(raw: -123_i16), -123.0_f64
-    it_to_float JSON::Any.new(raw: 123), 123.0_f64
+    it_to_float JSON::Any.new(raw: 123_i64), 123.0_f64
     it_to_float JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
     it_to_float JSON::Any.new(raw: 1.234567890), 1.234567890_f64
     it_to_float JSON::Any.new(raw: "123"), 123_f64
@@ -532,9 +530,7 @@ describe Popcorn do
     it_to_float JSON::Any.new(raw: "abc123true456"), 0_f64
     it_to_float JSON::Any.new(raw: "true"), 0_f64
 
-    it_to_float YAML::Any.new(raw: 1_i8), 1_f64
-    it_to_float YAML::Any.new(raw: -123_i16), -123_f64
-    it_to_float YAML::Any.new(raw: 123), 123.0_f64
+    it_to_float YAML::Any.new(raw: 123_i64), 123.0_f64
     it_to_float YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
     it_to_float YAML::Any.new(raw: 1.234567890), 1.234567890_f64
     it_to_float YAML::Any.new(raw: "123"), 123.0_f64
@@ -587,9 +583,7 @@ describe Popcorn do
     it_to_float32 "abc123true456", 0.0_f32
     it_to_float32 "true", 0.0_f32
 
-    it_to_float32 JSON::Any.new(raw: 1_i8), 1.0_f32
-    it_to_float32 JSON::Any.new(raw: -123_i16), -123.0_f32
-    it_to_float32 JSON::Any.new(raw: 123), 123.0_f32
+    it_to_float32 JSON::Any.new(raw: 123_i64), 123.0_f32
     it_to_float32 JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
     it_to_float32 JSON::Any.new(raw: 1.234567890), 1.234567890_f32
     it_to_float32 JSON::Any.new(raw: "123"), 123_f32
@@ -599,9 +593,7 @@ describe Popcorn do
     it_to_float32 JSON::Any.new(raw: "abc123true456"), 0_f32
     it_to_float32 JSON::Any.new(raw: "true"), 0_f32
 
-    it_to_float32 YAML::Any.new(raw: 1_i8), 1_f32
-    it_to_float32 YAML::Any.new(raw: -123_i16), -123_f32
-    it_to_float32 YAML::Any.new(raw: 123), 123.0_f32
+    it_to_float32 YAML::Any.new(raw: 123_i64), 123.0_f32
     it_to_float32 YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
     it_to_float32 YAML::Any.new(raw: 1.234567890), 1.234567890_f32
     it_to_float32 YAML::Any.new(raw: "123"), 123.0_f32
