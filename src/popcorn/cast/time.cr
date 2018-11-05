@@ -21,7 +21,7 @@ module Popcorn::Cast
 
   # Returns the `Int64` or `Nil` value represented by given Time type.
   def to_int64?(raw : Time)
-    raw.epoch
+    raw.to_unix
   end
 
   # Returns the `UInt32` or `Nil` value represented by given Time type.
@@ -46,7 +46,7 @@ module Popcorn::Cast
 
   # Returns the `UInt64` or `Nil` value represented by given Time type.
   def to_uint64?(raw : Time)
-    raw.epoch
+    raw.to_unix
   end
 
   # Returns the `Float64` or `Nil` value represented by given Time type.
@@ -56,7 +56,7 @@ module Popcorn::Cast
 
   # Alias to `to_float64?`
   def to_float64?(raw : Time)
-    raw.epoch_f
+    raw.to_unix_f
   end
 
   # Returns the `Nil` value represented by given Time type.

@@ -71,9 +71,9 @@ module Popcorn::Cast
   def to_time?(raw : Int, location : Time::Location? = nil, formatters : Array(String)? = nil)
     v = raw.to_i64
     if Math.log10(raw) > 10
-      location ? Time.epoch_ms(v, location: location) : Time.epoch_ms(raw)
+      location ? Time.unix_ms(v, location: location) : Time.unix_ms(raw)
     else
-      location ? Time.epoch(v, location: location) : Time.epoch(raw)
+      location ? Time.unix(v, location: location) : Time.unix(raw)
     end
   end
 
@@ -95,13 +95,13 @@ module Popcorn::Cast
 end
 
 struct Time
-  def self.epoch(seconds : Int, location = Location::UTC) : Time
-    new(seconds: UNIX_SECONDS + seconds, nanoseconds: 0, location: location)
+  def self.unix(seconds : Int, location = Location::UTC) : Time
+    new(seconds: UNIX_EPOCH.total_seconds + seconds, nanoseconds: 0, location: location)
   end
 
-  def self.epoch_ms(milliseconds : Int, location = Location::UTC) : Time
+  def self.unix_ms(milliseconds : Int, location = Location::UTC) : Time
     milliseconds = milliseconds.to_i64
-    seconds = UNIX_SECONDS + (milliseconds / 1_000)
+    seconds = UNIX_EPOCH.total_seconds + (milliseconds / 1_000)
     nanoseconds = (milliseconds % 1000) * NANOSECONDS_PER_MILLISECOND
     new(seconds: seconds, nanoseconds: nanoseconds.to_i, location: location)
   end
