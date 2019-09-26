@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.30.0">
+<meta name="generator" content="Crystal Docs 0.30.1">
 
 
 <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -164,9 +164,9 @@ This is distinguish between built-in methods in Crystal.</p>
 <span class="t">Popcorn</span>.to_bool(<span class="s">&quot;no&quot;</span>)                                                         <span class="c"># =&gt; false</span>
 <span class="t">Popcorn</span>.to_bool(<span class="s">&quot;unkown&quot;</span>)                                                     <span class="c"># =&gt; raise a `TypeCastError` exception</span>
 <span class="t">Popcorn</span>.to_bool?(<span class="s">&quot;unkown&quot;</span>)                                                    <span class="c"># =&gt; nil</span>
-<span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-07-23T10:11:22&quot;</span>)                                        <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span>
-<span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>, <span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
-<span class="t">Popcorn</span>.to_time(<span class="s">&quot;Tue, 20 Jan 2018&quot;</span>, formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
+<span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-07-23T10:11:22&quot;</span>)                                        <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span>
+<span class="t">Popcorn</span>.to_time(<span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>, <span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
+<span class="t">Popcorn</span>.to_time(<span class="s">&quot;Tue, 20 Jan 2018&quot;</span>, formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
 
 <p>Also these methods had been inject to Crystal literals, you can call it directly, Monkey Patching list:</p>
 
@@ -182,9 +182,9 @@ This is distinguish between built-in methods in Crystal.</p>
 <span class="s">&quot;no&quot;</span>.to_bool                                                         <span class="c"># =&gt; false</span>
 <span class="s">&quot;unkown&quot;</span>.to_bool                                                     <span class="c"># =&gt; raise a `TypeCastError` exception</span>
 <span class="s">&quot;unkown&quot;</span>.to_bool?                                                    <span class="c"># =&gt; nil</span>
-<span class="s">&quot;2018-07-23T10:11:22&quot;</span>.to_time                                        <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span>
-<span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>.to_time(<span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
-<span class="s">&quot;Tue, 20 Jan 2018&quot;</span>.to_time(formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.new(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
+<span class="s">&quot;2018-07-23T10:11:22&quot;</span>.to_time                                        <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span>
+<span class="s">&quot;2018-07-23T10:11:22Z&quot;</span>.to_time(<span class="t">Time</span><span class="t">::</span><span class="t">Location</span>.load(<span class="s">&quot;Asia/Shanghai&quot;</span>)) <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location.load(&quot;Asia/Shanghai&quot;))</span>
+<span class="s">&quot;Tue, 20 Jan 2018&quot;</span>.to_time(formatter: [<span class="s">&quot;%a, %d %b %Y&quot;</span>])              <span class="c"># =&gt; Time.local(2018, 7, 23, 10, 11, 22, location: Time::Location::UTC)</span></code></pre>
 
 <h2>Casting unmatch class</h2>
 
