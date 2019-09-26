@@ -21,7 +21,7 @@ require "./popcorn/cast"
 # ```
 # Popcorn.to_int("123abc")                # => 123
 # Popcorn.to_bool("No")                   # => false
-# Popcorn.to_time("2018-01-20T01:20:33Z") # => Time.new(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
+# Popcorn.to_time("2018-01-20T01:20:33Z") # => Time.local(2018, 1, 20, 1, 20, 33, location: Time::Location::UTC)
 # ```
 #
 # More methods to review `Popcorn::Cast`.
