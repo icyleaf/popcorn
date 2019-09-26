@@ -1,4 +1,4 @@
-![halite-logo](https://github.com/icyleaf/popcorn/raw/master/logo-small.png)
+![popcorn-logo](https://github.com/icyleaf/popcorn/raw/master/logo-small.png)
 
 # Popcorn
 
@@ -7,6 +7,8 @@
 [![Build Status](https://img.shields.io/circleci/project/github/icyleaf/popcorn/master.svg?style=flat)](https://circleci.com/gh/icyleaf/popcorn)
 
 Easy and Safe popping from one type to another. Popcorn icon by HLD from the [Noun Project](https://thenounproject.com).
+
+Build in Crystal version >= `v0.31.0`.
 
 ## Installation
 
