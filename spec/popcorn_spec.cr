@@ -12,7 +12,7 @@ describe Popcorn do
   describe ".to_int" do
     it_to_int 1_i8, 1_i32
     it_to_int -123_i16, -123
-    it_to_int 123456789123456_i64, -2045800064
+    it_to_int 123456789_i64, 123456789
     it_to_int 1.234567890, 1
     it_to_int 1.67890_f32, 1
     it_to_int true, 1
@@ -25,7 +25,7 @@ describe Popcorn do
     it_to_int "true", 0
 
     it_to_int JSON::Any.new(raw: 1_i64), 1_i32
-    it_to_int JSON::Any.new(raw: 123456789123456_i64), -2045800064
+    it_to_int JSON::Any.new(raw: 123456789_i64), 123456789
     it_to_int JSON::Any.new(raw: 1.234567890), 1
     it_to_int JSON::Any.new(raw: 1.67890_f32), 1
     it_to_int JSON::Any.new(raw: true), 1
@@ -38,7 +38,7 @@ describe Popcorn do
     it_to_int JSON::Any.new(raw: "true"), 0
 
     it_to_int YAML::Any.new(raw: 1_i64), 1_i32
-    it_to_int YAML::Any.new(raw: 123456789123456_i64), -2045800064
+    it_to_int YAML::Any.new(raw: 123456789_i64), 123456789
     it_to_int YAML::Any.new(raw: 1.234567890), 1
     it_to_int YAML::Any.new(raw: 1.67890_f32), 1
     it_to_int YAML::Any.new(raw: true), 1
@@ -74,7 +74,7 @@ describe Popcorn do
   describe ".to_int8" do
     it_to_int8 1, 1_i8
     it_to_int8 -123_i16, -123_i8
-    it_to_int8 123456789123456_i64, -128_i8
+    it_to_int8 127_i64, 127_i8
     it_to_int8 1.234567890, 1_i8
     it_to_int8 1.67890_f32, 1_i8
     it_to_int8 1, 1_i8
@@ -91,7 +91,7 @@ describe Popcorn do
     it_to_int8 "true", 0_i8
 
     it_to_int8 JSON::Any.new(raw: 1_i64), 1_i8
-    it_to_int8 JSON::Any.new(raw: 123456789123456_i64), -128_i8
+    it_to_int8 JSON::Any.new(raw: 127_i64), 127_i8
     it_to_int8 JSON::Any.new(raw: 1.234567890), 1_i8
     it_to_int8 JSON::Any.new(raw: 1.67890_f32), 1_i8
     it_to_int8 JSON::Any.new(raw: true), 1_i8
@@ -104,7 +104,7 @@ describe Popcorn do
     it_to_int8 JSON::Any.new(raw: "true"), 0_i8
 
     it_to_int8 YAML::Any.new(raw: 1_i64), 1_i8
-    it_to_int8 YAML::Any.new(raw: 123456789123456_i64), -128_i8
+    it_to_int8 YAML::Any.new(raw: 127_i64), 127_i8
     it_to_int8 YAML::Any.new(raw: 1.234567890), 1_i8
     it_to_int8 YAML::Any.new(raw: 1.67890_f32), 1_i8
     it_to_int8 YAML::Any.new(raw: true), 1_i8
@@ -141,7 +141,7 @@ describe Popcorn do
     it_to_int16 1_i8, 1_i16
     it_to_int16 -123_i16, -123_i16
     it_to_int16 123, 123_i16
-    it_to_int16 123456789123456_i64, -28288_i16
+    it_to_int16 1234_i64, 1234_i16
     it_to_int16 1.234567890, 1_i16
     it_to_int16 1.67890_f32, 1_i16
     it_to_int16 true, 1_i16
@@ -154,7 +154,7 @@ describe Popcorn do
     it_to_int16 "true", 0_i16
 
     it_to_int16 JSON::Any.new(raw: 1_i64), 1_i16
-    it_to_int16 JSON::Any.new(raw: 123456789123456_i64), -28288_i16
+    it_to_int16 JSON::Any.new(raw: 1234_i64), 1234_i16
     it_to_int16 JSON::Any.new(raw: 1.234567890), 1_i16
     it_to_int16 JSON::Any.new(raw: 1.67890_f32), 1_i16
     it_to_int16 JSON::Any.new(raw: true), 1_i16
@@ -167,7 +167,7 @@ describe Popcorn do
     it_to_int16 JSON::Any.new(raw: "true"), 0_i16
 
     it_to_int16 YAML::Any.new(raw: 1_i64), 1_i16
-    it_to_int16 YAML::Any.new(raw: 123456789123456_i64), -28288_i16
+    it_to_int16 YAML::Any.new(raw: 1234_i64), 1234_i16
     it_to_int16 YAML::Any.new(raw: 1.234567890), 1_i16
     it_to_int16 YAML::Any.new(raw: 1.67890_f32), 1_i16
     it_to_int16 YAML::Any.new(raw: true), 1_i16
@@ -204,7 +204,7 @@ describe Popcorn do
     it_to_int64 1_i8, 1_i64
     it_to_int64 -123_i16, -123_i64
     it_to_int64 123, 123_i64
-    it_to_int64 123456789123456_i64, 123456789123456_i64
+    it_to_int64 123456789_i64, 123456789_i64
     it_to_int64 1.234567890, 1_i64
     it_to_int64 1.67890_f32, 1_i64
     it_to_int64 true, 1_i64
@@ -217,7 +217,7 @@ describe Popcorn do
     it_to_int64 "true", 0_i64
 
     it_to_int64 JSON::Any.new(raw: 1_i64), 1_i64
-    it_to_int64 JSON::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_int64 JSON::Any.new(raw: 123456789_i64), 123456789_i64
     it_to_int64 JSON::Any.new(raw: 1.234567890), 1_i64
     it_to_int64 JSON::Any.new(raw: 1.67890_f32), 1_i64
     it_to_int64 JSON::Any.new(raw: true), 1_i64
@@ -230,7 +230,7 @@ describe Popcorn do
     it_to_int64 JSON::Any.new(raw: "true"), 0_i64
 
     it_to_int64 YAML::Any.new(raw: 1_i64), 1_i64
-    it_to_int64 YAML::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_int64 YAML::Any.new(raw: 123456789_i64), 123456789_i64
     it_to_int64 YAML::Any.new(raw: 1.234567890), 1_i64
     it_to_int64 YAML::Any.new(raw: 1.67890_f32), 1_i64
     it_to_int64 YAML::Any.new(raw: true), 1_i64
@@ -265,7 +265,7 @@ describe Popcorn do
 
   describe ".to_uint" do
     it_to_uint 1_i8, 1_u32
-    it_to_uint 123456789123456_i64, 2249167232_u32
+    it_to_uint 123456789_i64, 123456789_u32
     it_to_uint 1.234567890, 1_u32
     it_to_uint 1.67890_f32, 1_u32
     it_to_uint true, 1_u32
@@ -278,7 +278,7 @@ describe Popcorn do
     it_to_uint "true", 0_u32
 
     it_to_uint JSON::Any.new(raw: 1_i64), 1_u32
-    it_to_uint JSON::Any.new(raw: 123456789123456_i64), 2249167232_u32
+    it_to_uint JSON::Any.new(raw: 123456789_i64), 123456789_u32
     it_to_uint JSON::Any.new(raw: 1.234567890), 1_u32
     it_to_uint JSON::Any.new(raw: 1.67890_f32), 1_u32
     it_to_uint JSON::Any.new(raw: true), 1_u32
@@ -291,7 +291,7 @@ describe Popcorn do
     it_to_uint JSON::Any.new(raw: "true"), 0_u32
 
     it_to_uint YAML::Any.new(raw: 1_i64), 1_u32
-    it_to_uint YAML::Any.new(raw: 123456789123456_i64), 2249167232_u32
+    it_to_uint YAML::Any.new(raw: 123456789_i64), 123456789_u32
     it_to_uint YAML::Any.new(raw: 1.234567890), 1_u32
     it_to_uint YAML::Any.new(raw: 1.67890_f32), 1_u32
     it_to_uint YAML::Any.new(raw: true), 1_u32
@@ -326,7 +326,7 @@ describe Popcorn do
 
   describe ".to_uint8" do
     it_to_uint8 1_i8, 1_u8
-    it_to_uint8 123456789123456_i64, 128_u8
+    it_to_uint8 127_i64, 127_u8
     it_to_uint8 1.234567890, 1_u8
     it_to_uint8 1.67890_f32, 1_u8
     it_to_uint8 true, 1_u8
@@ -339,7 +339,7 @@ describe Popcorn do
     it_to_uint8 "true", 0_u8
 
     it_to_uint8 JSON::Any.new(raw: 1_i64), 1_u8
-    it_to_uint8 JSON::Any.new(raw: 123456789123456_i64), 128_u8
+    it_to_uint8 JSON::Any.new(raw: 127_i64), 127_u8
     it_to_uint8 JSON::Any.new(raw: 1.234567890), 1_u8
     it_to_uint8 JSON::Any.new(raw: 1.67890_f32), 1_u8
     it_to_uint8 JSON::Any.new(raw: true), 1_u8
@@ -352,7 +352,7 @@ describe Popcorn do
     it_to_uint8 JSON::Any.new(raw: "true"), 0_u8
 
     it_to_uint8 YAML::Any.new(raw: 1_i64), 1_u8
-    it_to_uint8 YAML::Any.new(raw: 123456789123456_i64), 128_u8
+    it_to_uint8 YAML::Any.new(raw: 127_i64), 127_u8
     it_to_uint8 YAML::Any.new(raw: 1.234567890), 1_u8
     it_to_uint8 YAML::Any.new(raw: 1.67890_f32), 1_u8
     it_to_uint8 YAML::Any.new(raw: true), 1_u8
@@ -387,7 +387,7 @@ describe Popcorn do
 
   describe ".to_uint16" do
     it_to_uint16 1_i8, 1_u16
-    it_to_uint16 123456789123456_i64, 37248_u16
+    it_to_uint16 1234_i64, 1234_u16
     it_to_uint16 1.234567890, 1_u16
     it_to_uint16 1.67890_f32, 1_u16
     it_to_uint16 true, 1_u16
@@ -400,7 +400,7 @@ describe Popcorn do
     it_to_uint16 "true", 0_u16
 
     it_to_uint16 JSON::Any.new(raw: 1_i64), 1_u16
-    it_to_uint16 JSON::Any.new(raw: 123456789123456_i64), 37248_u16
+    it_to_uint16 JSON::Any.new(raw: 1234_i64), 1234_u16
     it_to_uint16 JSON::Any.new(raw: 1.234567890), 1_u16
     it_to_uint16 JSON::Any.new(raw: 1.67890_f32), 1_u16
     it_to_uint16 JSON::Any.new(raw: true), 1_u16
@@ -413,7 +413,7 @@ describe Popcorn do
     it_to_uint16 JSON::Any.new(raw: "true"), 0_u16
 
     it_to_uint16 YAML::Any.new(raw: 1_i64), 1_u16
-    it_to_uint16 YAML::Any.new(raw: 123456789123456_i64), 37248_u16
+    it_to_uint16 YAML::Any.new(raw: 1234_i64), 1234_u16
     it_to_uint16 YAML::Any.new(raw: 1.234567890), 1_u16
     it_to_uint16 YAML::Any.new(raw: 1.67890_f32), 1_u16
     it_to_uint16 YAML::Any.new(raw: true), 1_u16
@@ -448,7 +448,7 @@ describe Popcorn do
 
   describe ".to_uint64" do
     it_to_uint64 1_i8, 1_u64
-    it_to_uint64 123456789123456_i64, 123456789123456_i64
+    it_to_uint64 123456789_i64, 123456789_i64
     it_to_uint64 1.234567890, 1_u64
     it_to_uint64 1.67890_f32, 1_u64
     it_to_uint64 true, 1_u64
@@ -461,7 +461,7 @@ describe Popcorn do
     it_to_uint64 "true", 0_u64
 
     it_to_uint64 JSON::Any.new(raw: 1_i64), 1_u64
-    it_to_uint64 JSON::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_uint64 JSON::Any.new(raw: 123456789_i64), 123456789_i64
     it_to_uint64 JSON::Any.new(raw: 1.234567890), 1_u64
     it_to_uint64 JSON::Any.new(raw: 1.67890_f32), 1_u64
     it_to_uint64 JSON::Any.new(raw: true), 1_u64
@@ -474,7 +474,7 @@ describe Popcorn do
     it_to_uint64 JSON::Any.new(raw: "true"), 0_u64
 
     it_to_uint64 YAML::Any.new(raw: 1_i64), 1_u64
-    it_to_uint64 YAML::Any.new(raw: 123456789123456_i64), 123456789123456_i64
+    it_to_uint64 YAML::Any.new(raw: 123456789_i64), 123456789_i64
     it_to_uint64 YAML::Any.new(raw: 1.234567890), 1_u64
     it_to_uint64 YAML::Any.new(raw: 1.67890_f32), 1_u64
     it_to_uint64 YAML::Any.new(raw: true), 1_u64
@@ -511,7 +511,7 @@ describe Popcorn do
     it_to_float 1_i8, 1.0_f64
     it_to_float -123_i16, -123.0_f64
     it_to_float 123, 123.0_f64
-    it_to_float 123456789123456_i64, 123456789123456.0_f64
+    it_to_float 123456789_i64, 123456789.0_f64
     it_to_float 1.234567890, 1.234567890_f64
     it_to_float "123", 123.0_f64
     it_to_float "123.4", 123.4_f64
@@ -521,7 +521,7 @@ describe Popcorn do
     it_to_float "true", 0.0_f64
 
     it_to_float JSON::Any.new(raw: 123_i64), 123.0_f64
-    it_to_float JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
+    it_to_float JSON::Any.new(raw: 123456789_i64), 123456789.0_f64
     it_to_float JSON::Any.new(raw: 1.234567890), 1.234567890_f64
     it_to_float JSON::Any.new(raw: "123"), 123_f64
     it_to_float JSON::Any.new(raw: "123.4"), 123.4_f64
@@ -531,7 +531,7 @@ describe Popcorn do
     it_to_float JSON::Any.new(raw: "true"), 0_f64
 
     it_to_float YAML::Any.new(raw: 123_i64), 123.0_f64
-    it_to_float YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f64
+    it_to_float YAML::Any.new(raw: 123456789_i64), 123456789.0_f64
     it_to_float YAML::Any.new(raw: 1.234567890), 1.234567890_f64
     it_to_float YAML::Any.new(raw: "123"), 123.0_f64
     it_to_float YAML::Any.new(raw: "123.4"), 123.4_f64
@@ -573,7 +573,7 @@ describe Popcorn do
     it_to_float32 1_i8, 1.0_f32
     it_to_float32 -123_i16, -123.0_f32
     it_to_float32 123, 123.0_f32
-    it_to_float32 123456789123456_i64, 123456790000000.0_f32
+    it_to_float32 123456789_i64, 123456790.0_f32
     it_to_float32 1.23_f64, 1.23_f32
     it_to_float32 1.23_f32, 1.23_f32
     it_to_float32 "123", 123.0_f32
@@ -584,7 +584,7 @@ describe Popcorn do
     it_to_float32 "true", 0.0_f32
 
     it_to_float32 JSON::Any.new(raw: 123_i64), 123.0_f32
-    it_to_float32 JSON::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
+    it_to_float32 JSON::Any.new(raw: 123456789_i64), 123456789.0_f32
     it_to_float32 JSON::Any.new(raw: 1.234567890), 1.234567890_f32
     it_to_float32 JSON::Any.new(raw: "123"), 123_f32
     it_to_float32 JSON::Any.new(raw: "123.4"), 123.4_f32
@@ -594,7 +594,7 @@ describe Popcorn do
     it_to_float32 JSON::Any.new(raw: "true"), 0_f32
 
     it_to_float32 YAML::Any.new(raw: 123_i64), 123.0_f32
-    it_to_float32 YAML::Any.new(raw: 123456789123456_i64), 123456789123456.0_f32
+    it_to_float32 YAML::Any.new(raw: 123456789_i64), 123456789.0_f32
     it_to_float32 YAML::Any.new(raw: 1.234567890), 1.234567890_f32
     it_to_float32 YAML::Any.new(raw: "123"), 123.0_f32
     it_to_float32 YAML::Any.new(raw: "123.4"), 123.4_f32
