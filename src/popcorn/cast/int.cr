@@ -103,6 +103,6 @@ struct Time
     milliseconds = milliseconds.to_i64
     seconds = UNIX_EPOCH.total_seconds + (milliseconds / 1_000)
     nanoseconds = (milliseconds % 1000) * NANOSECONDS_PER_MILLISECOND
-    new(seconds: seconds, nanoseconds: nanoseconds.to_i, location: location)
+    new(seconds: seconds.to_i64, nanoseconds: nanoseconds.to_i, location: location)
   end
 end
