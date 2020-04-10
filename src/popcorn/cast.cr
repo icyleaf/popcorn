@@ -80,6 +80,7 @@ module Popcorn
       when Array.class   then to_array?(raw)
       when Hash.class    then to_hash?(raw)
       when String.class  then raw.to_s
+      else nil
       end
     rescue TypeCastError
       nil
